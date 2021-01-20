@@ -4,7 +4,7 @@
         <div class="navbar navbar-light">
             <div class="container-fluid">
                 <ul class="navbar-nav">
-                    <li class="nav-item active">
+                    <li class="nav-item active" id="page-index">
                         <a class="nav-link" href="<%=path%>/dashboard">
                     <span class="nav-link-icon d-md-none d-lg-inline-block"><svg xmlns="http://www.w3.org/2000/svg"
                                                                                  class="icon" width="24" height="24"
@@ -21,9 +21,8 @@
                     </span>
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#navbar-base" data-bs-toggle="dropdown"
-                           role="button" aria-expanded="false">
+                    <li class="nav-item" id="page-pond">
+                        <a class="nav-link" href="<%=path%>/pond/list">
                     <span class="nav-link-icon d-md-none d-lg-inline-block">
                         <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
                              stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
