@@ -92,12 +92,12 @@
                                 <tbody>
                                 <tr>
                                     <td><span class="text-muted">001401</span></td>
-                                    <td><a href="invoice.html" class="text-reset" tabindex="-1">一号塘</a></td>
+                                    <td><a href="<%=path%>/pond/config" class="text-reset" tabindex="-1">一号塘</a></td>
                                     <td>
                                         净化池
                                     </td>
                                     <td class="text-end">
-                                        <a href="#" class="btn btn-primary w-30">
+                                        <a href="<%=path%>/pond/config" class="btn btn-primary w-30">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
                                                  viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
                                                  stroke-linecap="round" stroke-linejoin="round">
@@ -449,9 +449,11 @@
         }
     }).then((AMap) => {
         var map = new AMap.Map('map', {
-            zoom: 14
+            zoom: 18
         });
         map.addControl(new AMap.Scale());
+        var satelliteLayer = new AMap.TileLayer.Satellite();
+        map.add(satelliteLayer);
 
         // 矩形绘制
         var mouseTool = new AMap.MouseTool(map);

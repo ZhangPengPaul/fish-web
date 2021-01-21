@@ -13,4 +13,9 @@ public class PondManagerController {
     public ModelAndView list() {
         return new ModelAndView("/pond/list");
     }
+
+    @GetMapping("/config")
+    public ModelAndView config() {
+        return new ModelAndView("/pond/config");
+    }
 }
