@@ -1,4 +1,4 @@
-package com.paulzhang.web.contants;
+package com.paulzhang.web.common.constants;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

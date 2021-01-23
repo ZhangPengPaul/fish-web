@@ -1,7 +1,9 @@
 package com.paulzhang.web.controller;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.paulzhang.web.common.HttpResult;
-import com.paulzhang.web.contants.HttpResultCode;
+import com.paulzhang.web.common.constants.CommonConstants;
+import com.paulzhang.web.common.constants.HttpResultCode;
 import com.paulzhang.web.domain.PondVO;
 import com.paulzhang.web.service.PondService;
 import org.springframework.stereotype.Controller;
@@ -11,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import java.lang.reflect.InvocationTargetException;
+import java.util.Objects;
 
 @Controller
 @RequestMapping("/pond")
@@ -20,8 +23,11 @@ public class PondManagerController {
 	private PondService pondService;
 
 	@GetMapping("/list")
-	public ModelAndView list() {
-		return new ModelAndView("/pond/list");
+	public ModelAndView list(@RequestParam(value = "current", required = false) Long current, @RequestParam(value = "size", required = false) Long size) {
+		current = Objects.isNull(current) ? CommonConstants.DEFAULT_PAGE_CURRENT : current;
+		size = Objects.isNull(size) ? CommonConstants.DEFAULT_PAGE_SIZE : size;
+		IPage<PondVO> pondVOPage = pondService.findAllByPage(current, size);
+		return new ModelAndView("/pond/list", "pondPage", pondVOPage);
 	}
 
 	@GetMapping("/config")

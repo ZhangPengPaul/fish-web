@@ -90,209 +90,55 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                  <td><span class="text-muted">001401</span></td>
-                  <td><a href="<%=path%>/pond/config" class="text-reset" tabindex="-1">一号塘</a></td>
-                  <td>
-                    净化池
-                  </td>
-                  <td class="text-end">
-                    <a href="<%=path%>/pond/config" class="btn btn-primary w-30">
-                      <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
-                           viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                           stroke-linecap="round" stroke-linejoin="round">
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                        <path
-                          d="M10.325 4.317c.426 -1.756 2.924 -1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543 -.94 3.31 .826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756 .426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543 -.826 3.31 -2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756 -2.924 1.756 -3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543 .94 -3.31 -.826 -2.37 -2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756 -.426 -1.756 -2.924 0 -3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94 -1.543 .826 -3.31 2.37 -2.37c1 .608 2.296 .07 2.572 -1.065z"/>
-                        <circle cx="12" cy="12" r="3"/>
-                      </svg>
-                      配置
-                    </a>
-                    <a href="#" class="btn btn-primary w-30">
-                      <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
-                           viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                           stroke-linecap="round" stroke-linejoin="round">
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                        <path d="M9 7h-3a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-3"/>
-                        <path d="M9 15h3l8.5 -8.5a1.5 1.5 0 0 0 -3 -3l-8.5 8.5v3"/>
-                        <line x1="16" y1="5" x2="19" y2="8"/>
-                      </svg>
-                      编辑
-                    </a>
-                    <a href="#" class="btn btn-primary w-30">
-                      <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
-                           viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                           stroke-linecap="round" stroke-linejoin="round">
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                        <ellipse cx="12" cy="6" rx="8" ry="3"></ellipse>
-                        <path d="M4 6v6a8 3 0 0 0 16 0v-6"/>
-                        <path d="M4 12v6a8 3 0 0 0 16 0v-6"/>
-                      </svg>
-                      查看数据
-                    </a>
-                  </td>
-                </tr>
-                <tr>
-                  <td><span class="text-muted">001401</span></td>
-                  <td><a href="invoice.html" class="text-reset" tabindex="-1">一号塘</a></td>
-                  <td>
-                    净化池
-                  </td>
-                  <td class="text-end">
-                    <a href="#" class="btn btn-primary w-30">
-                      <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
-                           viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                           stroke-linecap="round" stroke-linejoin="round">
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                        <path
-                          d="M10.325 4.317c.426 -1.756 2.924 -1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543 -.94 3.31 .826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756 .426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543 -.826 3.31 -2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756 -2.924 1.756 -3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543 .94 -3.31 -.826 -2.37 -2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756 -.426 -1.756 -2.924 0 -3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94 -1.543 .826 -3.31 2.37 -2.37c1 .608 2.296 .07 2.572 -1.065z"/>
-                        <circle cx="12" cy="12" r="3"/>
-                      </svg>
-                      配置
-                    </a>
-                    <a href="#" class="btn btn-primary w-30">
-                      <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
-                           viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                           stroke-linecap="round" stroke-linejoin="round">
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                        <path d="M9 7h-3a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-3"/>
-                        <path d="M9 15h3l8.5 -8.5a1.5 1.5 0 0 0 -3 -3l-8.5 8.5v3"/>
-                        <line x1="16" y1="5" x2="19" y2="8"/>
-                      </svg>
-                      编辑
-                    </a>
-                    <a href="#" class="btn btn-primary w-30">
-                      <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
-                           viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                           stroke-linecap="round" stroke-linejoin="round">
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                        <ellipse cx="12" cy="6" rx="8" ry="3"></ellipse>
-                        <path d="M4 6v6a8 3 0 0 0 16 0v-6"/>
-                        <path d="M4 12v6a8 3 0 0 0 16 0v-6"/>
-                      </svg>
-                      查看数据
-                    </a>
-                  </td>
-                </tr>
-                <tr>
-                  <td><span class="text-muted">001401</span></td>
-                  <td><a href="invoice.html" class="text-reset" tabindex="-1">一号塘</a></td>
-                  <td>
-                    净化池
-                  </td>
-                  <td class="text-end">
-                    <a href="#" class="btn btn-primary w-30">
-                      <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
-                           viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                           stroke-linecap="round" stroke-linejoin="round">
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                        <path
-                          d="M10.325 4.317c.426 -1.756 2.924 -1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543 -.94 3.31 .826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756 .426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543 -.826 3.31 -2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756 -2.924 1.756 -3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543 .94 -3.31 -.826 -2.37 -2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756 -.426 -1.756 -2.924 0 -3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94 -1.543 .826 -3.31 2.37 -2.37c1 .608 2.296 .07 2.572 -1.065z"/>
-                        <circle cx="12" cy="12" r="3"/>
-                      </svg>
-                      配置
-                    </a>
-                    <a href="#" class="btn btn-primary w-30">
-                      <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
-                           viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                           stroke-linecap="round" stroke-linejoin="round">
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                        <path d="M9 7h-3a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-3"/>
-                        <path d="M9 15h3l8.5 -8.5a1.5 1.5 0 0 0 -3 -3l-8.5 8.5v3"/>
-                        <line x1="16" y1="5" x2="19" y2="8"/>
-                      </svg>
-                      编辑
-                    </a>
-                    <a href="#" class="btn btn-primary w-30">
-                      <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
-                           viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                           stroke-linecap="round" stroke-linejoin="round">
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                        <ellipse cx="12" cy="6" rx="8" ry="3"></ellipse>
-                        <path d="M4 6v6a8 3 0 0 0 16 0v-6"/>
-                        <path d="M4 12v6a8 3 0 0 0 16 0v-6"/>
-                      </svg>
-                      查看数据
-                    </a>
-                  </td>
-                </tr>
-                <tr>
-                  <td><span class="text-muted">001401</span></td>
-                  <td><a href="invoice.html" class="text-reset" tabindex="-1">一号塘</a></td>
-                  <td>
-                    净化池
-                  </td>
-                  <td class="text-end">
-                    <a href="#" class="btn btn-primary w-30">
-                      <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
-                           viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                           stroke-linecap="round" stroke-linejoin="round">
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                        <path
-                          d="M10.325 4.317c.426 -1.756 2.924 -1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543 -.94 3.31 .826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756 .426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543 -.826 3.31 -2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756 -2.924 1.756 -3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543 .94 -3.31 -.826 -2.37 -2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756 -.426 -1.756 -2.924 0 -3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94 -1.543 .826 -3.31 2.37 -2.37c1 .608 2.296 .07 2.572 -1.065z"/>
-                        <circle cx="12" cy="12" r="3"/>
-                      </svg>
-                      配置
-                    </a>
-                    <a href="#" class="btn btn-primary w-30">
-                      <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
-                           viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                           stroke-linecap="round" stroke-linejoin="round">
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                        <path d="M9 7h-3a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-3"/>
-                        <path d="M9 15h3l8.5 -8.5a1.5 1.5 0 0 0 -3 -3l-8.5 8.5v3"/>
-                        <line x1="16" y1="5" x2="19" y2="8"/>
-                      </svg>
-                      编辑
-                    </a>
-                    <a href="#" class="btn btn-primary w-30">
-                      <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
-                           viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                           stroke-linecap="round" stroke-linejoin="round">
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                        <ellipse cx="12" cy="6" rx="8" ry="3"></ellipse>
-                        <path d="M4 6v6a8 3 0 0 0 16 0v-6"/>
-                        <path d="M4 12v6a8 3 0 0 0 16 0v-6"/>
-                      </svg>
-                      查看数据
-                    </a>
-                  </td>
-                </tr>
+                <c:forEach items="${pondPage.records}" var="pond">
+                  <tr>
+                    <td><span class="text-muted">${pond.pondId}</span></td>
+                    <td><a href="<%=path%>/pond/config" class="text-reset" tabindex="-1">${pond.name}</a></td>
+                    <td>
+                        ${pond.type}
+                    </td>
+                    <td class="text-end">
+                      <a href="<%=path%>/pond/config" class="btn btn-primary w-30">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
+                             viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                             stroke-linecap="round" stroke-linejoin="round">
+                          <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                          <path
+                            d="M10.325 4.317c.426 -1.756 2.924 -1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543 -.94 3.31 .826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756 .426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543 -.826 3.31 -2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756 -2.924 1.756 -3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543 .94 -3.31 -.826 -2.37 -2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756 -.426 -1.756 -2.924 0 -3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94 -1.543 .826 -3.31 2.37 -2.37c1 .608 2.296 .07 2.572 -1.065z"/>
+                          <circle cx="12" cy="12" r="3"/>
+                        </svg>
+                        配置
+                      </a>
+                      <a href="#" class="btn btn-primary w-30">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
+                             viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                             stroke-linecap="round" stroke-linejoin="round">
+                          <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                          <path d="M9 7h-3a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-3"/>
+                          <path d="M9 15h3l8.5 -8.5a1.5 1.5 0 0 0 -3 -3l-8.5 8.5v3"/>
+                          <line x1="16" y1="5" x2="19" y2="8"/>
+                        </svg>
+                        编辑
+                      </a>
+                      <a href="#" class="btn btn-primary w-30">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
+                             viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                             stroke-linecap="round" stroke-linejoin="round">
+                          <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                          <ellipse cx="12" cy="6" rx="8" ry="3"></ellipse>
+                          <path d="M4 6v6a8 3 0 0 0 16 0v-6"/>
+                          <path d="M4 12v6a8 3 0 0 0 16 0v-6"/>
+                        </svg>
+                        查看数据
+                      </a>
+                    </td>
+                  </tr>
+                </c:forEach>
                 </tbody>
               </table>
             </div>
             <div class="card-footer d-flex align-items-center">
-              <p class="m-0 text-muted">Showing <span>1</span> to <span>8</span> of <span>16</span>
-                entries</p>
-              <ul class="pagination m-0 ms-auto">
-                <li class="page-item disabled">
-                  <a class="page-link" href="#" tabindex="-1" aria-disabled="true">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
-                         viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                         stroke-linecap="round" stroke-linejoin="round">
-                      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                      <polyline points="15 6 9 12 15 18"/>
-                    </svg>
-                    prev
-                  </a>
-                </li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item active"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item"><a class="page-link" href="#">4</a></li>
-                <li class="page-item"><a class="page-link" href="#">5</a></li>
-                <li class="page-item">
-                  <a class="page-link" href="#">
-                    next
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
-                         viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                         stroke-linecap="round" stroke-linejoin="round">
-                      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                      <polyline points="9 6 15 12 9 18"/>
-                    </svg>
-                  </a>
-                </li>
-              </ul>
+              <ul id="pageLimit" class="m-0 ms-auto"></ul>
             </div>
           </div>
         </div>
@@ -302,6 +148,28 @@
   </div>
 </div>
 <div class="modal modal-blur fade" id="modal-pond" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="alert alert-important alert-success alert-dismissible visually-hidden" id="success-alert" role="alert">
+    <div class="d-flex">
+      <div>
+        <!-- SVG icon code with class="alert-icon" -->
+      </div>
+      <div>
+        Your account has been saved!
+      </div>
+    </div>
+    <a class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="close"></a>
+  </div>
+  <div class="alert alert-important alert-danger alert-dismissible visually-hidden" id="error-alert" role="alert">
+    <div class="d-flex">
+      <div>
+        <!-- SVG icon code with class="alert-icon" -->
+      </div>
+      <div>
+        Your account has been deleted and can't be restored.
+      </div>
+    </div>
+    <a class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="close"></a>
+  </div>
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -443,10 +311,35 @@
 <!-- Tabler Core -->
 <script src="<%=path%>/dist/js/tabler.min.js"></script>
 <script src="https://cdn.bootcdn.net/ajax/libs/fetch/3.5.0/fetch.min.js"></script>
+<script src="<%=path%>/dist/libs/page/bootstrap-paginator.min.js"></script>
 <script>
   $("document").ready(function () {
     $("#page-index").removeClass("active");
     $("#page-pond").addClass("active");
+
+    $('#pageLimit').bootstrapPaginator({
+      pageUrl: "/test",
+      currentPage: 1,//当前的请求页面。
+      totalPages: 20,//一共多少页。
+      size: "normal",//应该是页眉的大小。
+      bootstrapMajorVersion: 3,//bootstrap的版本要求。
+      alignment: "right",
+      numberOfPages: 5,//一页列出多少数据。
+      itemTexts: function (type, page, current) {//如下的代码是将页眉显示的中文显示我们自定义的中文。
+        switch (type) {
+          case "first":
+            return "首页";
+          case "prev":
+            return "上一页";
+          case "next":
+            return "下一页";
+          case "last":
+            return "末页";
+          case "page":
+            return page;
+        }
+      }
+    });
   });
 </script>
 <script type="text/javascript">
@@ -565,8 +458,6 @@
       return;
     }
 
-    console.log(indexs);
-
     data.name = name;
     data.type = type;
     data.length = length;
@@ -586,10 +477,16 @@
       .catch(error => console.error("Error:", error))
       .then(response => {
         console.log("Success:", response);
-        $("#modal-pond").modal("hide");
+        if (response.code === 500) {
+          $("#error-alert").removeClass("visually-hidden");
+        } else {
+          window.location.href = "<%=path%>/pond/list";
+        }
+
       });
   }
-
+</script>
+<script type="text/javascript">
 </script>
 </body>
 </html>

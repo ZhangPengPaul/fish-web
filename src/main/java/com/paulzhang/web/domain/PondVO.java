@@ -5,7 +5,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
@@ -15,6 +14,7 @@ import javax.validation.constraints.NotNull;
 @Builder
 public class PondVO {
 
+	private Long pondId;
 	@NotBlank(message = "池塘名不能为空")
 	private String name;
 	@NotNull(message = "池塘类型不能为空")
