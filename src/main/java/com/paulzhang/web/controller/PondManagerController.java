@@ -30,9 +30,10 @@ public class PondManagerController {
 		return new ModelAndView("/pond/list", "pondPage", pondVOPage);
 	}
 
-	@GetMapping("/config")
-	public ModelAndView config() {
-		return new ModelAndView("/pond/config");
+	@GetMapping("/config/{pond-id}")
+	public ModelAndView config(@PathVariable("pond-id") Long pondId) {
+		PondVO pondVO = pondService.findById(pondId);
+		return new ModelAndView("/pond/config", "pondDetail", pondVO);
 	}
 
 	@PostMapping("/add")

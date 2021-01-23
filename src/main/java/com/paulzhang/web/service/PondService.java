@@ -10,4 +10,6 @@ public interface PondService {
 	int add(PondVO pondVO) throws InvocationTargetException, IllegalAccessException;
 
 	IPage<PondVO> findAllByPage(long current, long size);
+
+	PondVO findById(Long pondId);
 }

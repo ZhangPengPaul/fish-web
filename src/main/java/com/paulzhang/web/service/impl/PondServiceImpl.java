@@ -70,4 +70,19 @@ public class PondServiceImpl implements PondService {
 		}
 		return pondVOS;
 	}
+
+	@Override
+	public PondVO findById(Long pondId) {
+		Pond pond = pondMapper.selectById(pondId);
+		PondVO pondVO = null;
+		if (Objects.nonNull(pond)) {
+			pondVO = new PondVO();
+			try {
+				BeanUtils.copyProperties(pondVO, pond);
+			} catch (IllegalAccessException | InvocationTargetException e) {
+				log.error("pond copy error", e);
+			}
+		}
+		return pondVO;
+	}
 }
