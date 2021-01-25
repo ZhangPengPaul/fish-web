@@ -236,6 +236,17 @@
   </div>
 </div>
 <div class="modal modal-blur fade" id="modal-dtu" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="alert alert-important alert-danger alert-dismissible visually-hidden" id="error-alert" role="alert">
+    <div class="d-flex">
+      <div>
+        <!-- SVG icon code with class="alert-icon" -->
+      </div>
+      <div>
+        Your account has been deleted and can't be restored.
+      </div>
+    </div>
+    <a class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="close"></a>
+  </div>
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -244,14 +255,15 @@
       </div>
       <div class="modal-body">
         <div class="mb-3">
-          <label class="form-label">DTU编号</label>
-          <input type="text" class="form-control" name="example-text-input" placeholder="DTU的编号">
+          <label class="form-label required">DTU编号</label>
+          <input type="text" class="form-control" name="dtu-code" id="dtu-code" placeholder="DTU的编号">
+          <div class="invalid-feedback">DTU编号不能为空</div>
         </div>
         <div class="row">
           <div class="col-lg-12">
             <div>
               <label class="form-label">附加信息</label>
-              <textarea class="form-control" rows="3"></textarea>
+              <textarea class="form-control" rows="3" name="dtu-memo" id="dtu-memo"></textarea>
             </div>
           </div>
         </div>
@@ -260,7 +272,7 @@
         <a href="#" class="btn btn-link link-secondary" data-bs-dismiss="modal">
           取消
         </a>
-        <a href="#" class="btn btn-primary ms-auto" data-bs-dismiss="modal">
+        <a href="javascript:;" onclick="addDtu()" class="btn btn-primary ms-auto">
           <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
                stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
                stroke-linejoin="round">
@@ -395,6 +407,49 @@
   }).catch((e) => {
     console.error(e);  //加载错误提示
   });
+</script>
+<script type="text/javascript">
+  function addDtu() {
+    $("#dtu-code").removeClass("is-invalid");
+    var url = "<%=path%>/dtu/add";
+    var data = {
+      "code": "",
+      "memo": "",
+      "pondId": ""
+    };
+
+    var code = $("#dtu-code").val();
+    var memo = $("#dtu-memo").val();
+    var pondId = "${pondDetail.pondId}";
+
+
+    if (code.trim() === "") {
+      $("#dtu-code").addClass("is-invalid");
+      return;
+    }
+
+    data.code = code;
+    data.memo = memo;
+    data.pondId = pondId;
+
+    fetch(url, {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: new Headers({
+        "Content-Type": "application/json"
+      })
+    }).then(res => res.json())
+      .catch(error => console.error("Error:", error))
+      .then(response => {
+        console.log("Success:", response);
+        if (response.code !== 200) {
+          $("#error-alert").removeClass("visually-hidden");
+        } else {
+          window.location.href = "<%=path%>/pond/config/${pondDetail.pondId}";
+        }
+
+      });
+  }
 </script>
 </body>
 </html>

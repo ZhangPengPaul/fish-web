@@ -148,17 +148,6 @@
   </div>
 </div>
 <div class="modal modal-blur fade" id="modal-pond" tabindex="-1" role="dialog" aria-hidden="true">
-  <div class="alert alert-important alert-success alert-dismissible visually-hidden" id="success-alert" role="alert">
-    <div class="d-flex">
-      <div>
-        <!-- SVG icon code with class="alert-icon" -->
-      </div>
-      <div>
-        Your account has been saved!
-      </div>
-    </div>
-    <a class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="close"></a>
-  </div>
   <div class="alert alert-important alert-danger alert-dismissible visually-hidden" id="error-alert" role="alert">
     <div class="d-flex">
       <div>
@@ -477,7 +466,7 @@
       .catch(error => console.error("Error:", error))
       .then(response => {
         console.log("Success:", response);
-        if (response.code === 500) {
+        if (response.code !== 500) {
           $("#error-alert").removeClass("visually-hidden");
         } else {
           window.location.href = "<%=path%>/pond/list";
