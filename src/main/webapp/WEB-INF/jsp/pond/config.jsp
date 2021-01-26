@@ -131,7 +131,7 @@
             <div class="col-12">
               <div class="card">
                 <div class="card-header">
-                  <h3 class="card-title">控制设备</h3>
+                  <h3 class="card-title">生产设备</h3>
                 </div>
                 <div class="table-responsive">
                   <table class="table card-table table-vcenter text-nowrap datatable">
@@ -144,31 +144,30 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                      <td><span class="text-muted">增氧机</span></td>
-                      <td><a href="<%=path%>/pond/config" class="text-reset" tabindex="-1">增氧机</a>
-                      </td>
-                      <td>
-                        增氧机
-                      </td>
-                      <td class="text-end">
-                        <a href="<%=path%>/pond/config" class="btn btn-red w-30">
-                          <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24"
-                               height="24" viewBox="0 0 24 24" stroke-width="2"
-                               stroke="currentColor" fill="none" stroke-linecap="round"
-                               stroke-linejoin="round">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                            <line x1="4" y1="7" x2="20" y2="7"/>
-                            <line x1="10" y1="11" x2="10" y2="17"/>
-                            <line x1="14" y1="11" x2="14" y2="17"/>
-                            <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12"/>
-                            <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3"/>
-                          </svg>
-                          删除
-                        </a>
+                    <c:forEach items="${prodDevices}" var="prodDevice">
+                      <tr>
+                        <td><span class="text-muted">${prodDevice.name}</span></td>
+                        <td>${prodDevice.type}</td>
+                        <td>${prodDevice.memo}</td>
+                        <td class="text-end">
+                          <a href="<%=path%>/pond/config" class="btn btn-red w-30">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24"
+                                 height="24" viewBox="0 0 24 24" stroke-width="2"
+                                 stroke="currentColor" fill="none" stroke-linecap="round"
+                                 stroke-linejoin="round">
+                              <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                              <line x1="4" y1="7" x2="20" y2="7"/>
+                              <line x1="10" y1="11" x2="10" y2="17"/>
+                              <line x1="14" y1="11" x2="14" y2="17"/>
+                              <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12"/>
+                              <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3"/>
+                            </svg>
+                            删除
+                          </a>
 
-                      </td>
-                    </tr>
+                        </td>
+                      </tr>
+                    </c:forEach>
                     </tbody>
                   </table>
                 </div>
@@ -177,44 +176,84 @@
             <div class="col-12">
               <div class="card">
                 <div class="card-header">
-                  <h3 class="card-title">传感设备</h3>
+                  <h3 class="card-title">监测设备</h3>
                 </div>
                 <div class="table-responsive">
                   <table class="table card-table table-vcenter text-nowrap datatable">
                     <thead>
                     <tr>
-                      <th>设备编号</th>
                       <th>设备名称</th>
+                      <th>设备类型</th>
                       <th>备注信息</th>
                       <th></th>
                     </tr>
                     </thead>
                     <tbody>
+                    <c:forEach items="${sensorDevices}" var="sensor">
+                      <tr>
+                        <td><span class="text-muted">${sensor.name}</span></td>
+                        <td>${sensor.type}</td>
+                        <td>${sensor.memo}</td>
+                        <td class="text-end">
+                          <a href="<%=path%>/pond/config" class="btn btn-red w-30">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24"
+                                 height="24" viewBox="0 0 24 24" stroke-width="2"
+                                 stroke="currentColor" fill="none" stroke-linecap="round"
+                                 stroke-linejoin="round">
+                              <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                              <line x1="4" y1="7" x2="20" y2="7"/>
+                              <line x1="10" y1="11" x2="10" y2="17"/>
+                              <line x1="14" y1="11" x2="14" y2="17"/>
+                              <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12"/>
+                              <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3"/>
+                            </svg>
+                            删除
+                          </a>
+                        </td>
+                      </tr>
+                    </c:forEach>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="card">
+                <div class="card-header">
+                  <h3 class="card-title">DTU</h3>
+                </div>
+                <div class="table-responsive">
+                  <table class="table card-table table-vcenter text-nowrap datatable">
+                    <thead>
                     <tr>
-                      <td><span class="text-muted">10000001</span></td>
-                      <td><a href="<%=path%>/pond/config" class="text-reset" tabindex="-1">传感器</a>
-                      </td>
-                      <td>
-                        传感器
-                      </td>
-                      <td class="text-end">
-                        <a href="<%=path%>/pond/config" class="btn btn-red w-30">
-                          <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24"
-                               height="24" viewBox="0 0 24 24" stroke-width="2"
-                               stroke="currentColor" fill="none" stroke-linecap="round"
-                               stroke-linejoin="round">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                            <line x1="4" y1="7" x2="20" y2="7"/>
-                            <line x1="10" y1="11" x2="10" y2="17"/>
-                            <line x1="14" y1="11" x2="14" y2="17"/>
-                            <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12"/>
-                            <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3"/>
-                          </svg>
-                          删除
-                        </a>
-
-                      </td>
+                      <th>DTU编号</th>
+                      <th>备注信息</th>
+                      <th></th>
                     </tr>
+                    </thead>
+                    <tbody>
+                    <c:forEach items="${dtuList}" var="dtu">
+                      <tr>
+                        <td><span class="text-muted">${dtu.code}</span></td>
+                        <td>${dtu.memo}</td>
+                        <td class="text-end">
+                          <a href="<%=path%>/pond/config" class="btn btn-red w-30">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24"
+                                 height="24" viewBox="0 0 24 24" stroke-width="2"
+                                 stroke="currentColor" fill="none" stroke-linecap="round"
+                                 stroke-linejoin="round">
+                              <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                              <line x1="4" y1="7" x2="20" y2="7"/>
+                              <line x1="10" y1="11" x2="10" y2="17"/>
+                              <line x1="14" y1="11" x2="14" y2="17"/>
+                              <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12"/>
+                              <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3"/>
+                            </svg>
+                            删除
+                          </a>
+                        </td>
+                      </tr>
+                    </c:forEach>
                     </tbody>
                   </table>
                 </div>
@@ -295,14 +334,15 @@
       </div>
       <div class="modal-body">
         <div class="mb-3">
-          <label class="form-label">设备名称</label>
-          <input type="text" class="form-control" name="example-text-input" placeholder="设备的编号">
+          <label class="form-label required">设备名称</label>
+          <input type="text" class="form-control" name="device-name" id="device-name" placeholder="设备的编号">
+          <div class="invalid-feedback">设备名称不能为空</div>
         </div>
         <div class="mb-3">
           <div class="col-12">
             <div>
               <label class="form-label">设备类型</label>
-              <select class="form-select form-control">
+              <select class="form-select form-control" name="device-type" id="device-type">
                 <option value="1">生产设备</option>
                 <option value="2">监测设备</option>
               </select>
@@ -313,9 +353,10 @@
           <div class="col-12">
             <div>
               <label class="form-label">关联DTU</label>
-              <select class="form-select">
-                <option value="1">crab01</option>
-                <option value="2">crab02</option>
+              <select class="form-select" name="device-dtu" id="device-dtu">
+                <c:forEach items="${dtuList}" var="dtu">
+                  <option value="${dtu.dtuId}">${dtu.code}</option>
+                </c:forEach>
               </select>
             </div>
           </div>
@@ -323,8 +364,9 @@
         <div class="mb-3">
           <div class="col-12">
             <div>
-              <label class="form-label">DTU通道号</label>
-              <input type="text" class="form-control" name="example-text-input" placeholder="DTU通道号">
+              <label class="form-label required">DTU通道号</label>
+              <input type="text" class="form-control" name="dtu-channel" id="dtu-channel" placeholder="DTU通道号">
+              <div class="invalid-feedback">DTU通道号不能为空</div>
             </div>
           </div>
         </div>
@@ -332,7 +374,7 @@
           <div class="col-lg-12">
             <div>
               <label class="form-label">附加信息</label>
-              <textarea class="form-control" rows="3"></textarea>
+              <textarea class="form-control" rows="3" name="device-memo" id="device-memo"></textarea>
             </div>
           </div>
         </div>
@@ -341,7 +383,7 @@
         <a href="#" class="btn btn-link link-secondary" data-bs-dismiss="modal">
           取消
         </a>
-        <a href="#" class="btn btn-primary ms-auto" data-bs-dismiss="modal">
+        <a href="javascript:;" class="btn btn-primary ms-auto" onclick="addDevice()">
           <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
                stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
                stroke-linejoin="round">
@@ -448,6 +490,59 @@
           window.location.href = "<%=path%>/pond/config/${pondDetail.pondId}";
         }
 
+      });
+  }
+
+  function addDevice() {
+    var url = "<%=path%>/device/add";
+    var data = {
+      "name": "",
+      "type": "",
+      "dtuId": "",
+      "dtuChannel": "",
+      "pondId": "",
+      "memo": ""
+    }
+
+    var name = $("#device-name").val();
+    var type = $("#device-type").val();
+    var dtuId = $("#device-dtu").val();
+    var dtuChannel = $("#dtu-channel").val();
+    var pondId = "${pondDetail.pondId}";
+    var memo = $("#device-memo").val();
+
+    if (name.trim() === "") {
+      $("#device-name").addClass("is-invalid");
+      return;
+    }
+
+    if (dtuChannel.trim() === "") {
+      $("#dtu-channel").addClass("is-invalid");
+      return;
+    }
+
+    data.name = name;
+    data.type = type;
+    data.dtuId = dtuId;
+    data.dtuChannel = dtuChannel;
+    data.pondId = pondId;
+    data.memo = memo;
+
+    fetch(url, {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: new Headers({
+        "Content-Type": "application/json"
+      })
+    }).then(res => res.json())
+      .catch(error => console.error("Error:", error))
+      .then(response => {
+        console.log("Success:", response);
+        if (response.code !== 200) {
+          $("#error-alert").removeClass("visually-hidden");
+        } else {
+          window.location.href = "<%=path%>/pond/config/${pondDetail.pondId}";
+        }
       });
   }
 </script>

@@ -12,7 +12,6 @@ import javax.validation.constraints.NotBlank;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@TableName("dtu")
 public class DtuVO {
 
 	private Long dtuId;

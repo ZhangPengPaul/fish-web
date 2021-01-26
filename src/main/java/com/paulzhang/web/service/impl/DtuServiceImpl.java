@@ -8,11 +8,14 @@ import com.paulzhang.web.mapper.DtuMapper;
 import com.paulzhang.web.service.DtuService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 @Slf4j
@@ -52,5 +55,27 @@ public class DtuServiceImpl implements DtuService {
 			}
 		}
 		return dtuVO;
+	}
+
+	@Override
+	public List<DtuVO> findByPondId(Long pondId) {
+		QueryWrapper<Dtu> queryWrapper = new QueryWrapper<>();
+		queryWrapper.eq("POND_ID", pondId);
+		List<Dtu> dtus = dtuMapper.selectList(queryWrapper);
+		DtuVO dtuVO;
+		List<DtuVO> dtuVOS = null;
+		if (CollectionUtils.isNotEmpty(dtus)) {
+			dtuVOS = new ArrayList<>(dtus.size());
+			for (Dtu dtu : dtus) {
+				dtuVO = new DtuVO();
+				try {
+					BeanUtils.copyProperties(dtuVO, dtu);
+					dtuVOS.add(dtuVO);
+				} catch (IllegalAccessException | InvocationTargetException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return dtuVOS;
 	}
 }
