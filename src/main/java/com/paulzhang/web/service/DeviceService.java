@@ -10,4 +10,6 @@ public interface DeviceService {
 	int add(DeviceVO deviceVO) throws InvocationTargetException, IllegalAccessException;
 
 	List<DeviceVO> findByPondAndType(Long pondId, Integer type);
+
+	int deleteByPondId(Long deviceId, Long pondId);
 }

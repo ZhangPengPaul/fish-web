@@ -378,7 +378,6 @@
         "lat": lat
       }
       indexs.push(point);
-      console.log(indexs);
     }
 
     $("#clear").click(function () {

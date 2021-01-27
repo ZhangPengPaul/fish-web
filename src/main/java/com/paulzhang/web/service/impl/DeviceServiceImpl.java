@@ -59,4 +59,11 @@ public class DeviceServiceImpl implements DeviceService {
 		}
 		return deviceVOS;
 	}
+
+	@Override
+	public int deleteByPondId(Long deviceId, Long pondId) {
+		QueryWrapper<Device> queryWrapper = new QueryWrapper<>();
+		queryWrapper.eq("DEVICE_ID", deviceId).eq("POND_ID", pondId);
+		return deviceMapper.delete(queryWrapper);
+	}
 }
