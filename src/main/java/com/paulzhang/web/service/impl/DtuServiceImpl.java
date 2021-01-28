@@ -1,10 +1,12 @@
 package com.paulzhang.web.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.paulzhang.web.domain.DeviceVO;
 import com.paulzhang.web.domain.DtuVO;
 import com.paulzhang.web.entity.Dtu;
 import com.paulzhang.web.entity.Pond;
 import com.paulzhang.web.mapper.DtuMapper;
+import com.paulzhang.web.service.DeviceService;
 import com.paulzhang.web.service.DtuService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.beanutils.BeanUtils;
@@ -23,6 +25,9 @@ import java.util.Objects;
 public class DtuServiceImpl implements DtuService {
 	@Resource
 	private DtuMapper dtuMapper;
+
+	@Resource
+	private DeviceService deviceService;
 
 	@Override
 	public int add(DtuVO dtuVO) throws InvocationTargetException, IllegalAccessException {
@@ -77,5 +82,18 @@ public class DtuServiceImpl implements DtuService {
 			}
 		}
 		return dtuVOS;
+	}
+
+	@Override
+	public int deleteByPondId(Long dtuId, Long pondId) {
+		int count = 0;
+		List<DeviceVO> deviceVOS = deviceService.findByDtuId(dtuId);
+		if (CollectionUtils.isEmpty(deviceVOS)) {
+			QueryWrapper<Dtu> queryWrapper = new QueryWrapper<>();
+			queryWrapper.eq("DTU_ID", dtuId).eq("POND_ID", pondId);
+			count = dtuMapper.delete(queryWrapper);
+		}
+
+		return count;
 	}
 }

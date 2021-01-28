@@ -12,4 +12,6 @@ public interface DeviceService {
 	List<DeviceVO> findByPondAndType(Long pondId, Integer type);
 
 	int deleteByPondId(Long deviceId, Long pondId);
+
+	List<DeviceVO> findByDtuId(Long dtuId);
 }

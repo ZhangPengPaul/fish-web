@@ -66,4 +66,27 @@ public class DeviceServiceImpl implements DeviceService {
 		queryWrapper.eq("DEVICE_ID", deviceId).eq("POND_ID", pondId);
 		return deviceMapper.delete(queryWrapper);
 	}
+
+	@Override
+	public List<DeviceVO> findByDtuId(Long dtuId) {
+		QueryWrapper<Device> queryWrapper = new QueryWrapper<>();
+		queryWrapper.eq("DTU_ID", dtuId);
+		List<Device> devices = deviceMapper.selectList(queryWrapper);
+		List<DeviceVO> deviceVOS = null;
+		DeviceVO deviceVO;
+		if (CollectionUtils.isNotEmpty(devices)) {
+			deviceVOS = new ArrayList<>(devices.size());
+			for (Device device : devices) {
+				deviceVO = new DeviceVO();
+				try {
+					BeanUtils.copyProperties(deviceVO, device);
+					deviceVOS.add(deviceVO);
+				} catch (IllegalAccessException | InvocationTargetException e) {
+					e.printStackTrace();
+				}
+			}
+
+		}
+		return deviceVOS;
+	}
 }
