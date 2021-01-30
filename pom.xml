@@ -20,6 +20,7 @@
 		<mybatis-plus.version>3.4.2</mybatis-plus.version>
 		<mysql-connector-java.version>6.0.6</mysql-connector-java.version>
 		<commons-beanutils.version>1.9.3</commons-beanutils.version>
+		<shiro-spring.version>1.7.0</shiro-spring.version>
 	</properties>
 
 	<dependencies>
@@ -80,6 +81,12 @@
 			<groupId>commons-beanutils</groupId>
 			<artifactId>commons-beanutils</artifactId>
 			<version>${commons-beanutils.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-spring</artifactId>
+			<version>${shiro-spring.version}</version>
 		</dependency>
 
 

@@ -1,22 +1,33 @@
 package com.paulzhang.web.controller;
 
+import com.paulzhang.web.common.HttpResult;
+import com.paulzhang.web.common.constants.HttpResultCode;
+import com.paulzhang.web.service.AuthService;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.annotation.Resource;
 
 @Controller
 @RequestMapping("/auth")
 public class AuthController {
 
-    @GetMapping("/sign-in")
-    public ModelAndView signIn() {
-        return new ModelAndView("login");
-    }
+	@Resource
+	private AuthService authService;
 
-    @PostMapping("/login")
-    public ModelAndView login() {
-        return new ModelAndView("redirect:/index/dashboard");
-    }
+	@GetMapping("/sign-in")
+	public ModelAndView signIn() {
+		return new ModelAndView("login");
+	}
+
+	@PostMapping("/login")
+	@ResponseBody
+	public HttpResult<Void> login(@RequestParam("username") String username, @RequestParam("password") String password) {
+		authService.login(username, password);
+		return HttpResult.<Void>builder().code(HttpResultCode.SUCCESS.getCode())
+			.message(HttpResultCode.SUCCESS.getMessage())
+			.build();
+	}
+
 }
