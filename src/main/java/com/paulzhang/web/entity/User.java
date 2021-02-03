@@ -18,7 +18,7 @@ import java.util.Date;
 @TableName("auth_user")
 public class User extends Model<User> {
 
-	@TableId(type = IdType.ASSIGN_ID,value = "USER_ID")
+	@TableId(type = IdType.ASSIGN_ID, value = "USER_ID")
 	private Long userId;
 	@TableField(value = "USERNAME")
 	private String username;
@@ -28,4 +28,6 @@ public class User extends Model<User> {
 	private String passwordSalt;
 	@TableField(value = "CREATE_TIME")
 	private Date createTime;
+	@TableField(value = "PROJECT_ID")
+	private Long projectId;
 }

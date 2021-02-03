@@ -1,6 +1,6 @@
 package com.paulzhang.web.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.paulzhang.web.entity.Project;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,7 +16,8 @@ public class UserVO {
 
 	private Long userId;
 	private String username;
-	@JsonIgnore
 	private String password;
 	private Date createTime;
+	private Long projectId;
+	private ProjectVO projectVO;
 }

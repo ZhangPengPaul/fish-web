@@ -3,11 +3,8 @@ package com.paulzhang.web.common.config;
 import com.paulzhang.web.common.HttpResult;
 import com.paulzhang.web.common.constants.HttpResultCode;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -21,7 +18,8 @@ public class ControllerExceptionAdvice {
 	@ExceptionHandler(value = Throwable.class)
 	@ResponseBody
 	public HttpResult<Void> throwable(Throwable throwable, HttpServletRequest request) {
-		String errorMessage = throwable.getMessage();
+		log.error("error", throwable);
+		String errorMessage = throwable.toString();
 		return HttpResult.<Void>builder().code(HttpResultCode.FAILED.getCode())
 			.message(errorMessage).build();
 	}

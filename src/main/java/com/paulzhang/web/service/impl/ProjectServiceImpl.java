@@ -3,6 +3,7 @@ package com.paulzhang.web.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.paulzhang.web.domain.PondVO;
 import com.paulzhang.web.domain.ProjectVO;
 import com.paulzhang.web.domain.UserVO;
 import com.paulzhang.web.entity.Pond;
@@ -12,6 +13,7 @@ import com.paulzhang.web.mapper.ProjectMapper;
 import com.paulzhang.web.service.ProjectService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -73,5 +75,39 @@ public class ProjectServiceImpl implements ProjectService {
 		}
 
 		return count;
+	}
+
+	@Override
+	public List<ProjectVO> findAll() {
+		List<Project> projectList = projectMapper.selectList(null);
+		List<ProjectVO> projectVOS = null;
+		if (CollectionUtils.isNotEmpty(projectList)) {
+			projectVOS = new ArrayList<>(projectList.size());
+			for (Project project : projectList) {
+				ProjectVO projectVO = new ProjectVO();
+				try {
+					BeanUtils.copyProperties(projectVO, project);
+					projectVOS.add(projectVO);
+				} catch (IllegalAccessException | InvocationTargetException e) {
+					log.error("project copy error", e);
+				}
+			}
+		}
+		return projectVOS;
+	}
+
+	@Override
+	public ProjectVO findById(Long projectId) {
+		Project project = projectMapper.selectById(projectId);
+		ProjectVO projectVO = null;
+		if (Objects.nonNull(project)) {
+			projectVO = new ProjectVO();
+			try {
+				BeanUtils.copyProperties(projectVO, project);
+			} catch (IllegalAccessException | InvocationTargetException e) {
+				log.error("project copy error", e);
+			}
+		}
+		return projectVO;
 	}
 }

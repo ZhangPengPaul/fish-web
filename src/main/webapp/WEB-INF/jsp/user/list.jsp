@@ -85,7 +85,7 @@
                 <tr>
                   <th>用户编号</th>
                   <th>用户名称</th>
-                  <th>用户角色</th>
+                  <th>所属项目</th>
                   <th></th>
                 </tr>
                 </thead>
@@ -95,7 +95,7 @@
                     <td><span class="text-muted">${user.userId}</span></td>
                     <td><a href="<%=path%>/pond/config" class="text-reset" tabindex="-1">${user.username}</a></td>
                     <td>
-                        ${user.username}
+                        ${user.projectVO.name}
                     </td>
                     <td class="text-end">
                       <a href="" class="btn btn-primary w-30">
@@ -174,7 +174,15 @@
         <div class="mb-3">
           <label class="form-label required">初始密码</label>
           <input type="text" class="form-control" name="user-pwd" id="user-pwd" placeholder="初始密码">
-          <div class="invalid-feedback">初始不能为空</div>
+          <div class="invalid-feedback">初始密码不能为空</div>
+        </div>
+        <div class="mb-3">
+          <label class="form-label required">所属项目</label>
+          <select class="form-select form-control" name="projects" id="projects">
+            <c:forEach items="${projects}" var="project">
+              <option value="${project.projectId}">${project.name}</option>
+            </c:forEach>
+          </select>
         </div>
       </div>
       <div class="modal-footer">
@@ -237,70 +245,33 @@
 </script>
 <script type="text/javascript">
   function add() {
-    $("#pond-name").removeClass("is-invalid");
-    $("#pond-length").removeClass("is-invalid");
-    $("#pond-width").removeClass("is-invalid");
-    $("#pond-depth").removeClass("is-invalid");
-    $("#pond-area").removeClass("is-invalid");
-    $("#map").removeClass("is-invalid");
-    var url = "<%=path%>/pond/add";
+    $("#user-name").removeClass("is-invalid");
+    $("#user-pwd").removeClass("is-invalid");
+
+    var url = "<%=path%>/user/add";
     var data = {
-      "name": "",
-      "type": "",
-      "length": "",
-      "width": "",
-      "depth": "",
-      "area": "",
-      "memo": "",
-      "outline": ""
+      "username": "",
+      "password": "",
+      "projectId": ""
     };
 
-    var name = $("#pond-name").val();
-    var type = $("input[name='pond-type']:checked").val();
-    var length = $("#pond-length").val();
-    var width = $("#pond-width").val();
-    var depth = $("#pond-depth").val();
-    var area = $("#pond-area").val();
-    var memo = $("#pond-memo").val();
+    var username = $("#user-name").val();
+    var password = $("#user-pwd").val();
+    var project = $("#projects").val();
 
-    if (name.trim() === "") {
-      $("#pond-name").addClass("is-invalid");
+    if (username.trim() === "") {
+      $("#user-name").addClass("is-invalid");
       return;
     }
 
-    if (length.trim() === "") {
-      $("#pond-length").addClass("is-invalid");
+    if (password.trim() === "") {
+      $("#user-pwd").addClass("is-invalid");
       return;
     }
 
-    if (width.trim() === "") {
-      $("#pond-width").addClass("is-invalid");
-      return;
-    }
-
-    if (depth.trim() === "") {
-      $("#pond-depth").addClass("is-invalid");
-      return;
-    }
-
-    if (area.trim() === "") {
-      $("#pond-area").addClass("is-invalid");
-      return;
-    }
-
-    if (indexs.length === 0) {
-      $("#map").addClass("is-invalid");
-      return;
-    }
-
-    data.name = name;
-    data.type = type;
-    data.length = length;
-    data.width = width;
-    data.depth = depth;
-    data.area = area;
-    data.memo = memo;
-    data.outline = JSON.stringify(indexs);
+    data.username = username;
+    data.password = password;
+    data.projectId = project;
 
     fetch(url, {
       method: "POST",
@@ -312,10 +283,10 @@
       .catch(error => console.error("Error:", error))
       .then(response => {
         console.log("Success:", response);
-        if (response.code !== 500) {
+        if (response.code !== 200) {
           $("#error-alert").removeClass("visually-hidden");
         } else {
-          window.location.href = "<%=path%>/pond/list";
+          window.location.href = "<%=path%>/user/list";
         }
 
       });
