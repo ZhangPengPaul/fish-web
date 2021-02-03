@@ -95,6 +95,9 @@
               <a class="dropdown-item" href="<%=path%>/user/list" id="dropdown-user">
                 用户管理
               </a>
+              <a class="dropdown-item" href="<%=path%>/project/list" id="dropdown-project">
+                项目管理
+              </a>
             </div>
           </li>
         </ul>
