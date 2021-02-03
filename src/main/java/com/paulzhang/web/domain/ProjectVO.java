@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotBlank;
 import java.util.Date;
 
 @Data
@@ -14,7 +15,9 @@ import java.util.Date;
 public class ProjectVO {
 
 	private Long projectId;
+	@NotBlank(message = "项目名称不能为空")
 	private String name;
+	@NotBlank(message = "项目地址不能为空")
 	private String address;
 	private String memo;
 	private Date createTime;

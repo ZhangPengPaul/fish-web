@@ -463,7 +463,7 @@
       .catch(error => console.error("Error:", error))
       .then(response => {
         console.log("Success:", response);
-        if (response.code !== 500) {
+        if (response.code !== 200) {
           $("#error-alert").removeClass("visually-hidden");
         } else {
           window.location.href = "<%=path%>/pond/list";

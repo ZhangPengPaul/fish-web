@@ -245,70 +245,32 @@
 </script>
 <script type="text/javascript">
   function add() {
-    $("#pond-name").removeClass("is-invalid");
-    $("#pond-length").removeClass("is-invalid");
-    $("#pond-width").removeClass("is-invalid");
-    $("#pond-depth").removeClass("is-invalid");
-    $("#pond-area").removeClass("is-invalid");
-    $("#map").removeClass("is-invalid");
-    var url = "<%=path%>/pond/add";
+    $("#project-name").removeClass("is-invalid");
+    $("#project-addr").removeClass("is-invalid");
+    var url = "<%=path%>/project/add";
     var data = {
       "name": "",
-      "type": "",
-      "length": "",
-      "width": "",
-      "depth": "",
-      "area": "",
-      "memo": "",
-      "outline": ""
+      "address": "",
+      "memo": ""
     };
 
-    var name = $("#pond-name").val();
-    var type = $("input[name='pond-type']:checked").val();
-    var length = $("#pond-length").val();
-    var width = $("#pond-width").val();
-    var depth = $("#pond-depth").val();
-    var area = $("#pond-area").val();
-    var memo = $("#pond-memo").val();
+    var name = $("#project-name").val();
+    var address = $("#project-addr").val();
+    var memo = $("#project-memo").val();
 
     if (name.trim() === "") {
-      $("#pond-name").addClass("is-invalid");
+      $("#project-name").addClass("is-invalid");
       return;
     }
 
-    if (length.trim() === "") {
-      $("#pond-length").addClass("is-invalid");
-      return;
-    }
-
-    if (width.trim() === "") {
-      $("#pond-width").addClass("is-invalid");
-      return;
-    }
-
-    if (depth.trim() === "") {
-      $("#pond-depth").addClass("is-invalid");
-      return;
-    }
-
-    if (area.trim() === "") {
-      $("#pond-area").addClass("is-invalid");
-      return;
-    }
-
-    if (indexs.length === 0) {
-      $("#map").addClass("is-invalid");
+    if (address.trim() === "") {
+      $("#project-name").addClass("is-invalid");
       return;
     }
 
     data.name = name;
-    data.type = type;
-    data.length = length;
-    data.width = width;
-    data.depth = depth;
-    data.area = area;
+    data.address = address;
     data.memo = memo;
-    data.outline = JSON.stringify(indexs);
 
     fetch(url, {
       method: "POST",
@@ -320,10 +282,10 @@
       .catch(error => console.error("Error:", error))
       .then(response => {
         console.log("Success:", response);
-        if (response.code !== 500) {
+        if (response.code !== 200) {
           $("#error-alert").removeClass("visually-hidden");
         } else {
-          window.location.href = "<%=path%>/pond/list";
+          window.location.href = "<%=path%>/project/list";
         }
 
       });
