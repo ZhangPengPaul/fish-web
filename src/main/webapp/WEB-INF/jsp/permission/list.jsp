@@ -6,7 +6,7 @@
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
   <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-  <title>项目管理</title>
+  <title>权限管理</title>
   <!-- CSS files -->
   <link href="<%=path%>/dist/libs/jqvmap/dist/jqvmap.min.css" rel="stylesheet"/>
   <link href="<%=path%>/dist/css/tabler.min.css" rel="stylesheet"/>
@@ -26,7 +26,7 @@
         <div class="row align-items-center">
           <div class="col">
             <h2 class="page-title">
-              项目列表
+              权限列表
             </h2>
           </div>
           <div class="col-auto ms-auto d-print-none">
@@ -43,7 +43,7 @@
                                             cx="10" cy="10" r="7"></circle><line x1="21" y1="21" x2="15"
                                                                                  y2="15"></line></svg>
                                         </span>
-                    <input type="text" class="form-control" placeholder="搜索项目…"
+                    <input type="text" class="form-control" placeholder="搜索权限…"
                            aria-label="Search in website">
                   </div>
                 </form>
@@ -57,7 +57,7 @@
                   <line x1="12" y1="5" x2="12" y2="19"></line>
                   <line x1="5" y1="12" x2="19" y2="12"></line>
                 </svg>
-                新增项目
+                新增权限
               </a>
               <a href="#" class="btn btn-primary d-sm-none btn-icon" data-bs-toggle="modal"
                  data-bs-target="#modal-report" aria-label="Create new report">
@@ -77,29 +77,25 @@
         <div class="col-12">
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title">项目列表</h3>
+              <h3 class="card-title">权限列表</h3>
             </div>
             <div class="table-responsive">
               <table class="table card-table table-vcenter text-nowrap datatable">
                 <thead>
                 <tr>
-                  <th>项目编号</th>
-                  <th>项目名称</th>
-                  <th>项目地址</th>
-                  <th>项目简介</th>
+                  <th>权限名称</th>
+                  <th>权限URI</th>
+                  <th>权限描述</th>
                   <th></th>
                 </tr>
                 </thead>
                 <tbody>
-                <c:forEach items="${projectPage.records}" var="project">
+                <c:forEach items="${permissions}" var="permission">
                   <tr>
-                    <td><span class="text-muted">${project.projectId}</span></td>
-                    <td><a href="<%=path%>/pond/config" class="text-reset" tabindex="-1">${project.name}</a></td>
+                    <td><span class="text-muted">${permission.name}</span></td>
+                    <td><a href="<%=path%>/pond/config" class="text-reset" tabindex="-1">${permission.url}</a></td>
                     <td>
-                        ${project.address}
-                    </td>
-                    <td>
-                        ${project.memo}
+                        ${permission.memo}
                     </td>
                     <td class="text-end">
                       <a href="" class="btn btn-primary w-30">
@@ -166,23 +162,24 @@
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">新项目</h5>
+        <h5 class="modal-title">新权限</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <div class="mb-3">
-          <label class="form-label required">项目名</label>
-          <input type="text" class="form-control" name="project-name" id="project-name" placeholder="项目的名称">
-          <div class="invalid-feedback">项目名称不能为空</div>
+          <label class="form-label required">权限名</label>
+          <input type="text" class="form-control" name="permission-name" id="permission-name" placeholder="权限的名称">
+          <div class="invalid-feedback">权限名称不能为空</div>
         </div>
         <div class="mb-3">
-          <label class="form-label required">项目地址</label>
-          <input type="text" class="form-control" name="project-addr" id="project-addr" placeholder="项目地址">
-          <div class="invalid-feedback">项目地址不能为空</div>
+          <label class="form-label required">权限URI</label>
+          <input type="text" class="form-control" name="permission-uri" id="permission-uri" placeholder="权限URI">
+          <div class="invalid-feedback">权限URI不能为空</div>
         </div>
         <div class="mb-3">
-          <label class="form-label">项目说明</label>
-          <textarea class="form-control" rows="3" name="project-memo" id="project-memo"></textarea>
+          <label class="form-label required">权限简介</label>
+          <input type="text" class="form-control" name="permission-memo" id="permission-memo" placeholder="权限简介">
+          <div class="invalid-feedback">权限URI不能为空</div>
         </div>
       </div>
       <div class="modal-footer">
@@ -197,7 +194,7 @@
             <line x1="12" y1="5" x2="12" y2="19"/>
             <line x1="5" y1="12" x2="19" y2="12"/>
           </svg>
-          创建项目
+          创建权限
         </a>
       </div>
     </div>
@@ -215,7 +212,8 @@
 <script>
   $("document").ready(function () {
     $("#page-index").removeClass("active");
-    $("#page-project").addClass("active");
+    $("#page-user-manager").addClass("active");
+    $("#dropdown-permission").addClass("active");
 
     $('#pageLimit').bootstrapPaginator({
       pageUrl: "/test",
@@ -244,31 +242,38 @@
 </script>
 <script type="text/javascript">
   function add() {
-    $("#project-name").removeClass("is-invalid");
-    $("#project-addr").removeClass("is-invalid");
-    var url = "<%=path%>/project/add";
+    $("#permission-name").removeClass("is-invalid");
+    $("#permission-uri").removeClass("is-invalid");
+    $("#permission-memo").removeClass("is-invalid");
+
+    var url = "<%=path%>/permission/add";
     var data = {
       "name": "",
-      "address": "",
+      "url": "",
       "memo": ""
     };
 
-    var name = $("#project-name").val();
-    var address = $("#project-addr").val();
-    var memo = $("#project-memo").val();
+    var name = $("#permission-name").val();
+    var permissionUrl = $("#permission-uri").val();
+    var memo = $("#permission-memo").val();
 
     if (name.trim() === "") {
-      $("#project-name").addClass("is-invalid");
+      $("#permission-name").addClass("is-invalid");
       return;
     }
 
-    if (address.trim() === "") {
-      $("#project-name").addClass("is-invalid");
+    if (permissionUrl.trim() === "") {
+      $("#permission-uri").addClass("is-invalid");
+      return;
+    }
+
+    if (memo.trim() === "") {
+      $("#permission-memo").addClass("is-invalid");
       return;
     }
 
     data.name = name;
-    data.address = address;
+    data.url = permissionUrl;
     data.memo = memo;
 
     fetch(url, {
@@ -284,7 +289,7 @@
         if (response.code !== 200) {
           $("#error-alert").removeClass("visually-hidden");
         } else {
-          window.location.href = "<%=path%>/project/list";
+          window.location.href = "<%=path%>/permission/list";
         }
 
       });

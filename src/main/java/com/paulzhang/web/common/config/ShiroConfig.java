@@ -60,8 +60,9 @@ public class ShiroConfig {
 		}
 		filterMap.put("/dist/**", "anon");    //公开访问的资源
 		filterMap.put("/auth/sign-in", "anon");  //公开地址
+		filterMap.put("/auth/login", "anon");
 		filterMap.put("/logout", "logout");     //配置登出页,shiro已经帮我们实现了跳转
-//		filterMap.put("/**", "authc");          //所有资源都需要经过验证
+//		filterMap.put("/**", "user");          //所有资源都需要经过验证
 		return filterMap;
 	}
 }

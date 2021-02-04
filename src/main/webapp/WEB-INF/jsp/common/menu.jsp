@@ -77,6 +77,25 @@
                     </span>
             </a>
           </li>
+          <li class="nav-item" id="page-project">
+            <a class="nav-link" href="<%=path%>/project/list">
+                    <span class="nav-link-icon d-md-none d-lg-inline-block"><svg xmlns="http://www.w3.org/2000/svg"
+                                                                                 class="icon" width="24" height="24"
+                                                                                 viewBox="0 0 24 24" stroke-width="2"
+                                                                                 stroke="currentColor" fill="none"
+                                                                                 stroke-linecap="round"
+                                                                                 stroke-linejoin="round"><path
+                      stroke="none" d="M0 0h24v24H0z" fill="none"/><circle cx="12" cy="12" r="9"/><ellipse cx="12"
+                                                                                                           cy="12"
+                                                                                                           rx="4"
+                                                                                                           ry="9"/><ellipse
+                      cx="12" cy="12" rx="4" ry="9" transform="rotate(90 12 12)"/></svg>
+                    </span>
+              <span class="nav-link-title">
+                      项目管理
+                    </span>
+            </a>
+          </li>
           <li class="nav-item dropdown" id="page-user-manager">
             <a class="nav-link dropdown-toggle" href="#navbar-base" data-bs-toggle="dropdown" role="button"
                aria-expanded="false">
@@ -95,8 +114,8 @@
               <a class="dropdown-item" href="<%=path%>/user/list" id="dropdown-user">
                 用户管理
               </a>
-              <a class="dropdown-item" href="<%=path%>/project/list" id="dropdown-project">
-                项目管理
+              <a class="dropdown-item" href="<%=path%>/permission/list" id="dropdown-permission">
+                权限管理
               </a>
             </div>
           </li>
