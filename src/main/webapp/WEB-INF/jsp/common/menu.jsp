@@ -114,6 +114,9 @@
               <a class="dropdown-item" href="<%=path%>/user/list" id="dropdown-user">
                 用户管理
               </a>
+              <a class="dropdown-item" href="<%=path%>/role/list" id="dropdown-role">
+                角色管理
+              </a>
               <a class="dropdown-item" href="<%=path%>/permission/list" id="dropdown-permission">
                 权限管理
               </a>

@@ -6,7 +6,7 @@
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
   <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-  <title>用户管理</title>
+  <title>角色管理</title>
   <!-- CSS files -->
   <link href="<%=path%>/dist/libs/jqvmap/dist/jqvmap.min.css" rel="stylesheet"/>
   <link href="<%=path%>/dist/css/tabler.min.css" rel="stylesheet"/>
@@ -26,7 +26,7 @@
         <div class="row align-items-center">
           <div class="col">
             <h2 class="page-title">
-              用户列表
+              角色列表
             </h2>
           </div>
           <div class="col-auto ms-auto d-print-none">
@@ -43,7 +43,7 @@
                                             cx="10" cy="10" r="7"></circle><line x1="21" y1="21" x2="15"
                                                                                  y2="15"></line></svg>
                                         </span>
-                    <input type="text" class="form-control" placeholder="搜索用户…"
+                    <input type="text" class="form-control" placeholder="搜索角色…"
                            aria-label="Search in website">
                   </div>
                 </form>
@@ -57,7 +57,7 @@
                   <line x1="12" y1="5" x2="12" y2="19"></line>
                   <line x1="5" y1="12" x2="19" y2="12"></line>
                 </svg>
-                新增用户
+                新增角色
               </a>
               <a href="#" class="btn btn-primary d-sm-none btn-icon" data-bs-toggle="modal"
                  data-bs-target="#modal-report" aria-label="Create new report">
@@ -77,38 +77,23 @@
         <div class="col-12">
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title">用户列表</h3>
+              <h3 class="card-title">角色列表</h3>
             </div>
             <div class="table-responsive">
               <table class="table card-table table-vcenter text-nowrap datatable">
                 <thead>
                 <tr>
-                  <th>用户编号</th>
-                  <th>用户名称</th>
-                  <th>所属项目</th>
+                  <th>角色名称</th>
+                  <th>角色描述</th>
                   <th></th>
                 </tr>
                 </thead>
                 <tbody>
-                <c:forEach items="${userPage.records}" var="user">
+                <c:forEach items="${roles}" var="role">
                   <tr>
-                    <td><span class="text-muted">${user.userId}</span></td>
-                    <td><a href="<%=path%>/pond/config" class="text-reset" tabindex="-1">${user.username}</a></td>
-                    <td>
-                        ${user.projectVO.name}
-                    </td>
+                    <td><span class="text-muted">${role.name}</span></td>
+                    <td><a href="<%=path%>/pond/config" class="text-reset" tabindex="-1">${role.memo}</a></td>
                     <td class="text-end">
-                      <a href="" class="btn btn-primary w-30">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
-                             viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                             stroke-linecap="round" stroke-linejoin="round">
-                          <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                          <path
-                            d="M10.325 4.317c.426 -1.756 2.924 -1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543 -.94 3.31 .826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756 .426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543 -.826 3.31 -2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756 -2.924 1.756 -3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543 .94 -3.31 -.826 -2.37 -2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756 -.426 -1.756 -2.924 0 -3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94 -1.543 .826 -3.31 2.37 -2.37c1 .608 2.296 .07 2.572 -1.065z"/>
-                          <circle cx="12" cy="12" r="3"/>
-                        </svg>
-                        配置角色
-                      </a>
                       <a href="#" class="btn btn-primary w-30">
                         <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
                              viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
@@ -162,27 +147,19 @@
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">新用户</h5>
+        <h5 class="modal-title">新角色</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <div class="mb-3">
-          <label class="form-label required">用户名</label>
-          <input type="text" class="form-control" name="user-name" id="user-name" placeholder="用户的名称">
-          <div class="invalid-feedback">用户名称不能为空</div>
+          <label class="form-label required">角色名</label>
+          <input type="text" class="form-control" name="role-name" id="role-name" placeholder="角色的名称">
+          <div class="invalid-feedback">角色名称不能为空</div>
         </div>
         <div class="mb-3">
-          <label class="form-label required">初始密码</label>
-          <input type="text" class="form-control" name="user-pwd" id="user-pwd" placeholder="初始密码">
-          <div class="invalid-feedback">初始密码不能为空</div>
-        </div>
-        <div class="mb-3">
-          <label class="form-label required">所属项目</label>
-          <select class="form-select form-control" name="projects" id="projects">
-            <c:forEach items="${projects}" var="project">
-              <option value="${project.projectId}">${project.name}</option>
-            </c:forEach>
-          </select>
+          <label class="form-label required">角色简介</label>
+          <input type="text" class="form-control" name="role-memo" id="role-memo" placeholder="角色简介">
+          <div class="invalid-feedback">角色描述不能为空</div>
         </div>
       </div>
       <div class="modal-footer">
@@ -197,7 +174,7 @@
             <line x1="12" y1="5" x2="12" y2="19"/>
             <line x1="5" y1="12" x2="19" y2="12"/>
           </svg>
-          创建用户
+          创建角色
         </a>
       </div>
     </div>
@@ -216,7 +193,7 @@
   $("document").ready(function () {
     $("#page-index").removeClass("active");
     $("#page-user-manager").addClass("active");
-    $("#dropdown-user").addClass("active");
+    $("#dropdown-role").addClass("active");
 
     $('#pageLimit').bootstrapPaginator({
       pageUrl: "/test",
@@ -245,33 +222,30 @@
 </script>
 <script type="text/javascript">
   function add() {
-    $("#user-name").removeClass("is-invalid");
-    $("#user-pwd").removeClass("is-invalid");
+    $("#role-name").removeClass("is-invalid");
+    $("#role-memo").removeClass("is-invalid");
 
-    var url = "<%=path%>/user/add";
+    var url = "<%=path%>/role/add";
     var data = {
-      "username": "",
-      "password": "",
-      "projectId": ""
+      "name": "",
+      "memo": ""
     };
 
-    var username = $("#user-name").val();
-    var password = $("#user-pwd").val();
-    var project = $("#projects").val();
+    var name = $("#role-name").val();
+    var memo = $("#role-memo").val();
 
-    if (username.trim() === "") {
-      $("#user-name").addClass("is-invalid");
+    if (name.trim() === "") {
+      $("#role-name").addClass("is-invalid");
       return;
     }
 
-    if (password.trim() === "") {
-      $("#user-pwd").addClass("is-invalid");
+    if (memo.trim() === "") {
+      $("#role-memo").addClass("is-invalid");
       return;
     }
 
-    data.username = username;
-    data.password = password;
-    data.projectId = project;
+    data.name = name;
+    data.memo = memo;
 
     fetch(url, {
       method: "POST",
@@ -286,7 +260,7 @@
         if (response.code !== 200) {
           $("#error-alert").removeClass("visually-hidden");
         } else {
-          window.location.href = "<%=path%>/user/list";
+          window.location.href = "<%=path%>/role/list";
         }
 
       });

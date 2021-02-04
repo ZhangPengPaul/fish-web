@@ -51,4 +51,12 @@ public class UserManagerController {
 			.message(count > 0 ? HttpResultCode.SUCCESS.getMessage() : HttpResultCode.FAILED.getMessage())
 			.build();
 	}
+
+	@GetMapping("/permission/{user-id}")
+	public ModelAndView loadUserPermission(@PathVariable("user-id") Long userId) {
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("/user/config");
+
+		return modelAndView;
+	}
 }
