@@ -100,7 +100,7 @@
                         ${user.projectVO.name}
                     </td>
                     <td class="text-end">
-                      <a href="" class="btn btn-primary w-30">
+                      <a href="javascript:;" onclick="showModal('${user.userId}')" class="btn btn-primary w-30">
                         <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
                              viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
                              stroke-linecap="round" stroke-linejoin="round">
@@ -121,17 +121,6 @@
                           <line x1="16" y1="5" x2="19" y2="8"/>
                         </svg>
                         编辑
-                      </a>
-                      <a href="#" class="btn btn-primary w-30">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
-                             viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                             stroke-linecap="round" stroke-linejoin="round">
-                          <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                          <ellipse cx="12" cy="6" rx="8" ry="3"></ellipse>
-                          <path d="M4 6v6a8 3 0 0 0 16 0v-6"/>
-                          <path d="M4 12v6a8 3 0 0 0 16 0v-6"/>
-                        </svg>
-                        查看数据
                       </a>
                     </td>
                   </tr>
@@ -200,6 +189,42 @@
             <line x1="5" y1="12" x2="19" y2="12"/>
           </svg>
           创建用户
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal modal-blur fade" id="modal-role" tabindex="-1" role="dialog" aria-hidden="true">
+  <input type="hidden" name="modal-user-id" id="modal-user-id"/>
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">配置用户角色</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label class="form-label required">选择角色</label>
+          <select class="form-select form-control" name="roles" id="roles">
+            <c:forEach items="${roles}" var="role">
+              <option value="${role.roleId}">${role.memo}</option>
+            </c:forEach>
+          </select>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <a href="#" class="btn btn-link link-secondary" data-bs-dismiss="modal">
+          取消
+        </a>
+        <a href="javascript:;" onclick="configRole()" class="btn btn-primary ms-auto">
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
+               stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+               stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <line x1="12" y1="5" x2="12" y2="19"/>
+            <line x1="5" y1="12" x2="19" y2="12"/>
+          </svg>
+          确认角色
         </a>
       </div>
     </div>
@@ -278,6 +303,34 @@
     fetch(url, {
       method: "POST",
       body: JSON.stringify(data),
+      headers: new Headers({
+        "Content-Type": "application/json"
+      })
+    }).then(res => res.json())
+      .catch(error => console.error("Error:", error))
+      .then(response => {
+        console.log("Success:", response);
+        if (response.code !== 200) {
+          $("#error-alert").removeClass("visually-hidden");
+        } else {
+          window.location.href = "<%=path%>/user/list";
+        }
+
+      });
+  }
+
+  function showModal(userId) {
+    $("#modal-user-id").val(userId);
+    $("#modal-role").modal('show');
+  }
+
+  function configRole() {
+    var userId = $("#modal-user-id").val();
+    var roleId = $("#roles").val();
+    var url = "<%=path%>/user/config-role?userId=" + userId + "&roleId=" + roleId;
+
+    fetch(url, {
+      method: "POST",
       headers: new Headers({
         "Content-Type": "application/json"
       })

@@ -8,7 +8,9 @@ import com.paulzhang.web.domain.ProjectVO;
 import com.paulzhang.web.domain.UserVO;
 import com.paulzhang.web.entity.Pond;
 import com.paulzhang.web.entity.User;
+import com.paulzhang.web.entity.UserRole;
 import com.paulzhang.web.mapper.UserMapper;
+import com.paulzhang.web.mapper.UserRoleMapper;
 import com.paulzhang.web.service.ProjectService;
 import com.paulzhang.web.service.UserService;
 import lombok.extern.slf4j.Slf4j;
@@ -29,6 +31,9 @@ public class UserServiceImpl implements UserService {
 
 	@Resource
 	private ProjectService projectService;
+
+	@Resource
+	private UserRoleMapper userRoleMapper;
 
 	@Override
 	public IPage<UserVO> findAllByPage(long current, long size) {
@@ -83,5 +88,12 @@ public class UserServiceImpl implements UserService {
 			count = userMapper.insert(user);
 		}
 		return count;
+	}
+
+	@Override
+	public int addUserRole(Long userId, Long roleId) {
+		UserRole userRole = UserRole.builder().roleId(roleId)
+			.userId(userId).build();
+		return userRoleMapper.insert(userRole);
 	}
 }
