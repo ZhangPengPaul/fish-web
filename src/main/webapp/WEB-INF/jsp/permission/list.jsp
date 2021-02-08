@@ -17,8 +17,10 @@
 </head>
 <body class="antialiased">
 <div class="page">
-  <%@include file="../common/header.jsp" %>
-  <%@include file="../common/menu.jsp" %>
+  <div class="sticky-top">
+    <%@include file="../common/header.jsp" %>
+    <%@include file="../common/menu.jsp" %>
+  </div>
   <div class="content">
     <div class="container-fluid">
       <!-- Page title -->

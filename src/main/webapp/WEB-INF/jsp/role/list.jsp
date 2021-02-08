@@ -17,8 +17,10 @@
 </head>
 <body class="antialiased">
 <div class="page">
-  <%@include file="../common/header.jsp" %>
-  <%@include file="../common/menu.jsp" %>
+  <div class="sticky-top">
+    <%@include file="../common/header.jsp" %>
+    <%@include file="../common/menu.jsp" %>
+  </div>
   <div class="content">
     <div class="container-fluid">
       <!-- Page title -->
@@ -92,9 +94,9 @@
                 <c:forEach items="${roles}" var="role">
                   <tr>
                     <td><span class="text-muted">${role.name}</span></td>
-                    <td><a href="<%=path%>/pond/config" class="text-reset" tabindex="-1">${role.memo}</a></td>
+                    <td>${role.memo}</td>
                     <td class="text-end">
-                      <a href="#" class="btn btn-primary w-30">
+                      <a href="<%=path%>/role/config/${role.roleId}" class="btn btn-primary w-30">
                         <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
                              viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
                              stroke-linecap="round" stroke-linejoin="round">
@@ -103,7 +105,7 @@
                           <path d="M9 15h3l8.5 -8.5a1.5 1.5 0 0 0 -3 -3l-8.5 8.5v3"/>
                           <line x1="16" y1="5" x2="19" y2="8"/>
                         </svg>
-                        编辑
+                        配置权限
                       </a>
                       <a href="#" class="btn btn-primary w-30">
                         <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
