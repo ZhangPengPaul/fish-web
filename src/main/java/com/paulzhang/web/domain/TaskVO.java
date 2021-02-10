@@ -11,12 +11,13 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class UserVO {
-
-	private Long userId;
-	private String username;
-	private String password;
+public class TaskVO {
+	private Long taskId;
+	private String title;
+	private Long pondId;
+	private String memo;
+	private Integer type;
+	private Date startTime;
+	private Date endTime;
 	private Date createTime;
-	private Long projectId;
-	private ProjectVO projectVO;
 }

@@ -92,7 +92,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <c:forEach items="${pondPage.records}" var="pond">
+                <c:forEach items="${pondPage}" var="pond">
                   <tr>
                     <td><span class="text-muted">${pond.pondId}</span></td>
                     <td><a href="<%=path%>/pond/config" class="text-reset" tabindex="-1">${pond.name}</a></td>

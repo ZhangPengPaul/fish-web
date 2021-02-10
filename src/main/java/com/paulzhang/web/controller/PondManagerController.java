@@ -8,9 +8,12 @@ import com.paulzhang.web.common.constants.HttpResultCode;
 import com.paulzhang.web.domain.DeviceVO;
 import com.paulzhang.web.domain.DtuVO;
 import com.paulzhang.web.domain.PondVO;
+import com.paulzhang.web.entity.User;
 import com.paulzhang.web.service.DeviceService;
 import com.paulzhang.web.service.DtuService;
 import com.paulzhang.web.service.PondService;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.shiro.SecurityUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +24,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.Objects;
 
+@Slf4j
 @Controller
 @RequestMapping("/pond")
 public class PondManagerController {
@@ -35,11 +39,13 @@ public class PondManagerController {
 	private DeviceService deviceService;
 
 	@GetMapping("/list")
-	public ModelAndView list(@RequestParam(value = "current", required = false) Long current, @RequestParam(value = "size", required = false) Long size) {
-		current = Objects.isNull(current) ? CommonConstants.DEFAULT_PAGE_CURRENT : current;
-		size = Objects.isNull(size) ? CommonConstants.DEFAULT_PAGE_SIZE : size;
-		IPage<PondVO> pondVOPage = pondService.findAllByPage(current, size);
-		return new ModelAndView("/pond/list", "pondPage", pondVOPage);
+	public ModelAndView list() {
+		User user = (User) SecurityUtils.getSubject().getPrincipal();
+		Long projectId = user.getProjectId();
+		List<PondVO> pondVOPage = pondService.findAllByProjectId(projectId);
+		ModelAndView modelAndView = new ModelAndView("/pond/list");
+		modelAndView.addObject("pondPage", pondVOPage);
+		return modelAndView;
 	}
 
 	@GetMapping("/config/{pond-id}")
@@ -63,6 +69,9 @@ public class PondManagerController {
 	@PostMapping("/add")
 	@ResponseBody
 	public HttpResult<Void> add(@Validated @RequestBody PondVO pondVO) throws InvocationTargetException, IllegalAccessException {
+		User user = (User) SecurityUtils.getSubject().getPrincipal();
+		Long projectId = user.getProjectId();
+		pondVO.setProjectId(projectId);
 		int count = pondService.add(pondVO);
 		return HttpResult.<Void>builder()
 			.code(count > 0 ? HttpResultCode.SUCCESS.getCode() : HttpResultCode.FAILED.getCode())

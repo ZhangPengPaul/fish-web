@@ -30,5 +30,6 @@ public class PondVO {
 	private String memo;
 	@NotBlank(message = "池塘轮廓不能为空")
 	private String outline;
+	private Long projectId;
 
 }

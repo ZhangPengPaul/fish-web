@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.paulzhang.web.domain.PondVO;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.List;
 
 public interface PondService {
 
@@ -12,4 +13,6 @@ public interface PondService {
 	IPage<PondVO> findAllByPage(long current, long size);
 
 	PondVO findById(Long pondId);
+
+	List<PondVO> findAllByProjectId(Long projectId);
 }

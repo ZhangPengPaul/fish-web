@@ -56,8 +56,8 @@
                     </span>
             </a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#navbar-extra" data-bs-toggle="dropdown"
+          <li class="nav-item dropdown" id="page-work-schedule">
+            <a class="nav-link dropdown-toggle" href="#navbar-extra" data-bs-toggle="dropdown"
                role="button" aria-expanded="false">
                     <span class="nav-link-icon d-md-none d-lg-inline-block">
                         <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
@@ -73,9 +73,17 @@
                           x="8" y="15" width="2" height="2"/></svg>
                     </span>
               <span class="nav-link-title">
-                      生产管理
-                    </span>
+                生产管理
+              </span>
             </a>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="<%=path%>/work/calendar" id="dropdown-calendar">
+                工作日历
+              </a>
+              <a class="dropdown-item" href="<%=path%>/role/list" id="dropdown-log">
+                工作日志
+              </a>
+            </div>
           </li>
           <li class="nav-item" id="page-project">
             <a class="nav-link" href="<%=path%>/project/list">

@@ -9,6 +9,7 @@ import com.paulzhang.web.mapper.PondMapper;
 import com.paulzhang.web.service.PondService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -84,5 +85,28 @@ public class PondServiceImpl implements PondService {
 			}
 		}
 		return pondVO;
+	}
+
+	@Override
+	public List<PondVO> findAllByProjectId(Long projectId) {
+		QueryWrapper<Pond> queryWrapper = new QueryWrapper<>();
+		queryWrapper.eq("PROJECT_ID", projectId);
+		List<Pond> ponds = pondMapper.selectList(queryWrapper);
+
+		List<PondVO> pondVOS = null;
+		if (CollectionUtils.isNotEmpty(ponds)) {
+			pondVOS = new ArrayList<>(ponds.size());
+			for (Pond pond : ponds) {
+				PondVO pondVO = new PondVO();
+				try {
+					BeanUtils.copyProperties(pondVO, pond);
+					pondVOS.add(pondVO);
+				} catch (IllegalAccessException | InvocationTargetException e) {
+					log.error("pond copy error", e);
+				}
+
+			}
+		}
+		return pondVOS;
 	}
 }
