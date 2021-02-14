@@ -43,7 +43,7 @@ public class PondManagerController {
 		User user = (User) SecurityUtils.getSubject().getPrincipal();
 		Long projectId = user.getProjectId();
 		List<PondVO> pondVOPage = pondService.findAllByProjectId(projectId);
-		ModelAndView modelAndView = new ModelAndView("/pond/list");
+		ModelAndView modelAndView = new ModelAndView("pond/list");
 		modelAndView.addObject("pondPage", pondVOPage);
 		return modelAndView;
 	}
@@ -58,7 +58,7 @@ public class PondManagerController {
 		List<DeviceVO> prodDevices = deviceService.findByPondAndType(pondId, DeviceType.PROD.getCode());
 		// 检测设备列表
 		List<DeviceVO> sensorDevices = deviceService.findByPondAndType(pondId, DeviceType.SENSOR.getCode());
-		ModelAndView modelAndView = new ModelAndView("/pond/config");
+		ModelAndView modelAndView = new ModelAndView("pond/config");
 		modelAndView.addObject("pondDetail", pondVO);
 		modelAndView.addObject("dtuList", dtuVOList);
 		modelAndView.addObject("prodDevices", prodDevices);
@@ -77,6 +77,18 @@ public class PondManagerController {
 			.code(count > 0 ? HttpResultCode.SUCCESS.getCode() : HttpResultCode.FAILED.getCode())
 			.message(count > 0 ? HttpResultCode.SUCCESS.getMessage() : HttpResultCode.FAILED.getMessage())
 			.build();
+	}
+
+	@GetMapping("/analyse/{pond-id}")
+	public ModelAndView analyse(@PathVariable("pond-id") Long pondId) {
+		// 池塘信息
+		PondVO pondVO = pondService.findById(pondId);
+		// 生产设备列表
+		List<DeviceVO> prodDevices = deviceService.findByPondAndType(pondId, DeviceType.PROD.getCode());
+		ModelAndView modelAndView = new ModelAndView("pond/analyse");
+		modelAndView.addObject("pondDetail", pondVO);
+		modelAndView.addObject("prodDevices", prodDevices);
+		return modelAndView;
 	}
 }
 

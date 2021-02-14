@@ -4,23 +4,23 @@
     <div class="navbar navbar-light">
       <div class="container-fluid">
         <ul class="navbar-nav">
-          <li class="nav-item active" id="page-index">
-            <a class="nav-link" href="<%=path%>/dashboard">
-                    <span class="nav-link-icon d-md-none d-lg-inline-block"><svg xmlns="http://www.w3.org/2000/svg"
-                                                                                 class="icon" width="24" height="24"
-                                                                                 viewBox="0 0 24 24" stroke-width="2"
-                                                                                 stroke="currentColor" fill="none"
-                                                                                 stroke-linecap="round"
-                                                                                 stroke-linejoin="round"><path
-                      stroke="none" d="M0 0h24v24H0z" fill="none"/><polyline points="5 12 3 12 12 3 21 12 19 12"/><path
-                      d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7"/><path
-                      d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6"/></svg>
-                    </span>
-              <span class="nav-link-title">
-                      首页
-                    </span>
-            </a>
-          </li>
+          <%--          <li class="nav-item active" id="page-index">--%>
+          <%--            <a class="nav-link" href="<%=path%>/dashboard">--%>
+          <%--                    <span class="nav-link-icon d-md-none d-lg-inline-block"><svg xmlns="http://www.w3.org/2000/svg"--%>
+          <%--                                                                                 class="icon" width="24" height="24"--%>
+          <%--                                                                                 viewBox="0 0 24 24" stroke-width="2"--%>
+          <%--                                                                                 stroke="currentColor" fill="none"--%>
+          <%--                                                                                 stroke-linecap="round"--%>
+          <%--                                                                                 stroke-linejoin="round"><path--%>
+          <%--                      stroke="none" d="M0 0h24v24H0z" fill="none"/><polyline points="5 12 3 12 12 3 21 12 19 12"/><path--%>
+          <%--                      d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7"/><path--%>
+          <%--                      d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6"/></svg>--%>
+          <%--                    </span>--%>
+          <%--              <span class="nav-link-title">--%>
+          <%--                      首页--%>
+          <%--                    </span>--%>
+          <%--            </a>--%>
+          <%--          </li>--%>
           <li class="nav-item" id="page-pond">
             <a class="nav-link" href="<%=path%>/pond/list">
                     <span class="nav-link-icon d-md-none d-lg-inline-block">
@@ -37,25 +37,25 @@
                     </span>
             </a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="<%=path%>/form-elements.html">
-                    <span class="nav-link-icon d-md-none d-lg-inline-block">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
-                             stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
-                             stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><rect x="13"
-                                                                                                              y="8"
-                                                                                                              width="8"
-                                                                                                              height="12"
-                                                                                                              rx="1"/><path
-                          d="M18 8v-3a1 1 0 0 0 -1 -1h-13a1 1 0 0 0 -1 1v12a1 1 0 0 0 1 1h9"/><line x1="16" y1="9"
-                                                                                                    x2="18"
-                                                                                                    y2="9"/></svg>
-                    </span>
-              <span class="nav-link-title">
-                      设备管理
-                    </span>
-            </a>
-          </li>
+          <%--          <li class="nav-item">--%>
+          <%--            <a class="nav-link" href="<%=path%>/form-elements.html">--%>
+          <%--                    <span class="nav-link-icon d-md-none d-lg-inline-block">--%>
+          <%--                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"--%>
+          <%--                             stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"--%>
+          <%--                             stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><rect x="13"--%>
+          <%--                                                                                                              y="8"--%>
+          <%--                                                                                                              width="8"--%>
+          <%--                                                                                                              height="12"--%>
+          <%--                                                                                                              rx="1"/><path--%>
+          <%--                          d="M18 8v-3a1 1 0 0 0 -1 -1h-13a1 1 0 0 0 -1 1v12a1 1 0 0 0 1 1h9"/><line x1="16" y1="9"--%>
+          <%--                                                                                                    x2="18"--%>
+          <%--                                                                                                    y2="9"/></svg>--%>
+          <%--                    </span>--%>
+          <%--              <span class="nav-link-title">--%>
+          <%--                      设备管理--%>
+          <%--                    </span>--%>
+          <%--            </a>--%>
+          <%--          </li>--%>
           <li class="nav-item dropdown" id="page-work-schedule">
             <a class="nav-link dropdown-toggle" href="#navbar-extra" data-bs-toggle="dropdown"
                role="button" aria-expanded="false">
