@@ -100,27 +100,59 @@
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">新用户</h5>
+        <h5 class="modal-title">新任务</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <div class="mb-3">
-          <label class="form-label required">用户名</label>
-          <input type="text" class="form-control" name="user-name" id="user-name" placeholder="用户的名称">
-          <div class="invalid-feedback">用户名称不能为空</div>
-        </div>
-        <div class="mb-3">
-          <label class="form-label required">初始密码</label>
-          <input type="text" class="form-control" name="user-pwd" id="user-pwd" placeholder="初始密码">
-          <div class="invalid-feedback">初始密码不能为空</div>
-        </div>
-        <div class="mb-3">
-          <label class="form-label required">所属项目</label>
-          <select class="form-select form-control" name="projects" id="projects">
-            <c:forEach items="${projects}" var="project">
-              <option value="${project.projectId}">${project.name}</option>
+          <label class="form-label required">池塘</label>
+          <select class="form-select form-control" name="task-pond" id="task-pond">
+            <c:forEach items="${ponds}" var="pond">
+              <option value="${pond.pondId}">${pond.name}</option>
             </c:forEach>
           </select>
+        </div>
+        <div class="mb-3">
+          <label class="form-label required">任务名</label>
+          <input type="text" class="form-control" name="task-title" id="task-title" placeholder="任务名">
+          <div class="invalid-feedback">任务名</div>
+        </div>
+        <div class="mb-3">
+          <label class="form-label required">任务描述</label>
+          <textarea class="form-control" rows="3" name="task-memo" id="task-memo"></textarea>
+          <div class="invalid-feedback">任务描述</div>
+        </div>
+        <div class="mb-3">
+          <label class="form-label required">任务类型</label>
+          <select class="form-select form-control" name="task-type" id="task-type">
+            <option value="1">清塘</option>
+            <option value="2">消毒</option>
+            <option value="3">晒塘</option>
+            <option value="4">放水</option>
+            <option value="5">施肥</option>
+            <option value="6">种植水草</option>
+            <option value="7">肥水</option>
+            <option value="8">试苗</option>
+            <option value="9">巡塘</option>
+            <option value="10">放苗</option>
+            <option value="11">投喂</option>
+            <option value="12">抽检</option>
+            <option value="13">换水</option>
+            <option value="14">捕捞</option>
+            <option value="15">检验</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label class="form-label required">任务开始时间</label>
+          <input id="startTime" type="date" class="form-control mb-2"
+                 placeholder="Select a date"/>
+          <div class="invalid-feedback">任务描述</div>
+        </div>
+        <div class="mb-3">
+          <label class="form-label required">任务结束时间</label>
+          <input id="endTime" type="date" class="form-control mb-2"
+                 placeholder="Select a date"/>
+          <div class="invalid-feedback">任务描述</div>
         </div>
       </div>
       <div class="modal-footer">
@@ -135,43 +167,7 @@
             <line x1="12" y1="5" x2="12" y2="19"/>
             <line x1="5" y1="12" x2="19" y2="12"/>
           </svg>
-          创建用户
-        </a>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="modal modal-blur fade" id="modal-role" tabindex="-1" role="dialog" aria-hidden="true">
-  <input type="hidden" name="modal-user-id" id="modal-user-id"/>
-  <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">配置用户角色</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <div class="mb-3">
-          <label class="form-label required">选择角色</label>
-          <select class="form-select form-control" name="roles" id="roles">
-            <c:forEach items="${roles}" var="role">
-              <option value="${role.roleId}">${role.memo}</option>
-            </c:forEach>
-          </select>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <a href="#" class="btn btn-link link-secondary" data-bs-dismiss="modal">
-          取消
-        </a>
-        <a href="javascript:;" onclick="configRole()" class="btn btn-primary ms-auto">
-          <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
-               stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
-               stroke-linejoin="round">
-            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-            <line x1="12" y1="5" x2="12" y2="19"/>
-            <line x1="5" y1="12" x2="19" y2="12"/>
-          </svg>
-          确认角色
+          添加任务
         </a>
       </div>
     </div>
@@ -193,7 +189,17 @@
     var calendarEl = document.getElementById('calendar');
     var calendar = new FullCalendar.Calendar(calendarEl, {
       initialView: 'dayGridMonth',
-      locale: 'zh-cn'
+      locale: 'cn',
+      events: [
+        <c:forEach items="${tasks}" var="task">
+        {
+          title: "${task.title}",
+          start: "<fmt:formatDate value="${task.startTime}" pattern="yyyy-MM-dd"/>",
+          end: "<fmt:formatDate value="${task.endTime}" pattern="yyyy-MM-dd"/>"
+        }
+        <c:if test="${tasks.size() > 1}">, </c:if>
+        </c:forEach>
+      ]
     });
     calendar.render();
   });
@@ -203,12 +209,6 @@
     $("#page-index").removeClass("active");
     $("#page-work-schedule").addClass("active");
     $("#dropdown-calendar").addClass("active");
-
-    // var calendarEl = $("calendar");
-    // var calendar = new FullCalendar.Calendar(calendarEl, {
-    //   initialView: 'dayGridMonth'
-    // });
-    // calendar.render();
 
     $('#pageLimit').bootstrapPaginator({
       pageUrl: "/test",
@@ -237,33 +237,29 @@
 </script>
 <script type="text/javascript">
   function add() {
-    $("#user-name").removeClass("is-invalid");
-    $("#user-pwd").removeClass("is-invalid");
-
-    var url = "<%=path%>/user/add";
+    var url = "<%=path%>/work/add-task";
     var data = {
-      "username": "",
-      "password": "",
-      "projectId": ""
+      "title": "",
+      "memo": "",
+      "type": "",
+      "startTime": "",
+      "endTime": "",
+      "pondId": ""
     };
 
-    var username = $("#user-name").val();
-    var password = $("#user-pwd").val();
-    var project = $("#projects").val();
+    var pondId = $("#task-pond").val();
+    var title = $("#task-title").val();
+    var memo = $("#task-memo").val();
+    var type = $("#task-type").val();
+    var startTime = $("#startTime").val();
+    var endTime = $("#endTime").val();
 
-    if (username.trim() === "") {
-      $("#user-name").addClass("is-invalid");
-      return;
-    }
-
-    if (password.trim() === "") {
-      $("#user-pwd").addClass("is-invalid");
-      return;
-    }
-
-    data.username = username;
-    data.password = password;
-    data.projectId = project;
+    data.title = title;
+    data.memo = memo;
+    data.type = type;
+    data.startTime = startTime;
+    data.endTime = endTime;
+    data.pondId = pondId;
 
     fetch(url, {
       method: "POST",
@@ -278,7 +274,7 @@
         if (response.code !== 200) {
           $("#error-alert").removeClass("visually-hidden");
         } else {
-          window.location.href = "<%=path%>/user/list";
+          window.location.href = "<%=path%>/work/calendar";
         }
 
       });
