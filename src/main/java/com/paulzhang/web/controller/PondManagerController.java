@@ -13,7 +13,9 @@ import com.paulzhang.web.service.DeviceService;
 import com.paulzhang.web.service.DtuService;
 import com.paulzhang.web.service.PondService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.logging.log4j.util.Strings;
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.util.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -92,7 +94,9 @@ public class PondManagerController {
 	}
 
 	@GetMapping("/dashboard")
-	public ModelAndView dashboard(@RequestParam(value = "pondId", required = false) Long pondId) {
+	public ModelAndView dashboard(@RequestParam(value = "pondId", required = false) Long pondId,
+								  @RequestParam(value = "index", required = false, defaultValue = "0") String index,
+								  @RequestParam(value = "isSelect", required = false, defaultValue = "false") String isSelect) {
 		User user = (User) SecurityUtils.getSubject().getPrincipal();
 		Long projectId = user.getProjectId();
 		List<PondVO> pondVOPage = pondService.findAllByProjectId(projectId);
@@ -103,6 +107,17 @@ public class PondManagerController {
 			pondVO = pondService.findById(pondId);
 		}
 		modelAndView.addObject("pondDetail", pondVO);
+		int intIndex = Integer.parseInt(index);
+		intIndex++;
+		if (intIndex >= pondVOPage.size()) {
+			intIndex = 0;
+		}
+		modelAndView.addObject("index", intIndex);
+		boolean bolSelect = false;
+		if (Strings.isNotBlank(isSelect)) {
+			bolSelect = Boolean.parseBoolean(isSelect);
+		}
+		modelAndView.addObject("isSelect", bolSelect);
 		return modelAndView;
 	}
 }

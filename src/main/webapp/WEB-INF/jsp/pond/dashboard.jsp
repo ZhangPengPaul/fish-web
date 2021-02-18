@@ -32,7 +32,9 @@
           <div class="col-auto ms-auto d-print-none">
             <div class="btn-list">
               <label class="form-check form-switch">
-                <input class="form-check-input" type="checkbox" checked="">
+                <input class="form-check-input" type="checkbox" id="refresh-radio"
+                       onclick="switchRefresh()"
+                       <c:if test="${isSelect eq true}">checked</c:if> >
                 <span class="form-check-label">轮播开关</span>
               </label>
             </div>
@@ -355,11 +357,6 @@
 <!-- Tabler Core -->
 <script src="<%=path%>/dist/js/tabler.min.js"></script>
 <script type="application/javascript">
-  $("document").ready(function () {
-
-  })
-</script>
-<script type="application/javascript">
   AMapLoader.load({
     "key": "f824b2bfc96d319950893291586c3600",              // 申请好的Web端开发者Key，首次调用 load 时必填
     "version": "2.0",   // 指定要加载的 JSAPI 的版本，缺省时默认为 1.4.15
@@ -421,6 +418,33 @@
   }).catch((e) => {
     console.error(e);  //加载错误提示
   });
+</script>
+<script type="application/javascript">
+  console.log("aaa${isSelect}");
+  var timeId;
+
+  var isSelected = $("#refresh-radio").prop("checked");
+
+  function refresh(s) {
+    timeId = window.setTimeout(function () {
+      console.log(s);
+      window.location.href = "<%=path%>/pond/dashboard?pondId=" + pondIndexId + "&index=${index}&isSelect=" + s;
+    }, 20000);
+  }
+
+  var pondIndexId = "${pondPage[index].pondId}";
+  if (isSelected) {
+    refresh(isSelected);
+  }
+
+  function switchRefresh() {
+    isSelected = $("#refresh-radio").prop("checked");
+    if (isSelected) {
+      refresh(isSelected);
+    } else {
+      window.clearTimeout(timeId);
+    }
+  }
 </script>
 </body>
 </html>
