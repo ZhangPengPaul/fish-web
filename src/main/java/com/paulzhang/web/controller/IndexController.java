@@ -11,6 +11,6 @@ public class IndexController {
 
     @GetMapping("/dashboard")
     public ModelAndView dashboard() {
-        return new ModelAndView("dashboard");
+        return new ModelAndView("pond/dashboard");
     }
 }

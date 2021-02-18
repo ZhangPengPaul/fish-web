@@ -90,5 +90,20 @@ public class PondManagerController {
 		modelAndView.addObject("prodDevices", prodDevices);
 		return modelAndView;
 	}
+
+	@GetMapping("/dashboard")
+	public ModelAndView dashboard(@RequestParam(value = "pondId", required = false) Long pondId) {
+		User user = (User) SecurityUtils.getSubject().getPrincipal();
+		Long projectId = user.getProjectId();
+		List<PondVO> pondVOPage = pondService.findAllByProjectId(projectId);
+		ModelAndView modelAndView = new ModelAndView("pond/dashboard");
+		modelAndView.addObject("pondPage", pondVOPage);
+		PondVO pondVO = pondVOPage.get(0);
+		if (Objects.nonNull(pondId)) {
+			pondVO = pondService.findById(pondId);
+		}
+		modelAndView.addObject("pondDetail", pondVO);
+		return modelAndView;
+	}
 }
 

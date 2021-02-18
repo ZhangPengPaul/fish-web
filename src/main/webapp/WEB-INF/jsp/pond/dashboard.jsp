@@ -1,0 +1,426 @@
+<%@include file="../common/common.jsp" %>
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+  <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+  <title>驾驶舱</title>
+  <!-- CSS files -->
+  <link href="<%=path%>/dist/libs/jqvmap/dist/jqvmap.min.css" rel="stylesheet"/>
+  <link href="<%=path%>/dist/css/tabler.min.css" rel="stylesheet"/>
+  <link href="<%=path%>/dist/css/tabler-flags.min.css" rel="stylesheet"/>
+  <link href="<%=path%>/dist/css/tabler-payments.min.css" rel="stylesheet"/>
+  <link href="<%=path%>/dist/css/tabler-vendors.min.css" rel="stylesheet"/>
+  <link href="<%=path%>/dist/css/demo.min.css" rel="stylesheet"/>
+</head>
+<body class="antialiased">
+<div class="page">
+  <%@include file="../common/header.jsp" %>
+  <%@include file="../common/menu.jsp" %>
+  <div class="content">
+    <div class="container-fluid">
+      <!-- Page title -->
+      <div class="page-header d-print-none">
+        <div class="row align-items-center">
+          <div class="col">
+            <h2 class="page-title">
+              首页
+            </h2>
+          </div>
+          <div class="col-auto ms-auto d-print-none">
+            <div class="btn-list">
+              <label class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" checked="">
+                <span class="form-check-label">轮播开关</span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row row-deck row-cards">
+        <div class="col-2">
+          <div class="card" style="height: calc(100vh - 180px);">
+            <div class="card-header">
+              <h3 class="card-title">池塘列表</h3>
+            </div>
+            <div class="card-body card-body-scrollable card-body-scrollable-shadow">
+              <c:forEach items="${pondPage}" var="pond">
+                <a href="<%=path%>/pond/dashboard?pondId=${pond.pondId}"
+                   class="card text-center <c:if test="${pond.pondId eq pondDetail.pondId}">card-active</c:if>">
+                  <div class="card-body">
+                    <div class="list-group list-group-flush">
+                      <div class="list-group-item">
+                        <div class="row align-items-center">
+                          <div class="col">
+                              ${pond.name}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </c:forEach>
+            </div>
+          </div>
+        </div>
+        <div class="col-8">
+          <div class="card" style="height: calc(100vh - 180px);">
+            <div class="card-body" id="map"></div>
+          </div>
+        </div>
+        <div class="col-2">
+          <div class="card" style="height: calc(100vh - 180px);">
+            <div class="card-header">
+              <h3 class="card-title">池塘信息</h3>
+            </div>
+            <div class="card-body card-body-scrollable card-body-scrollable-shadow">
+              <div class="card">
+                <div class="card-header">
+                  <h4>基本信息</h4>
+                </div>
+                <div class="card-body">
+                  <div class="row align-items-center">
+                    <div class="col-auto">
+                          <span class="bg-blue text-white avatar"><svg xmlns="http://www.w3.org/2000/svg" class="icon"
+                                                                       width="24" height="24" viewBox="0 0 24 24"
+                                                                       stroke-width="2" stroke="currentColor"
+                                                                       fill="none" stroke-linecap="round"
+                                                                       stroke-linejoin="round"><path stroke="none"
+                                                                                                     d="M0 0h24v24H0z"
+                                                                                                     fill="none"/><polyline
+                            points="6 21 21 6 18 3 3 18 6 21"/><line x1="15" y1="6" x2="18" y2="9"/><path
+                            d="M9 3a2 2 0 0 0 2 2a2 2 0 0 0 -2 2a2 2 0 0 0 -2 -2a2 2 0 0 0 2 -2"/><path
+                            d="M19 13a2 2 0 0 0 2 2a2 2 0 0 0 -2 2a2 2 0 0 0 -2 -2a2 2 0 0 0 2 -2"/></svg>
+                          </span>
+                    </div>
+                    <div class="col">
+                      <div class="font-weight-medium">
+                        养殖类型
+                      </div>
+                      <div class="text-muted">
+                        大闸蟹
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <div class="row align-items-center">
+                    <div class="col-auto">
+                          <span class="bg-blue text-white avatar"><svg xmlns="http://www.w3.org/2000/svg" class="icon"
+                                                                       width="24" height="24" viewBox="0 0 24 24"
+                                                                       stroke-width="2" stroke="currentColor"
+                                                                       fill="none" stroke-linecap="round"
+                                                                       stroke-linejoin="round"><path stroke="none"
+                                                                                                     d="M0 0h24v24H0z"
+                                                                                                     fill="none"/><circle
+                            cx="9.5" cy="9.5" r="6.5"/><rect x="10" y="10" width="11" height="11" rx="2"/></svg>
+                          </span>
+                    </div>
+                    <div class="col">
+                      <div class="font-weight-medium">
+                        面积
+                      </div>
+                      <div class="text-muted">
+                        ${pondDetail.area}亩
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <div class="row align-items-center">
+                    <div class="col-auto">
+                          <span class="bg-blue text-white avatar"><svg xmlns="http://www.w3.org/2000/svg" class="icon"
+                                                                       width="24" height="24" viewBox="0 0 24 24"
+                                                                       stroke-width="2" stroke="currentColor"
+                                                                       fill="none" stroke-linecap="round"
+                                                                       stroke-linejoin="round"><path stroke="none"
+                                                                                                     d="M0 0h24v24H0z"
+                                                                                                     fill="none"></path><path
+                            d="M16.7 8a3 3 0 0 0 -2.7 -2h-4a3 3 0 0 0 0 6h4a3 3 0 0 1 0 6h-4a3 3 0 0 1 -2.7 -2"></path><path
+                            d="M12 3v3m0 12v3"></path></svg>
+                          </span>
+                    </div>
+                    <div class="col">
+                      <div class="font-weight-medium">
+                        密度
+                      </div>
+                      <div class="text-muted">
+                        100
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card">
+                <div class="card-header">
+                  <h4>实时水质</h4>
+                </div>
+                <div class="card-body">
+                  <div class="row align-items-center">
+                    <div class="col-auto">
+                          <span class="bg-green text-white avatar"><svg xmlns="http://www.w3.org/2000/svg" class="icon"
+                                                                        width="24" height="24" viewBox="0 0 24 24"
+                                                                        stroke-width="2" stroke="currentColor"
+                                                                        fill="none" stroke-linecap="round"
+                                                                        stroke-linejoin="round"><path stroke="none"
+                                                                                                      d="M0 0h24v24H0z"
+                                                                                                      fill="none"/><path
+                            d="M10 13.5a4 4 0 1 0 4 0v-8.5a2 2 0 0 0 -4 0v8.5"/><line x1="10" y1="9" x2="14"
+                                                                                      y2="9"/></svg>
+                          </span>
+                    </div>
+                    <div class="col">
+                      <div class="font-weight-medium">
+                        温度
+                      </div>
+                      <div class="text-muted">
+                        25
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <div class="row align-items-center">
+                    <div class="col-auto">
+                          <span class="bg-green text-white avatar"><svg xmlns="http://www.w3.org/2000/svg" class="icon"
+                                                                        width="24" height="24" viewBox="0 0 24 24"
+                                                                        stroke-width="2" stroke="currentColor"
+                                                                        fill="none" stroke-linecap="round"
+                                                                        stroke-linejoin="round"><path stroke="none"
+                                                                                                      d="M0 0h24v24H0z"
+                                                                                                      fill="none"/><circle
+                            cx="6" cy="16" r="3"/><circle cx="16" cy="19" r="2"/><circle cx="14.5" cy="7.5"
+                                                                                         r="4.5"/></svg>
+                          </span>
+                    </div>
+                    <div class="col">
+                      <div class="font-weight-medium">
+                        溶氧量
+                      </div>
+                      <div class="text-muted">
+                        10
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <div class="row align-items-center">
+                    <div class="col-auto">
+                          <span class="bg-green text-white avatar"><svg xmlns="http://www.w3.org/2000/svg" class="icon"
+                                                                        width="24" height="24" viewBox="0 0 24 24"
+                                                                        stroke-width="2" stroke="currentColor"
+                                                                        fill="none" stroke-linecap="round"
+                                                                        stroke-linejoin="round"><path stroke="none"
+                                                                                                      d="M0 0h24v24H0z"
+                                                                                                      fill="none"/><path
+                            d="M7 20v-16h5.5a4 4 0 0 1 0 9h-5.5"/></svg>
+                          </span>
+                    </div>
+                    <div class="col">
+                      <div class="font-weight-medium">
+                        PH
+                      </div>
+                      <div class="text-muted">
+                        8
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card">
+                <div class="card-header">
+                  <h4>远程开关</h4>
+                </div>
+                <div class="card-body">
+                  <div class="row align-items-center">
+                    <div class="col-auto">
+                          <span class="bg-blue text-white avatar"><svg xmlns="http://www.w3.org/2000/svg" class="icon"
+                                                                       width="24" height="24" viewBox="0 0 24 24"
+                                                                       stroke-width="2" stroke="currentColor"
+                                                                       fill="none" stroke-linecap="round"
+                                                                       stroke-linejoin="round"><path stroke="none"
+                                                                                                     d="M0 0h24v24H0z"
+                                                                                                     fill="none"></path><path
+                            d="M16.7 8a3 3 0 0 0 -2.7 -2h-4a3 3 0 0 0 0 6h4a3 3 0 0 1 0 6h-4a3 3 0 0 1 -2.7 -2"></path><path
+                            d="M12 3v3m0 12v3"></path></svg>
+                          </span>
+                    </div>
+                    <div class="col">
+                      <div class="font-weight-medium">
+                        增氧泵
+                      </div>
+                      <div class="text-muted">
+                        <label class="form-check form-switch">
+                          <input class="form-check-input" type="checkbox" checked="">
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card">
+                <div class="card-header">
+                  <h4>生产任务</h4>
+                </div>
+                <div class="card-body">
+                  <div class="row align-items-center">
+                    <div class="col-auto">
+                          <span class="bg-blue text-white avatar"><svg xmlns="http://www.w3.org/2000/svg" class="icon"
+                                                                       width="24" height="24" viewBox="0 0 24 24"
+                                                                       stroke-width="2" stroke="currentColor"
+                                                                       fill="none" stroke-linecap="round"
+                                                                       stroke-linejoin="round"><path stroke="none"
+                                                                                                     d="M0 0h24v24H0z"
+                                                                                                     fill="none"></path><path
+                            d="M16.7 8a3 3 0 0 0 -2.7 -2h-4a3 3 0 0 0 0 6h4a3 3 0 0 1 0 6h-4a3 3 0 0 1 -2.7 -2"></path><path
+                            d="M12 3v3m0 12v3"></path></svg>
+                          </span>
+                    </div>
+                    <div class="col">
+                      <div class="font-weight-medium">
+                        已发布
+                      </div>
+                      <div class="text-muted">
+                        10
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <div class="row align-items-center">
+                    <div class="col-auto">
+                          <span class="bg-blue text-white avatar"><svg xmlns="http://www.w3.org/2000/svg" class="icon"
+                                                                       width="24" height="24" viewBox="0 0 24 24"
+                                                                       stroke-width="2" stroke="currentColor"
+                                                                       fill="none" stroke-linecap="round"
+                                                                       stroke-linejoin="round"><path stroke="none"
+                                                                                                     d="M0 0h24v24H0z"
+                                                                                                     fill="none"></path><path
+                            d="M16.7 8a3 3 0 0 0 -2.7 -2h-4a3 3 0 0 0 0 6h4a3 3 0 0 1 0 6h-4a3 3 0 0 1 -2.7 -2"></path><path
+                            d="M12 3v3m0 12v3"></path></svg>
+                          </span>
+                    </div>
+                    <div class="col">
+                      <div class="font-weight-medium">
+                        进行中
+                      </div>
+                      <div class="text-muted">
+                        5
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <div class="row align-items-center">
+                    <div class="col-auto">
+                          <span class="bg-blue text-white avatar"><svg xmlns="http://www.w3.org/2000/svg" class="icon"
+                                                                       width="24" height="24" viewBox="0 0 24 24"
+                                                                       stroke-width="2" stroke="currentColor"
+                                                                       fill="none" stroke-linecap="round"
+                                                                       stroke-linejoin="round"><path stroke="none"
+                                                                                                     d="M0 0h24v24H0z"
+                                                                                                     fill="none"></path><path
+                            d="M16.7 8a3 3 0 0 0 -2.7 -2h-4a3 3 0 0 0 0 6h4a3 3 0 0 1 0 6h-4a3 3 0 0 1 -2.7 -2"></path><path
+                            d="M12 3v3m0 12v3"></path></svg>
+                          </span>
+                    </div>
+                    <div class="col">
+                      <div class="font-weight-medium">
+                        已完成
+                      </div>
+                      <div class="text-muted">
+                        20
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <%@include file="../common/footer.jsp" %>
+  </div>
+</div>
+<!-- Libs JS -->
+<script src="<%=path%>/dist/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="<%=path%>/dist/libs/jquery/dist/jquery.slim.min.js"></script>
+<script src="<%=path%>/dist/libs/apexcharts/dist/apexcharts.min.js"></script>
+<script src="<%=path%>/dist/libs/jqvmap/dist/jquery.vmap.min.js"></script>
+<script src="<%=path%>/dist/libs/jqvmap/dist/maps/jquery.vmap.world.js"></script>
+<script src="https://webapi.amap.com/loader.js"></script>
+<!-- Tabler Core -->
+<script src="<%=path%>/dist/js/tabler.min.js"></script>
+<script type="application/javascript">
+  $("document").ready(function () {
+
+  })
+</script>
+<script type="application/javascript">
+  AMapLoader.load({
+    "key": "f824b2bfc96d319950893291586c3600",              // 申请好的Web端开发者Key，首次调用 load 时必填
+    "version": "2.0",   // 指定要加载的 JSAPI 的版本，缺省时默认为 1.4.15
+    "plugins": ['AMap.Scale', 'AMap.ToolBar', 'AMap.MouseTool'],      // 需要使用的的插件列表，如比例尺'AMap.Scale'等
+    "AMapUI": {             // 是否加载 AMapUI，缺省不加载
+      "version": '1.1',   // AMapUI 缺省 1.1
+      "plugins": ['overlay/SimpleMarker'],       // 需要加载的 AMapUI ui插件
+    }
+  }).then((AMap) => {
+
+    function getCenterPoint(data) {
+      var lng = 0.0, lat = 0.0;
+      for (var i = 0; i < data.length; i++) {
+        if ($.isEmptyObject(data[i])) {
+          continue;
+        }
+        lng = lng + parseFloat(data[i]['lng']);
+        lat = lat + parseFloat(data[i]['lat']);
+      }
+      lng = lng / data.length;
+      lat = lat / data.length;
+      return {'lng': lng, 'lat': lat};
+    }
+
+
+    var map = new AMap.Map('map', {
+      zoom: 17
+    });
+    map.addControl(new AMap.Scale());
+    var satelliteLayer = new AMap.TileLayer.Satellite();
+    map.add(satelliteLayer);
+
+    var indexs = ${pondDetail.outline};
+    var centerPoint = getCenterPoint(indexs);
+    var center = new AMap.LngLat(centerPoint.lng, centerPoint.lat);
+    map.setCenter(center);
+
+    var path = [];
+    indexs.forEach((item, index, array) => {
+      path.push(new AMap.LngLat(item.lng, item.lat));
+    });
+    var polygon = new AMap.Polygon({
+      path: path,
+      fillColor: '#3d5d93', // 多边形填充颜色
+      borderWeight: 1, // 线条宽度，默认为 1
+      strokeColor: '#287c95', // 线条颜色
+    });
+    map.add(polygon);
+
+    // 创建一个 Marker 实例：
+    var marker = new AMap.Marker({
+      position: new AMap.LngLat(centerPoint.lng, centerPoint.lat),   // 经纬度对象，也可以是经纬度构成的一维数组[116.39, 39.9]
+      title: '${pondDetail.name}'
+    });
+    map.remove(marker);
+    map.add(marker);
+
+
+  }).catch((e) => {
+    console.error(e);  //加载错误提示
+  });
+</script>
+</body>
+</html>

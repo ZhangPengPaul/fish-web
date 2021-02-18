@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
-<header class="navbar navbar-expand-md navbar-light sticky-top d-print-none">
+<header class="navbar navbar-expand-md navbar-light d-print-none">
   <div class="container-fluid">
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-menu">
       <span class="navbar-toggler-icon"></span>
@@ -26,9 +26,9 @@
         <div class="dropdown-menu dropdown-menu-end dropdown-menu-card">
           <div class="card">
             <div class="card-body">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus ad amet consectetur
-              exercitationem fugiat in ipsa ipsum, natus odio quidem quod repudiandae sapiente. Amet
-              debitis et magni maxime necessitatibus ullam.
+              <%--              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus ad amet consectetur--%>
+              <%--              exercitationem fugiat in ipsa ipsum, natus odio quidem quod repudiandae sapiente. Amet--%>
+              <%--              debitis et magni maxime necessitatibus ullam.--%>
             </div>
           </div>
         </div>
@@ -36,11 +36,10 @@
       <div class="nav-item dropdown">
         <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown"
            aria-label="Open user menu">
-                    <span class="avatar avatar-sm"
-                          style="background-image: url(<%=path%>/dist/dist/static/avatars/000m.jpg)"></span>
           <div class="d-none d-xl-block ps-2">
-            <div>管理员</div>
-            <div class="mt-1 small text-muted">UI Designer</div>
+            <div><%=user.getUsername()%>
+            </div>
+            <div class="mt-1 small text-muted">项目管理员</div>
           </div>
         </a>
         <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
