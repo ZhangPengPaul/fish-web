@@ -15,7 +15,7 @@
   <link href="<%=path%>/dist/css/tabler-vendors.min.css" rel="stylesheet"/>
   <link href="<%=path%>/dist/css/demo.min.css" rel="stylesheet"/>
 </head>
-<body class="antialiased">
+<body class="antialiased theme-dark">
 <div class="page">
   <%@include file="../common/header.jsp" %>
   <%@include file="../common/menu.jsp" %>
@@ -161,7 +161,7 @@
                 <div class="col-3">
                   <div class="card">
                     <div class="card-body p-2 text-center">
-                      <div class="h1 m-0">43</div>
+                      <div class="h1 m-0">18</div>
                       <div class="text-muted mb-3">温度</div>
                     </div>
                   </div>

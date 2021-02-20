@@ -37,7 +37,7 @@ public class WorkScheduleController {
 			pondIds.add(pondVO.getPondId());
 		}
 		List<TaskVO> taskVOS = taskService.findByPonds(pondIds);
-		ModelAndView modelAndView = new ModelAndView("/work/calendar");
+		ModelAndView modelAndView = new ModelAndView("work/calendar");
 		modelAndView.addObject("ponds", pondVOS);
 		modelAndView.addObject("tasks", taskVOS);
 		return modelAndView;
@@ -51,5 +51,10 @@ public class WorkScheduleController {
 			.code(count > 0 ? HttpResultCode.SUCCESS.getCode() : HttpResultCode.FAILED.getCode())
 			.message(count > 0 ? HttpResultCode.SUCCESS.getMessage() : HttpResultCode.FAILED.getMessage())
 			.build();
+	}
+
+	@GetMapping("/logs")
+	public ModelAndView workLogs() {
+		return new ModelAndView("work/logs");
 	}
 }

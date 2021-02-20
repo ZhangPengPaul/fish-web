@@ -82,7 +82,7 @@
               <a class="dropdown-item" href="<%=path%>/work/calendar" id="dropdown-calendar">
                 工作日历
               </a>
-              <a class="dropdown-item" href="<%=path%>/role/list" id="dropdown-log">
+              <a class="dropdown-item" href="<%=path%>/work/logs" id="dropdown-log">
                 工作日志
               </a>
             </div>

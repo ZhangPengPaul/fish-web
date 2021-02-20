@@ -15,7 +15,7 @@
   <link href="<%=path%>/dist/css/tabler-vendors.min.css" rel="stylesheet"/>
   <link href="<%=path%>/dist/css/demo.min.css" rel="stylesheet"/>
 </head>
-<body class="antialiased">
+<body class="antialiased theme-dark">
 <div class="page">
   <%@include file="../common/header.jsp" %>
   <%@include file="../common/menu.jsp" %>
@@ -67,24 +67,24 @@
             </div>
           </div>
         </div>
-        <div class="col-8">
+        <div class="col-6">
           <div class="card" style="height: calc(100vh - 180px);">
             <div class="card-body" id="map"></div>
           </div>
         </div>
-        <div class="col-2">
-          <div class="card" style="height: calc(100vh - 180px);">
-            <div class="card-header">
-              <h3 class="card-title">池塘信息</h3>
-            </div>
+        <div class="col-4">
+          <div class="card">
             <div class="card-body card-body-scrollable card-body-scrollable-shadow">
               <div class="card">
                 <div class="card-header">
                   <h4>基本信息</h4>
                 </div>
-                <div class="card-body">
-                  <div class="row align-items-center">
-                    <div class="col-auto">
+                <div class="row">
+                  <div class="col-4">
+                    <div class="card">
+                      <div class="card-body">
+                        <div class="row align-items-center">
+                          <div class="col-auto">
                           <span class="bg-blue text-white avatar"><svg xmlns="http://www.w3.org/2000/svg" class="icon"
                                                                        width="24" height="24" viewBox="0 0 24 24"
                                                                        stroke-width="2" stroke="currentColor"
@@ -96,20 +96,21 @@
                             d="M9 3a2 2 0 0 0 2 2a2 2 0 0 0 -2 2a2 2 0 0 0 -2 -2a2 2 0 0 0 2 -2"/><path
                             d="M19 13a2 2 0 0 0 2 2a2 2 0 0 0 -2 2a2 2 0 0 0 -2 -2a2 2 0 0 0 2 -2"/></svg>
                           </span>
-                    </div>
-                    <div class="col">
-                      <div class="font-weight-medium">
-                        养殖类型
-                      </div>
-                      <div class="text-muted">
-                        大闸蟹
+                          </div>
+                          <div class="col">
+                            <div class="font-weight-medium">
+                              大闸蟹
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-                <div class="card-body">
-                  <div class="row align-items-center">
-                    <div class="col-auto">
+                  <div class="col-4">
+                    <div class="card">
+                      <div class="card-body">
+                        <div class="row align-items-center">
+                          <div class="col-auto">
                           <span class="bg-blue text-white avatar"><svg xmlns="http://www.w3.org/2000/svg" class="icon"
                                                                        width="24" height="24" viewBox="0 0 24 24"
                                                                        stroke-width="2" stroke="currentColor"
@@ -119,20 +120,21 @@
                                                                                                      fill="none"/><circle
                             cx="9.5" cy="9.5" r="6.5"/><rect x="10" y="10" width="11" height="11" rx="2"/></svg>
                           </span>
-                    </div>
-                    <div class="col">
-                      <div class="font-weight-medium">
-                        面积
-                      </div>
-                      <div class="text-muted">
-                        ${pondDetail.area}亩
+                          </div>
+                          <div class="col">
+                            <div class="font-weight-medium">
+                              ${pondDetail.area}亩
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-                <div class="card-body">
-                  <div class="row align-items-center">
-                    <div class="col-auto">
+                  <div class="col-4">
+                    <div class="card">
+                      <div class="card-body">
+                        <div class="row align-items-center">
+                          <div class="col-auto">
                           <span class="bg-blue text-white avatar"><svg xmlns="http://www.w3.org/2000/svg" class="icon"
                                                                        width="24" height="24" viewBox="0 0 24 24"
                                                                        stroke-width="2" stroke="currentColor"
@@ -143,13 +145,13 @@
                             d="M16.7 8a3 3 0 0 0 -2.7 -2h-4a3 3 0 0 0 0 6h4a3 3 0 0 1 0 6h-4a3 3 0 0 1 -2.7 -2"></path><path
                             d="M12 3v3m0 12v3"></path></svg>
                           </span>
-                    </div>
-                    <div class="col">
-                      <div class="font-weight-medium">
-                        密度
-                      </div>
-                      <div class="text-muted">
-                        100
+                          </div>
+                          <div class="col">
+                            <div class="font-weight-medium">
+                              100
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -159,9 +161,12 @@
                 <div class="card-header">
                   <h4>实时水质</h4>
                 </div>
-                <div class="card-body">
-                  <div class="row align-items-center">
-                    <div class="col-auto">
+                <div class="row">
+                  <div class="col-4">
+                    <div class="card">
+                      <div class="card-body">
+                        <div class="row align-items-center">
+                          <div class="col-auto">
                           <span class="bg-green text-white avatar"><svg xmlns="http://www.w3.org/2000/svg" class="icon"
                                                                         width="24" height="24" viewBox="0 0 24 24"
                                                                         stroke-width="2" stroke="currentColor"
@@ -172,20 +177,24 @@
                             d="M10 13.5a4 4 0 1 0 4 0v-8.5a2 2 0 0 0 -4 0v8.5"/><line x1="10" y1="9" x2="14"
                                                                                       y2="9"/></svg>
                           </span>
-                    </div>
-                    <div class="col">
-                      <div class="font-weight-medium">
-                        温度
-                      </div>
-                      <div class="text-muted">
-                        25
+                          </div>
+                          <div class="col">
+                            <div class="font-weight-medium">
+                              温度
+                            </div>
+                            <div class="h1 mb-0 me-2 text-green">
+                              25
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-                <div class="card-body">
-                  <div class="row align-items-center">
-                    <div class="col-auto">
+                  <div class="col-4">
+                    <div class="card">
+                      <div class="card-body">
+                        <div class="row align-items-center">
+                          <div class="col-auto">
                           <span class="bg-green text-white avatar"><svg xmlns="http://www.w3.org/2000/svg" class="icon"
                                                                         width="24" height="24" viewBox="0 0 24 24"
                                                                         stroke-width="2" stroke="currentColor"
@@ -196,20 +205,24 @@
                             cx="6" cy="16" r="3"/><circle cx="16" cy="19" r="2"/><circle cx="14.5" cy="7.5"
                                                                                          r="4.5"/></svg>
                           </span>
-                    </div>
-                    <div class="col">
-                      <div class="font-weight-medium">
-                        溶氧量
-                      </div>
-                      <div class="text-muted">
-                        10
+                          </div>
+                          <div class="col">
+                            <div class="font-weight-medium">
+                              溶氧量
+                            </div>
+                            <div class="h1 mb-0 me-2 text-green">
+                              10
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-                <div class="card-body">
-                  <div class="row align-items-center">
-                    <div class="col-auto">
+                  <div class="col-4">
+                    <div class="card">
+                      <div class="card-body">
+                        <div class="row align-items-center">
+                          <div class="col-auto">
                           <span class="bg-green text-white avatar"><svg xmlns="http://www.w3.org/2000/svg" class="icon"
                                                                         width="24" height="24" viewBox="0 0 24 24"
                                                                         stroke-width="2" stroke="currentColor"
@@ -219,44 +232,16 @@
                                                                                                       fill="none"/><path
                             d="M7 20v-16h5.5a4 4 0 0 1 0 9h-5.5"/></svg>
                           </span>
-                    </div>
-                    <div class="col">
-                      <div class="font-weight-medium">
-                        PH
-                      </div>
-                      <div class="text-muted">
-                        8
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="card">
-                <div class="card-header">
-                  <h4>远程开关</h4>
-                </div>
-                <div class="card-body">
-                  <div class="row align-items-center">
-                    <div class="col-auto">
-                          <span class="bg-blue text-white avatar"><svg xmlns="http://www.w3.org/2000/svg" class="icon"
-                                                                       width="24" height="24" viewBox="0 0 24 24"
-                                                                       stroke-width="2" stroke="currentColor"
-                                                                       fill="none" stroke-linecap="round"
-                                                                       stroke-linejoin="round"><path stroke="none"
-                                                                                                     d="M0 0h24v24H0z"
-                                                                                                     fill="none"></path><path
-                            d="M16.7 8a3 3 0 0 0 -2.7 -2h-4a3 3 0 0 0 0 6h4a3 3 0 0 1 0 6h-4a3 3 0 0 1 -2.7 -2"></path><path
-                            d="M12 3v3m0 12v3"></path></svg>
-                          </span>
-                    </div>
-                    <div class="col">
-                      <div class="font-weight-medium">
-                        增氧泵
-                      </div>
-                      <div class="text-muted">
-                        <label class="form-check form-switch">
-                          <input class="form-check-input" type="checkbox" checked="">
-                        </label>
+                          </div>
+                          <div class="col">
+                            <div class="font-weight-medium">
+                              PH
+                            </div>
+                            <div class="h1 mb-0 me-2 text-green">
+                              8
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -264,76 +249,167 @@
               </div>
               <div class="card">
                 <div class="card-header">
-                  <h4>生产任务</h4>
+                  <h4>智能开关</h4>
                 </div>
-                <div class="card-body">
-                  <div class="row align-items-center">
-                    <div class="col-auto">
+                <div class="row">
+                  <div class="col-4">
+                    <div class="card">
+                      <div class="card-body">
+                        <div class="row align-items-center">
+                          <div class="col-auto">
                           <span class="bg-blue text-white avatar"><svg xmlns="http://www.w3.org/2000/svg" class="icon"
                                                                        width="24" height="24" viewBox="0 0 24 24"
                                                                        stroke-width="2" stroke="currentColor"
                                                                        fill="none" stroke-linecap="round"
                                                                        stroke-linejoin="round"><path stroke="none"
                                                                                                      d="M0 0h24v24H0z"
-                                                                                                     fill="none"></path><path
-                            d="M16.7 8a3 3 0 0 0 -2.7 -2h-4a3 3 0 0 0 0 6h4a3 3 0 0 1 0 6h-4a3 3 0 0 1 -2.7 -2"></path><path
-                            d="M12 3v3m0 12v3"></path></svg>
+                                                                                                     fill="none"/><path
+                            d="M12 12c2.76 0 5 -2.01 5 -4.5s-2.24 -4.5 -5 -4.5v9z"/><path
+                            d="M12 12c0 2.76 2.01 5 4.5 5s4.5 -2.24 4.5 -5h-9z"/><path
+                            d="M12 12c-2.76 0 -5 2.01 -5 4.5s2.24 4.5 5 4.5v-9z"/><path
+                            d="M12 12c0 -2.76 -2.01 -5 -4.5 -5s-4.5 2.24 -4.5 5h9z"/></svg>
                           </span>
-                    </div>
-                    <div class="col">
-                      <div class="font-weight-medium">
-                        已发布
+                          </div>
+                          <div class="col">
+                            <div class="font-weight-medium">
+                              增氧泵
+                            </div>
+                            <div class="text-muted">
+                              <label class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" checked="">
+                              </label>
+                            </div>
+                          </div>
+                        </div>
                       </div>
-                      <div class="text-muted">
-                        10
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <div class="card">
+                      <div class="card-body">
+                        <div class="row align-items-center">
+                          <div class="col-auto">
+                          <span class="bg-blue text-white avatar"><svg xmlns="http://www.w3.org/2000/svg" class="icon"
+                                                                       width="24" height="24" viewBox="0 0 24 24"
+                                                                       stroke-width="2" stroke="currentColor"
+                                                                       fill="none" stroke-linecap="round"
+                                                                       stroke-linejoin="round"><path stroke="none"
+                                                                                                     d="M0 0h24v24H0z"
+                                                                                                     fill="none"/><path
+                            d="M12 12c2.76 0 5 -2.01 5 -4.5s-2.24 -4.5 -5 -4.5v9z"/><path
+                            d="M12 12c0 2.76 2.01 5 4.5 5s4.5 -2.24 4.5 -5h-9z"/><path
+                            d="M12 12c-2.76 0 -5 2.01 -5 4.5s2.24 4.5 5 4.5v-9z"/><path
+                            d="M12 12c0 -2.76 -2.01 -5 -4.5 -5s-4.5 2.24 -4.5 5h9z"/></svg>
+                          </span>
+                          </div>
+                          <div class="col">
+                            <div class="font-weight-medium">
+                              推水机
+                            </div>
+                            <div class="text-muted">
+                              <label class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" checked="">
+                              </label>
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-                <div class="card-body">
-                  <div class="row align-items-center">
-                    <div class="col-auto">
+              </div>
+              <div class="card">
+                <div class="card-header">
+                  <h4>任务统计</h4>
+                </div>
+                <div class="row">
+                  <div class="col-4">
+                    <div class="card">
+                      <div class="card-body">
+                        <div class="row align-items-center">
+                          <div class="col-auto">
                           <span class="bg-blue text-white avatar"><svg xmlns="http://www.w3.org/2000/svg" class="icon"
                                                                        width="24" height="24" viewBox="0 0 24 24"
                                                                        stroke-width="2" stroke="currentColor"
                                                                        fill="none" stroke-linecap="round"
                                                                        stroke-linejoin="round"><path stroke="none"
                                                                                                      d="M0 0h24v24H0z"
-                                                                                                     fill="none"></path><path
-                            d="M16.7 8a3 3 0 0 0 -2.7 -2h-4a3 3 0 0 0 0 6h4a3 3 0 0 1 0 6h-4a3 3 0 0 1 -2.7 -2"></path><path
-                            d="M12 3v3m0 12v3"></path></svg>
+                                                                                                     fill="none"/><path
+                            d="M3.5 5.5l1.5 1.5l2.5 -2.5"/><path d="M3.5 11.5l1.5 1.5l2.5 -2.5"/><path
+                            d="M3.5 17.5l1.5 1.5l2.5 -2.5"/><line x1="11" y1="6" x2="20" y2="6"/><line x1="11" y1="12"
+                                                                                                       x2="20" y2="12"/><line
+                            x1="11" y1="18" x2="20" y2="18"/></svg>
                           </span>
-                    </div>
-                    <div class="col">
-                      <div class="font-weight-medium">
-                        进行中
-                      </div>
-                      <div class="text-muted">
-                        5
+                          </div>
+                          <div class="col">
+                            <div class="font-weight-medium">
+                              已发布
+                            </div>
+                            <div class="h1 mb-0 me-2 text-azure">
+                              10
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-                <div class="card-body">
-                  <div class="row align-items-center">
-                    <div class="col-auto">
+                  <div class="col-4">
+                    <div class="card">
+                      <div class="card-body">
+                        <div class="row align-items-center">
+                          <div class="col-auto">
                           <span class="bg-blue text-white avatar"><svg xmlns="http://www.w3.org/2000/svg" class="icon"
                                                                        width="24" height="24" viewBox="0 0 24 24"
                                                                        stroke-width="2" stroke="currentColor"
                                                                        fill="none" stroke-linecap="round"
                                                                        stroke-linejoin="round"><path stroke="none"
                                                                                                      d="M0 0h24v24H0z"
-                                                                                                     fill="none"></path><path
-                            d="M16.7 8a3 3 0 0 0 -2.7 -2h-4a3 3 0 0 0 0 6h4a3 3 0 0 1 0 6h-4a3 3 0 0 1 -2.7 -2"></path><path
-                            d="M12 3v3m0 12v3"></path></svg>
+                                                                                                     fill="none"/><path
+                            d="M3.5 5.5l1.5 1.5l2.5 -2.5"/><path d="M3.5 11.5l1.5 1.5l2.5 -2.5"/><path
+                            d="M3.5 17.5l1.5 1.5l2.5 -2.5"/><line x1="11" y1="6" x2="20" y2="6"/><line x1="11" y1="12"
+                                                                                                       x2="20" y2="12"/><line
+                            x1="11" y1="18" x2="20" y2="18"/></svg>
                           </span>
-                    </div>
-                    <div class="col">
-                      <div class="font-weight-medium">
-                        已完成
+                          </div>
+                          <div class="col">
+                            <div class="font-weight-medium">
+                              进行中
+                            </div>
+                            <div class="h1 mb-0 me-2 text-facebook">
+                              5
+                            </div>
+                          </div>
+                        </div>
                       </div>
-                      <div class="text-muted">
-                        20
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <div class="card">
+                      <div class="card-body">
+                        <div class="row align-items-center">
+                          <div class="col-auto">
+                          <span class="bg-blue text-white avatar"><svg xmlns="http://www.w3.org/2000/svg" class="icon"
+                                                                       width="24" height="24" viewBox="0 0 24 24"
+                                                                       stroke-width="2" stroke="currentColor"
+                                                                       fill="none" stroke-linecap="round"
+                                                                       stroke-linejoin="round"><path stroke="none"
+                                                                                                     d="M0 0h24v24H0z"
+                                                                                                     fill="none"/><path
+                            d="M3.5 5.5l1.5 1.5l2.5 -2.5"/><path d="M3.5 11.5l1.5 1.5l2.5 -2.5"/><path
+                            d="M3.5 17.5l1.5 1.5l2.5 -2.5"/><line x1="11" y1="6" x2="20" y2="6"/><line x1="11" y1="12"
+                                                                                                       x2="20" y2="12"/><line
+                            x1="11" y1="18" x2="20" y2="18"/></svg>
+                          </span>
+                          </div>
+                          <div class="col">
+                            <div class="font-weight-medium">
+                              已完成
+                            </div>
+                            <div class="h1 mb-0 me-2 text-green">
+                              20
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>

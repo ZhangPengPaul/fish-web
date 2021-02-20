@@ -31,7 +31,7 @@ public class ShiroConfig {
 		ShiroFilterFactoryBean factoryBean = new ShiroFilterFactoryBean();
 		factoryBean.setSecurityManager(securityManager);
 		factoryBean.setLoginUrl("/auth/sign-in");//登录页
-		factoryBean.setSuccessUrl("/index");//首页
+		factoryBean.setSuccessUrl("/");//首页
 		factoryBean.setUnauthorizedUrl("/unauthorized");//未授权界面;
 		factoryBean.setFilterChainDefinitionMap(setFilterChainDefinitionMap()); //配置 拦截过滤器链
 		return factoryBean;

@@ -84,7 +84,7 @@
           $("#alert-text").text(response.message);
           $("#error-alert").removeClass("visually-hidden");
         } else {
-          window.location.href = "<%=path%>/pond/list";
+          window.location.href = "<%=path%>/";
         }
       })
   }

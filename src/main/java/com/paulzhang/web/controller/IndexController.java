@@ -6,11 +6,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping("/index")
 public class IndexController {
 
-    @GetMapping("/dashboard")
-    public ModelAndView dashboard() {
-        return new ModelAndView("pond/dashboard");
-    }
+	@GetMapping("/")
+	public ModelAndView dashboard() {
+		return new ModelAndView("redirect:/pond/dashboard");
+	}
 }

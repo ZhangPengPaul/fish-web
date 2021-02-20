@@ -15,7 +15,7 @@
   <link href="<%=path%>/dist/css/tabler-vendors.min.css" rel="stylesheet"/>
   <link href="<%=path%>/dist/css/demo.min.css" rel="stylesheet"/>
 </head>
-<body class="antialiased">
+<body class="antialiased theme-dark">
 <div class="page">
   <div class="sticky-top">
     <%@include file="../common/header.jsp" %>
