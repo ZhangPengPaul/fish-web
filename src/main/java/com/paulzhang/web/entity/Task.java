@@ -33,4 +33,8 @@ public class Task extends Model<Task> {
 	private Date endTime;
 	@TableField(value = "CREATE_TIME")
 	private Date createTime;
+	@TableField(value = "USER_ID")
+	private Long userId;
+	@TableField(value = "STATUS")
+	private Integer status;
 }

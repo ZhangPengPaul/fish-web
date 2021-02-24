@@ -15,6 +15,7 @@ import com.paulzhang.web.service.ProjectService;
 import com.paulzhang.web.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.springframework.stereotype.Service;
 
@@ -95,5 +96,26 @@ public class UserServiceImpl implements UserService {
 		UserRole userRole = UserRole.builder().roleId(roleId)
 			.userId(userId).build();
 		return userRoleMapper.insert(userRole);
+	}
+
+	@Override
+	public List<UserVO> findByProjectId(Long projectId) {
+		QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+		queryWrapper.eq("PROJECT_ID", projectId);
+		List<User> users = userMapper.selectList(queryWrapper);
+		List<UserVO> userVOS = null;
+		if (CollectionUtils.isNotEmpty(users)) {
+			userVOS = new ArrayList<>(users.size());
+			for (User user : users) {
+				UserVO userVO = new UserVO();
+				try {
+					BeanUtils.copyProperties(userVO, user);
+					userVOS.add(userVO);
+				} catch (IllegalAccessException | InvocationTargetException e) {
+					log.error("user copy error", e);
+				}
+			}
+		}
+		return userVOS;
 	}
 }

@@ -1,9 +1,14 @@
 package com.paulzhang.web.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
+import com.paulzhang.web.common.constants.TaskStatus;
+import com.paulzhang.web.domain.PondVO;
 import com.paulzhang.web.domain.TaskVO;
 import com.paulzhang.web.entity.Task;
 import com.paulzhang.web.mapper.TaskMapper;
+import com.paulzhang.web.service.PondService;
 import com.paulzhang.web.service.TaskService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.beanutils.BeanUtils;
@@ -23,6 +28,9 @@ public class TaskServiceImpl implements TaskService {
 	@Resource
 	private TaskMapper taskMapper;
 
+	@Resource
+	private PondService pondService;
+
 	@Override
 	public int add(TaskVO taskVO) {
 		int count = 0;
@@ -31,6 +39,8 @@ public class TaskServiceImpl implements TaskService {
 			try {
 				BeanUtils.copyProperties(task, taskVO);
 				task.setCreateTime(new Date());
+				task.setUserId(0L);
+				task.setStatus(TaskStatus.NOT_ASSIGN.getCode());
 				count = taskMapper.insert(task);
 			} catch (IllegalAccessException | InvocationTargetException e) {
 				log.error("task copy error", e);
@@ -61,6 +71,38 @@ public class TaskServiceImpl implements TaskService {
 
 		}
 		return taskVOS;
+	}
+
+	@Override
+	public TaskVO findById(Long taskId) {
+		Task task = taskMapper.selectById(taskId);
+		TaskVO taskVO = null;
+		if (Objects.nonNull(task)) {
+			taskVO = new TaskVO();
+			try {
+				BeanUtils.copyProperties(taskVO, task);
+				Long pondId = task.getPondId();
+				PondVO pondVO = pondService.findById(pondId);
+				taskVO.setPond(pondVO);
+			} catch (IllegalAccessException | InvocationTargetException e) {
+				log.error("task copy error", e);
+			}
+		}
+		return taskVO;
+	}
+
+	@Override
+	public int deleteById(Long taskId) {
+		return taskMapper.deleteById(taskId);
+	}
+
+	@Override
+	public int assign(Long taskId, Long userId) {
+		Task task = new Task();
+		task.setUserId(userId);
+		task.setTaskId(taskId);
+		task.setStatus(TaskStatus.ASSIGNED.getCode());
+		return taskMapper.updateById(task);
 	}
 
 }

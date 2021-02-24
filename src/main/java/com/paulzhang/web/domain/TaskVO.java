@@ -12,12 +12,15 @@ import java.util.Date;
 @NoArgsConstructor
 @Builder
 public class TaskVO {
-	private Long taskId;
+	private String taskId;
 	private String title;
-	private Long pondId;
 	private String memo;
 	private Integer type;
 	private Date startTime;
 	private Date endTime;
 	private Date createTime;
+	private Long userId;
+	private Integer status;
+	private PondVO pond;
+	private Long pondId;
 }
