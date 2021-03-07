@@ -96,4 +96,23 @@ public class DtuServiceImpl implements DtuService {
 
 		return count;
 	}
+
+	@Override
+	public List<DtuVO> findAll() {
+		List<Dtu> dtus = dtuMapper.selectList(null);
+		List<DtuVO> dtuVOS = null;
+		if (CollectionUtils.isNotEmpty(dtus)) {
+			dtuVOS = new ArrayList<>(dtus.size());
+			for (Dtu dtu : dtus) {
+				DtuVO dtuVO = new DtuVO();
+				try {
+					BeanUtils.copyProperties(dtuVO, dtu);
+					dtuVOS.add(dtuVO);
+				} catch (IllegalAccessException | InvocationTargetException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return dtuVOS;
+	}
 }

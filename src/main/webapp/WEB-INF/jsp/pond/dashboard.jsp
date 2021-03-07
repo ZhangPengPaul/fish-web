@@ -183,7 +183,7 @@
                               温度
                             </div>
                             <div class="h1 mb-0 me-2 text-green">
-                              25
+                              ${tsData.records[0].temp}
                             </div>
                           </div>
                         </div>
@@ -211,7 +211,7 @@
                               溶氧量
                             </div>
                             <div class="h1 mb-0 me-2 text-green">
-                              10
+                              ${tsData.records[0].oxygen}
                             </div>
                           </div>
                         </div>
@@ -238,7 +238,7 @@
                               PH
                             </div>
                             <div class="h1 mb-0 me-2 text-green">
-                              8
+                              ${tsData.records[0].ph}
                             </div>
                           </div>
                         </div>

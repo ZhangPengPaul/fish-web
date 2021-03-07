@@ -8,10 +8,12 @@ import com.paulzhang.web.common.constants.HttpResultCode;
 import com.paulzhang.web.domain.DeviceVO;
 import com.paulzhang.web.domain.DtuVO;
 import com.paulzhang.web.domain.PondVO;
+import com.paulzhang.web.domain.TsDataVO;
 import com.paulzhang.web.entity.User;
 import com.paulzhang.web.service.DeviceService;
 import com.paulzhang.web.service.DtuService;
 import com.paulzhang.web.service.PondService;
+import com.paulzhang.web.service.TsDataService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.logging.log4j.util.Strings;
 import org.apache.shiro.SecurityUtils;
@@ -39,6 +41,9 @@ public class PondManagerController {
 
 	@Resource
 	private DeviceService deviceService;
+
+	@Resource
+	private TsDataService tsDataService;
 
 	@GetMapping("/list")
 	public ModelAndView list() {
@@ -118,6 +123,9 @@ public class PondManagerController {
 			bolSelect = Boolean.parseBoolean(isSelect);
 		}
 		modelAndView.addObject("isSelect", bolSelect);
+
+		IPage<TsDataVO> tsDataVO = tsDataService.findLatestByPond(0L, 1L, pondId);
+		modelAndView.addObject("tsData", tsDataVO);
 		return modelAndView;
 	}
 }
