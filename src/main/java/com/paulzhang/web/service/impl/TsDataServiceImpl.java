@@ -11,11 +11,13 @@ import com.paulzhang.web.mapper.TsDataMapper;
 import com.paulzhang.web.service.TsDataService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -64,5 +66,27 @@ public class TsDataServiceImpl implements TsDataService {
 			tsDataVOs.setTotal(tsDataIPage.getTotal());
 		}
 		return tsDataVOs;
+	}
+
+	@Override
+	public List<TsDataVO> findBetweenDateByPond(Date start, Date end, Long pondId) {
+		QueryWrapper<TsData> queryWrapper = new QueryWrapper<>();
+		queryWrapper.eq("POND_ID", pondId)
+			.between("TIMESTAMP", start, end);
+		List<TsData> tsDataList = tsDataMapper.selectList(queryWrapper);
+		List<TsDataVO> tsDataVOS = null;
+		if (CollectionUtils.isNotEmpty(tsDataList)) {
+			tsDataVOS = new ArrayList<>(tsDataList.size());
+			for (TsData tsData : tsDataList) {
+				TsDataVO tsDataVO = new TsDataVO();
+				try {
+					BeanUtils.copyProperties(tsDataVO, tsData);
+					tsDataVOS.add(tsDataVO);
+				} catch (IllegalAccessException | InvocationTargetException e) {
+					log.error("tsData copy error", e);
+				}
+			}
+		}
+		return tsDataVOS;
 	}
 }

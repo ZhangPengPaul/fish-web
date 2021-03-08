@@ -14,6 +14,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -50,6 +55,17 @@ public class MobilePondController {
 		PondVO pondVO = pondService.findById(pondId);
 		ModelAndView modelAndView = new ModelAndView("pond/mobile/detail");
 		modelAndView.addObject("pond", pondVO);
+
+		IPage<TsDataVO> tsDataVOIPage = tsDataService.findLatestByPond(0, 1, pondId);
+		modelAndView.addObject("tsData", tsDataVOIPage);
+
+//		LocalDateTime startTime = LocalDateTime.of(LocalDate.now(), LocalTime.MIN);
+//		LocalDateTime endTime = LocalDateTime.of(LocalDate.now(), LocalTime.MAX);
+//		List<TsDataVO> tsDataVOS = tsDataService.findBetweenDateByPond(Date.from(startTime.atZone(ZoneId.systemDefault()).toInstant()),
+//			Date.from(endTime.atZone(ZoneId.systemDefault()).toInstant()), pondId);
+
+		IPage<TsDataVO> tsDataVOS = tsDataService.findLatestByPond(0, 100, pondId);
+		modelAndView.addObject("tsDatas", tsDataVOS);
 		return modelAndView;
 	}
 

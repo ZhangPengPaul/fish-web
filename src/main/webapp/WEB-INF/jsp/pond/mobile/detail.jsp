@@ -117,11 +117,24 @@
         <div class="col-12">
           <div class="card">
             <div class="card-body">
+              <div id="myPlayer"></div>
+            </div>
+            <div class="resize-triggers">
+              <div class="expand-trigger">
+                <div style="width: 343px; height: 120px;"></div>
+              </div>
+              <div class="contract-trigger"></div>
+            </div>
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="card">
+            <div class="card-body">
               <div class="d-flex align-items-center">
                 <div class="subheader">温度</div>
               </div>
               <div class="d-flex align-items-baseline">
-                <div class="h1 mb-0 me-2">25.5</div>
+                <div class="h1 mb-0 me-2">${tsData.records[0].temp}</div>
               </div>
             </div>
             <div id="chart-temp-bg" class="chart-sm">
@@ -142,7 +155,7 @@
                 <div class="subheader">溶氧</div>
               </div>
               <div class="d-flex align-items-baseline">
-                <div class="h1 mb-0 me-2">25.5</div>
+                <div class="h1 mb-0 me-2">${tsData.records[0].oxygen}</div>
               </div>
             </div>
             <div id="chart-ry-bg" class="chart-sm">
@@ -163,7 +176,7 @@
                 <div class="subheader">PH</div>
               </div>
               <div class="d-flex align-items-baseline">
-                <div class="h1 mb-0 me-2">25.5</div>
+                <div class="h1 mb-0 me-2">${tsData.records[0].ph}</div>
               </div>
             </div>
             <div id="chart-ph-bg" class="chart-sm">
@@ -334,6 +347,7 @@
 <script src="<%=path%>/dist/js/tabler.min.js"></script>
 <script src="https://cdn.bootcdn.net/ajax/libs/fetch/3.5.0/fetch.min.js"></script>
 <script src="<%=path%>/dist/libs/page/bootstrap-paginator.min.js"></script>
+<script src="<%=path%>/dist/js/ezuikit.js"></script>
 <script>
   $("document").ready(function () {
     $("#page-index").removeClass("active");
@@ -367,6 +381,12 @@
 <script>
   // @formatter:off
   document.addEventListener("DOMContentLoaded", function () {
+    var tempData = [];
+    var tempLabels = [];
+    <c:forEach items="${tsDatas.records}" var="data">
+    tempData.push(${data.temp});
+    tempLabels.push('<fmt:formatDate value="${data.timestamp}" pattern="yyyy-MM-dd HH:mm"/>');
+    </c:forEach>
     window.ApexCharts && (new ApexCharts(document.getElementById('chart-temp-bg'), {
       chart: {
         type: "area",
@@ -393,7 +413,8 @@
       },
       series: [{
         name: "Profits",
-        data: [37, 35, 44, 28, 36, 24, 65, 31, 37, 39, 62, 51, 35, 41, 35, 27, 93, 53, 61, 27, 54, 43, 19, 46, 39, 62, 51, 35, 41, 67]
+        data: tempData
+        // [37, 35, 44, 28, 36, 24, 65, 31, 37, 39, 62, 51, 35, 41, 35, 27, 93, 53, 61, 27, 54, 43, 19, 46, 39, 62, 51, 35, 41, 67]
       }],
       grid: {
         strokeDashArray: 4,
@@ -415,9 +436,10 @@
           padding: 4
         },
       },
-      labels: [
-        '2020-06-20', '2020-06-21', '2020-06-22', '2020-06-23', '2020-06-24', '2020-06-25', '2020-06-26', '2020-06-27', '2020-06-28', '2020-06-29', '2020-06-30', '2020-07-01', '2020-07-02', '2020-07-03', '2020-07-04', '2020-07-05', '2020-07-06', '2020-07-07', '2020-07-08', '2020-07-09', '2020-07-10', '2020-07-11', '2020-07-12', '2020-07-13', '2020-07-14', '2020-07-15', '2020-07-16', '2020-07-17', '2020-07-18', '2020-07-19'
-      ],
+      labels: tempLabels,
+      //   [
+      //   '2020-06-20', '2020-06-21', '2020-06-22', '2020-06-23', '2020-06-24', '2020-06-25', '2020-06-26', '2020-06-27', '2020-06-28', '2020-06-29', '2020-06-30', '2020-07-01', '2020-07-02', '2020-07-03', '2020-07-04', '2020-07-05', '2020-07-06', '2020-07-07', '2020-07-08', '2020-07-09', '2020-07-10', '2020-07-11', '2020-07-12', '2020-07-13', '2020-07-14', '2020-07-15', '2020-07-16', '2020-07-17', '2020-07-18', '2020-07-19'
+      // ],
       colors: ["#206bc4"],
       legend: {
         show: false,
@@ -429,6 +451,12 @@
 <script>
   // @formatter:off
   document.addEventListener("DOMContentLoaded", function () {
+    var ryData = [];
+    var ryLabels = [];
+    <c:forEach items="${tsDatas.records}" var="data">
+    ryData.push(${data.oxygen});
+    ryLabels.push('<fmt:formatDate value="${data.timestamp}" pattern="yyyy-MM-dd HH:mm"/>');
+    </c:forEach>
     window.ApexCharts && (new ApexCharts(document.getElementById('chart-ry-bg'), {
       chart: {
         type: "area",
@@ -455,7 +483,8 @@
       },
       series: [{
         name: "Profits",
-        data: [37, 35, 44, 28, 36, 24, 65, 31, 37, 39, 62, 51, 35, 41, 35, 27, 93, 53, 61, 27, 54, 43, 19, 46, 39, 62, 51, 35, 41, 67]
+        data: ryData,
+        // [37, 35, 44, 28, 36, 24, 65, 31, 37, 39, 62, 51, 35, 41, 35, 27, 93, 53, 61, 27, 54, 43, 19, 46, 39, 62, 51, 35, 41, 67]
       }],
       grid: {
         strokeDashArray: 4,
@@ -477,9 +506,10 @@
           padding: 4
         },
       },
-      labels: [
-        '2020-06-20', '2020-06-21', '2020-06-22', '2020-06-23', '2020-06-24', '2020-06-25', '2020-06-26', '2020-06-27', '2020-06-28', '2020-06-29', '2020-06-30', '2020-07-01', '2020-07-02', '2020-07-03', '2020-07-04', '2020-07-05', '2020-07-06', '2020-07-07', '2020-07-08', '2020-07-09', '2020-07-10', '2020-07-11', '2020-07-12', '2020-07-13', '2020-07-14', '2020-07-15', '2020-07-16', '2020-07-17', '2020-07-18', '2020-07-19'
-      ],
+      labels: ryLabels,
+      //   [
+      //   '2020-06-20', '2020-06-21', '2020-06-22', '2020-06-23', '2020-06-24', '2020-06-25', '2020-06-26', '2020-06-27', '2020-06-28', '2020-06-29', '2020-06-30', '2020-07-01', '2020-07-02', '2020-07-03', '2020-07-04', '2020-07-05', '2020-07-06', '2020-07-07', '2020-07-08', '2020-07-09', '2020-07-10', '2020-07-11', '2020-07-12', '2020-07-13', '2020-07-14', '2020-07-15', '2020-07-16', '2020-07-17', '2020-07-18', '2020-07-19'
+      // ],
       colors: ["#206bc4"],
       legend: {
         show: false,
@@ -491,6 +521,12 @@
 <script>
   // @formatter:off
   document.addEventListener("DOMContentLoaded", function () {
+    var phData = [];
+    var phLabels = [];
+    <c:forEach items="${tsDatas.records}" var="data">
+    phData.push(${data.ph});
+    phLabels.push('<fmt:formatDate value="${data.timestamp}" pattern="yyyy-MM-dd HH:mm"/>');
+    </c:forEach>
     window.ApexCharts && (new ApexCharts(document.getElementById('chart-ph-bg'), {
       chart: {
         type: "area",
@@ -517,7 +553,8 @@
       },
       series: [{
         name: "Profits",
-        data: [37, 35, 44, 28, 36, 24, 65, 31, 37, 39, 62, 51, 35, 41, 35, 27, 93, 53, 61, 27, 54, 43, 19, 46, 39, 62, 51, 35, 41, 67]
+        data: phData
+        // [37, 35, 44, 28, 36, 24, 65, 31, 37, 39, 62, 51, 35, 41, 35, 27, 93, 53, 61, 27, 54, 43, 19, 46, 39, 62, 51, 35, 41, 67]
       }],
       grid: {
         strokeDashArray: 4,
@@ -539,9 +576,10 @@
           padding: 4
         },
       },
-      labels: [
-        '2020-06-20', '2020-06-21', '2020-06-22', '2020-06-23', '2020-06-24', '2020-06-25', '2020-06-26', '2020-06-27', '2020-06-28', '2020-06-29', '2020-06-30', '2020-07-01', '2020-07-02', '2020-07-03', '2020-07-04', '2020-07-05', '2020-07-06', '2020-07-07', '2020-07-08', '2020-07-09', '2020-07-10', '2020-07-11', '2020-07-12', '2020-07-13', '2020-07-14', '2020-07-15', '2020-07-16', '2020-07-17', '2020-07-18', '2020-07-19'
-      ],
+      labels: phLabels,
+      //   [
+      //   '2020-06-20', '2020-06-21', '2020-06-22', '2020-06-23', '2020-06-24', '2020-06-25', '2020-06-26', '2020-06-27', '2020-06-28', '2020-06-29', '2020-06-30', '2020-07-01', '2020-07-02', '2020-07-03', '2020-07-04', '2020-07-05', '2020-07-06', '2020-07-07', '2020-07-08', '2020-07-09', '2020-07-10', '2020-07-11', '2020-07-12', '2020-07-13', '2020-07-14', '2020-07-15', '2020-07-16', '2020-07-17', '2020-07-18', '2020-07-19'
+      // ],
       colors: ["#206bc4"],
       legend: {
         show: false,
@@ -549,6 +587,17 @@
     })).render();
   });
   // @formatter:on
+</script>
+<script type="application/javascript">
+  var player = new EZUIPlayer({
+    id: 'myPlayer',
+    url: 'ezopen://open.ys7.com/F43323849/1.hd.live',
+    autoplay: true,
+    accessToken: "at.1fscvppp9cmd71hu8t0xr5q90g9r0xd3-2kqgms1bmp-0abqw6m-4ih0nqfp3",
+    decoderPath: '<%=path%>/dist',
+    width: 300,
+    height: 200
+  });
 </script>
 <script type="text/javascript">
   // 池塘轮廓坐标点数组
