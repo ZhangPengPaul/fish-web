@@ -5,6 +5,7 @@ import com.paulzhang.web.mapper.PermissionMapper;
 import com.paulzhang.web.service.impl.UserAuthRealm;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
+import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.apache.shiro.mgt.SecurityManager;
@@ -44,7 +45,17 @@ public class ShiroConfig {
 	public SecurityManager securityManager() {
 		DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
 		securityManager.setRealm(userAuthRealm);
+		securityManager.setSessionManager(sessionManager());
 		return securityManager;
+	}
+
+
+	@Bean
+	public DefaultWebSessionManager sessionManager() {
+		DefaultWebSessionManager sessionManager = new DefaultWebSessionManager();
+		// 去掉shiro登录时url里的JSESSIONID
+		sessionManager.setSessionIdUrlRewritingEnabled(false);
+		return sessionManager;
 	}
 
 	/**
