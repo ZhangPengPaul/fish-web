@@ -117,6 +117,43 @@
         <div class="col-12">
           <div class="card">
             <div class="card-body">
+              <div class="d-flex align-items-center">
+                <div class="subheader">远程开关</div>
+              </div>
+              <div class="d-flex align-items-baseline">
+                <div class="col">
+                  <div class="font-weight-medium">
+                    增氧泵
+                  </div>
+                  <div class="text-muted">
+                    <label class="form-check form-switch">
+                      <input class="form-check-input" type="checkbox" checked="">
+                    </label>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="font-weight-medium">
+                    推水机
+                  </div>
+                  <div class="text-muted">
+                    <label class="form-check form-switch">
+                      <input class="form-check-input" type="checkbox" checked="">
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="resize-triggers">
+              <div class="expand-trigger">
+                <div style="width: 343px; height: 120px;"></div>
+              </div>
+              <div class="contract-trigger"></div>
+            </div>
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="card">
+            <div class="card-body">
               <div id="myPlayer"></div>
             </div>
             <div class="resize-triggers">

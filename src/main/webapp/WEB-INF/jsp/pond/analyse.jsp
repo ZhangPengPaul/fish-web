@@ -161,7 +161,7 @@
                 <div class="col-3">
                   <div class="card">
                     <div class="card-body p-2 text-center">
-                      <div class="h1 m-0">18</div>
+                      <div class="h1 m-0">${tsDatas.records[0].temp}</div>
                       <div class="text-muted mb-3">温度</div>
                     </div>
                   </div>
@@ -181,7 +181,7 @@
                 <div class="col-3">
                   <div class="card">
                     <div class="card-body p-2 text-center">
-                      <div class="h1 m-0">10.00</div>
+                      <div class="h1 m-0">${tsDatas.records[0].oxygen}</div>
                       <div class="text-muted mb-3">溶氧</div>
                     </div>
                   </div>
@@ -201,7 +201,7 @@
                 <div class="col-3">
                   <div class="card">
                     <div class="card-body p-2 text-center">
-                      <div class="h1 m-0">8.23</div>
+                      <div class="h1 m-0">${tsDatas.records[0].ph}</div>
                       <div class="text-muted mb-3">PH</div>
                     </div>
                   </div>
@@ -275,6 +275,13 @@
 <script>
   // @formatter:off
   document.addEventListener("DOMContentLoaded", function () {
+    var tempData = [];
+    var tempLabels = [];
+    <c:forEach items="${tsDatas.records}" var="data">
+    tempData.push(${data.temp});
+    tempLabels.push('<fmt:formatDate value="${data.timestamp}" pattern="yyyy-MM-dd HH:mm"/>');
+    </c:forEach>
+
     window.ApexCharts && (new ApexCharts(document.getElementById('chart-temp'), {
       chart: {
         type: "line",
@@ -298,7 +305,8 @@
       },
       series: [{
         name: "温度",
-        data: [18.78, 18.52, 17.46, 18.85, 17.81, 17.88, 18.31, 18.04, 17.50, 17.83, 18.20, 17.83, 17.29, 17.02, 17.28, 19.00, 17.76, 18.09, 18.68, 18.82, 17.06, 17.66, 18.35, 18.36, 17.63, 18.85, 17.41, 17.46, 18.28, 18.11, 18.34, 17.63, 17.96, 18.93, 17.26, 17.48, 18.99, 18.60, 17.15, 17.59, 17.87, 18.71, 18.76, 18.25, 17.78, 17.84, 17.63, 17.32, 18.33, 18.85, 18.21]
+        data: tempData
+        // [18.78, 18.52, 17.46, 18.85, 17.81, 17.88, 18.31, 18.04, 17.50, 17.83, 18.20, 17.83, 17.29, 17.02, 17.28, 19.00, 17.76, 18.09, 18.68, 18.82, 17.06, 17.66, 18.35, 18.36, 17.63, 18.85, 17.41, 17.46, 18.28, 18.11, 18.34, 17.63, 17.96, 18.93, 17.26, 17.48, 18.99, 18.60, 17.15, 17.59, 17.87, 18.71, 18.76, 18.25, 17.78, 17.84, 17.63, 17.32, 18.33, 18.85, 18.21]
       }],
       grid: {
         padding: {
@@ -319,6 +327,7 @@
           padding: 4
         },
       },
+      labels: tempLabels,
       colors: ["#3b5998"],
       legend: {
         show: true,
@@ -335,6 +344,13 @@
         },
       },
     })).render();
+
+    var ryData = [];
+    var ryLabels = [];
+    <c:forEach items="${tsDatas.records}" var="data">
+    ryData.push(${data.oxygen});
+    ryLabels.push('<fmt:formatDate value="${data.timestamp}" pattern="yyyy-MM-dd HH:mm"/>');
+    </c:forEach>
 
     window.ApexCharts && (new ApexCharts(document.getElementById('chart-ry'), {
       chart: {
@@ -359,7 +375,7 @@
       },
       series: [{
         name: "溶氧",
-        data: [18.78, 18.52, 17.46, 18.85, 17.81, 17.88, 18.31, 18.04, 17.50, 17.83, 18.20, 17.83, 17.29, 17.02, 17.28, 19.00, 17.76, 18.09, 18.68, 18.82, 17.06, 17.66, 18.35, 18.36, 17.63, 18.85, 17.41, 17.46, 18.28, 18.11, 18.34, 17.63, 17.96, 18.93, 17.26, 17.48, 18.99, 18.60, 17.15, 17.59, 17.87, 18.71, 18.76, 18.25, 17.78, 17.84, 17.63, 17.32, 18.33, 18.85, 18.21]
+        data: ryData
       }],
       grid: {
         padding: {
@@ -380,6 +396,7 @@
           padding: 4
         },
       },
+      labels: ryLabels,
       colors: ["#1da1f2"],
       legend: {
         show: true,
@@ -397,6 +414,12 @@
       },
     })).render();
 
+    var phData = [];
+    var phLabels = [];
+    <c:forEach items="${tsDatas.records}" var="data">
+    phData.push(${data.ph});
+    phLabels.push('<fmt:formatDate value="${data.timestamp}" pattern="yyyy-MM-dd HH:mm"/>');
+    </c:forEach>
     window.ApexCharts && (new ApexCharts(document.getElementById('chart-ph'), {
       chart: {
         type: "line",
@@ -420,7 +443,7 @@
       },
       series: [{
         name: "PH",
-        data: [18.78, 18.52, 17.46, 18.85, 17.81, 17.88, 18.31, 18.04, 17.50, 17.83, 18.20, 17.83, 17.29, 17.02, 17.28, 19.00, 17.76, 18.09, 18.68, 18.82, 17.06, 17.66, 18.35, 18.36, 17.63, 18.85, 17.41, 17.46, 18.28, 18.11, 18.34, 17.63, 17.96, 18.93, 17.26, 17.48, 18.99, 18.60, 17.15, 17.59, 17.87, 18.71, 18.76, 18.25, 17.78, 17.84, 17.63, 17.32, 18.33, 18.85, 18.21]
+        data: phData
       }],
       grid: {
         padding: {
@@ -441,6 +464,7 @@
           padding: 4
         },
       },
+      labels: phLabels,
       colors: ["#ea4c89"],
       legend: {
         show: true,

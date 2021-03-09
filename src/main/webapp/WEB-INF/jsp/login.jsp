@@ -18,7 +18,7 @@
 <div class="flex-fill d-flex flex-column justify-content-center py-4">
   <div class="container-tight py-6">
     <div class="text-center mb-4">
-      <a href="."><img src="<%=path%>/dist/static/logo.svg" height="36" alt=""></a>
+      <%--      <a href="."><img src="<%=path%>/dist/static/logo.svg" height="36" alt=""></a>--%>
     </div>
     <div class="alert alert-important alert-danger alert-dismissible visually-hidden" id="error-alert" role="alert">
       <div class="d-flex">
@@ -31,7 +31,7 @@
       <a class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="close"></a>
     </div>
     <div class="card-body">
-      <h2 class="card-title text-center mb-4">登录</h2>
+      <h2 class="card-title text-center mb-4">渔立方智能养殖系统</h2>
       <div class="mb-3">
         <label class="form-label required">账号</label>
         <input type="text" name="username" id="username" class="form-control" placeholder="输入账号">

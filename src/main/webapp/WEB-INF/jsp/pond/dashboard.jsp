@@ -183,7 +183,8 @@
                               温度
                             </div>
                             <div class="h1 mb-0 me-2 text-green">
-                              ${tsData.records[0].temp}
+                              <fmt:formatNumber type="number" value="${tsData.records[0].temp}"
+                                                maxFractionDigits="2"/>
                             </div>
                           </div>
                         </div>
@@ -211,7 +212,8 @@
                               溶氧量
                             </div>
                             <div class="h1 mb-0 me-2 text-green">
-                              ${tsData.records[0].oxygen}
+                              <fmt:formatNumber type="number" value="${tsData.records[0].oxygen}"
+                                                maxFractionDigits="2"/>
                             </div>
                           </div>
                         </div>
@@ -238,7 +240,8 @@
                               PH
                             </div>
                             <div class="h1 mb-0 me-2 text-green">
-                              ${tsData.records[0].ph}
+                              <fmt:formatNumber type="number" value="${tsData.records[0].ph}"
+                                                maxFractionDigits="2"/>
                             </div>
                           </div>
                         </div>
@@ -423,6 +426,26 @@
     <%@include file="../common/footer.jsp" %>
   </div>
 </div>
+<div class="modal modal-blur fade" id="modal-camera" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">监控</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <div id="myPlayer"></div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <a href="#" class="btn btn-link link-secondary" data-bs-dismiss="modal">
+          关闭
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
 <!-- Libs JS -->
 <script src="<%=path%>/dist/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 <script src="<%=path%>/dist/libs/jquery/dist/jquery.slim.min.js"></script>
@@ -432,6 +455,7 @@
 <script src="https://webapi.amap.com/loader.js"></script>
 <!-- Tabler Core -->
 <script src="<%=path%>/dist/js/tabler.min.js"></script>
+<script src="<%=path%>/dist/js/ezuikit.js"></script>
 <script type="application/javascript">
   AMapLoader.load({
     "key": "f824b2bfc96d319950893291586c3600",              // 申请好的Web端开发者Key，首次调用 load 时必填
@@ -486,14 +510,28 @@
     var marker = new AMap.Marker({
       position: new AMap.LngLat(centerPoint.lng, centerPoint.lat),   // 经纬度对象，也可以是经纬度构成的一维数组[116.39, 39.9]
       title: '${pondDetail.name}'
-    });
+    })
     map.remove(marker);
     map.add(marker);
 
+    marker.on('click', clickMarker);
 
   }).catch((e) => {
     console.error(e);  //加载错误提示
   });
+
+  function clickMarker() {
+    $("#modal-camera").modal("show");
+    var player = new EZUIPlayer({
+      id: 'myPlayer',
+      url: 'ezopen://open.ys7.com/F43323849/1.hd.live',
+      autoplay: true,
+      accessToken: "at.1fscvppp9cmd71hu8t0xr5q90g9r0xd3-2kqgms1bmp-0abqw6m-4ih0nqfp3",
+      decoderPath: '<%=path%>/dist',
+      width: 600,
+      height: 400
+    });
+  }
 </script>
 <script type="application/javascript">
   console.log("aaa${isSelect}");

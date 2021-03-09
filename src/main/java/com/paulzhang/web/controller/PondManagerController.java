@@ -95,6 +95,9 @@ public class PondManagerController {
 		ModelAndView modelAndView = new ModelAndView("pond/analyse");
 		modelAndView.addObject("pondDetail", pondVO);
 		modelAndView.addObject("prodDevices", prodDevices);
+
+		IPage<TsDataVO> tsDataVOS = tsDataService.findLatestByPond(0, 100, pondId);
+		modelAndView.addObject("tsDatas", tsDataVOS);
 		return modelAndView;
 	}
 

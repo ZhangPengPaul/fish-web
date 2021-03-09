@@ -59,11 +59,6 @@ public class MobilePondController {
 		IPage<TsDataVO> tsDataVOIPage = tsDataService.findLatestByPond(0, 1, pondId);
 		modelAndView.addObject("tsData", tsDataVOIPage);
 
-//		LocalDateTime startTime = LocalDateTime.of(LocalDate.now(), LocalTime.MIN);
-//		LocalDateTime endTime = LocalDateTime.of(LocalDate.now(), LocalTime.MAX);
-//		List<TsDataVO> tsDataVOS = tsDataService.findBetweenDateByPond(Date.from(startTime.atZone(ZoneId.systemDefault()).toInstant()),
-//			Date.from(endTime.atZone(ZoneId.systemDefault()).toInstant()), pondId);
-
 		IPage<TsDataVO> tsDataVOS = tsDataService.findLatestByPond(0, 100, pondId);
 		modelAndView.addObject("tsDatas", tsDataVOS);
 		return modelAndView;
