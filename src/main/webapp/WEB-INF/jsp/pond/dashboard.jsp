@@ -431,7 +431,8 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">监控</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                onclick="closeCramera()"></button>
       </div>
       <div class="modal-body">
         <div class="mb-3">
@@ -439,7 +440,7 @@
         </div>
       </div>
       <div class="modal-footer">
-        <a href="#" class="btn btn-link link-secondary" data-bs-dismiss="modal">
+        <a href="#" class="btn btn-link link-secondary" data-bs-dismiss="modal" onclick="closeCramera()">
           关闭
         </a>
       </div>
@@ -520,9 +521,12 @@
     console.error(e);  //加载错误提示
   });
 
+  var player;
+
   function clickMarker() {
-    $("#modal-camera").modal("show");
-    var player = new EZUIPlayer({
+    var modal = $("#modal-camera");
+    modal.modal("show")
+    player = new EZUIPlayer({
       id: 'myPlayer',
       url: 'ezopen://open.ys7.com/F43323849/1.hd.live',
       autoplay: true,
@@ -532,9 +536,15 @@
       height: 400
     });
   }
+
+  function closeCramera() {
+    var modal = $("#modal-camera");
+    modal.modal("hide");
+    player.stop();
+
+  }
 </script>
 <script type="application/javascript">
-  console.log("aaa${isSelect}");
   var timeId;
 
   var isSelected = $("#refresh-radio").prop("checked");
