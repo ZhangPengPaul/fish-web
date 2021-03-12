@@ -148,7 +148,7 @@
                           </div>
                           <div class="col">
                             <div class="font-weight-medium">
-                              100
+                              N/A
                             </div>
                           </div>
                         </div>
@@ -184,7 +184,7 @@
                             </div>
                             <div class="h1 mb-0 me-2 text-green">
                               <fmt:formatNumber type="number" value="${tsData.records[0].temp}"
-                                                maxFractionDigits="2"/>
+                                                maxFractionDigits="1"/>
                             </div>
                           </div>
                         </div>
@@ -213,7 +213,7 @@
                             </div>
                             <div class="h1 mb-0 me-2 text-green">
                               <fmt:formatNumber type="number" value="${tsData.records[0].oxygen}"
-                                                maxFractionDigits="2"/>
+                                                maxFractionDigits="1"/>
                             </div>
                           </div>
                         </div>
@@ -241,7 +241,7 @@
                             </div>
                             <div class="h1 mb-0 me-2 text-green">
                               <fmt:formatNumber type="number" value="${tsData.records[0].ph}"
-                                                maxFractionDigits="2"/>
+                                                maxFractionDigits="1"/>
                             </div>
                           </div>
                         </div>

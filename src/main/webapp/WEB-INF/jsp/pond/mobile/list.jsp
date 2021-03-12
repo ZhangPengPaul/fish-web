@@ -46,19 +46,19 @@
                     <div class="col-3">
                     <span class="font-weight-medium">
                       溶氧  <fmt:formatNumber type="number" value="${tsDataMap[pond.pondId].records[0].oxygen}"
-                                            maxFractionDigits="2"/>
+                                            maxFractionDigits="1"/>
                     </span>
                     </div>
                     <div class="col-3">
                     <span class="font-weight-medium">
                       PH <fmt:formatNumber type="number" value="${tsDataMap[pond.pondId].records[0].ph}"
-                                           maxFractionDigits="2"/>
+                                           maxFractionDigits="1"/>
                     </span>
                     </div>
                     <div class="col-3">
                     <span class="font-weight-medium">
                       温度 <fmt:formatNumber type="number" value="${tsDataMap[pond.pondId].records[0].temp}"
-                                           maxFractionDigits="2"/>
+                                           maxFractionDigits="1"/>
                     </span>
                     </div>
 <%--                    <div class="col-2">--%>

@@ -171,7 +171,10 @@
                 <div class="subheader">温度</div>
               </div>
               <div class="d-flex align-items-baseline">
-                <div class="h1 mb-0 me-2">${tsData.records[0].temp}</div>
+                <div class="h1 mb-0 me-2">
+                  <fmt:formatNumber type="number" value="${tsData.records[0].temp}"
+                                    maxFractionDigits="1"/>
+                </div>
               </div>
             </div>
             <div id="chart-temp-bg" class="chart-sm">
@@ -192,7 +195,10 @@
                 <div class="subheader">溶氧</div>
               </div>
               <div class="d-flex align-items-baseline">
-                <div class="h1 mb-0 me-2">${tsData.records[0].oxygen}</div>
+                <div class="h1 mb-0 me-2">
+                  <fmt:formatNumber type="number" value="${tsData.records[0].oxygen}"
+                                    maxFractionDigits="1"/>
+                </div>
               </div>
             </div>
             <div id="chart-ry-bg" class="chart-sm">
@@ -213,7 +219,10 @@
                 <div class="subheader">PH</div>
               </div>
               <div class="d-flex align-items-baseline">
-                <div class="h1 mb-0 me-2">${tsData.records[0].ph}</div>
+                <div class="h1 mb-0 me-2">
+                  <fmt:formatNumber type="number" value="${tsData.records[0].ph}"
+                                    maxFractionDigits="1"/>
+                </div>
               </div>
             </div>
             <div id="chart-ph-bg" class="chart-sm">
