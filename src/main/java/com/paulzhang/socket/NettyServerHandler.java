@@ -56,7 +56,7 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
 								+ "成功发送指令:"
 								+ Hex.encodeHexString(deviceIdResult)));
 				}
-			}, 0, 1, TimeUnit.MINUTES);
+			}, 0, 10, TimeUnit.MINUTES);
 
 
 	}
@@ -98,27 +98,27 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
 				byte[] ai1Bytes = Arrays.copyOfRange(bytes, 5, 9);
 				String hexAi1 = Hex.encodeHexString(ai1Bytes);
 				long ai1l = NettyServerHandler.parseLong(hexAi1, 16);
-				float a1f = Float.intBitsToFloat((int) ai1l);
-				log.info("溶氧：{}", a1f);
+				float oxygen = Float.intBitsToFloat((int) ai1l);
+				log.info("溶氧：{}", oxygen);
 
 				byte[] ai2Bytes = Arrays.copyOfRange(bytes, 13, 17);
 				String hexAi2 = Hex.encodeHexString(ai2Bytes);
 				long ai2l = NettyServerHandler.parseLong(hexAi2, 16);
-				float a2f = Float.intBitsToFloat((int) ai2l);
-				log.info("温度：{}", a2f);
+				float ph = Float.intBitsToFloat((int) ai2l);
+				log.info("PH：{}", ph);
 
 				byte[] ai3Bytes = Arrays.copyOfRange(bytes, 21, 25);
 				String hexAi3 = Hex.encodeHexString(ai3Bytes);
 				long ai3l = NettyServerHandler.parseLong(hexAi3, 16);
-				float a3f = Float.intBitsToFloat((int) ai3l);
-				log.info("PH：{}", a3f);
+				float temp = Float.intBitsToFloat((int) ai3l);
+				log.info("温度：{}", temp);
 
 				if (dtuCode.equals("crab02")) {
 					TsDataService tsDataService = (TsDataService) SpringUtil.getBean("tsDataService");
 					TsData tsData = TsData.builder()
-						.temp(a2f)
-						.oxygen(a1f)
-						.ph(a3f)
+						.temp(temp)
+						.oxygen(oxygen)
+						.ph(ph)
 						.pondId(dtuVO.getPondId())
 						.timestamp(new Date())
 						.build();
