@@ -25,7 +25,7 @@ public class DeviceVO {
 	@NotNull(message = "DTU编号不能为空")
 	private Long dtuId;
 	@NotNull(message = "DTU通道不能为空")
-	private Integer dtuChannel;
+	private String dtuChannel;
 	private String memo;
 	private Date createTime;
 }

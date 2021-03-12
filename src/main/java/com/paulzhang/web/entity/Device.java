@@ -28,7 +28,7 @@ public class Device extends Model<Device> {
 	@TableField(value = "DTU_ID")
 	private Long dtuId;
 	@TableField(value = "DTU_CHANNEL")
-	private Integer dtuChannel;
+	private String dtuChannel;
 	@TableField(value = "MEMO")
 	private String memo;
 	@TableField(value = "CREATE_TIME")

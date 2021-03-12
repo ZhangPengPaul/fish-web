@@ -255,11 +255,12 @@
                   <h4>智能开关</h4>
                 </div>
                 <div class="row">
-                  <div class="col-4">
-                    <div class="card">
-                      <div class="card-body">
-                        <div class="row align-items-center">
-                          <div class="col-auto">
+                  <c:forEach items="${prodDevices}" var="prodDevice">
+                    <div class="col-4">
+                      <div class="card">
+                        <div class="card-body">
+                          <div class="row align-items-center">
+                            <div class="col-auto">
                           <span class="bg-blue text-white avatar"><svg xmlns="http://www.w3.org/2000/svg" class="icon"
                                                                        width="24" height="24" viewBox="0 0 24 24"
                                                                        stroke-width="2" stroke="currentColor"
@@ -272,53 +273,43 @@
                             d="M12 12c-2.76 0 -5 2.01 -5 4.5s2.24 4.5 5 4.5v-9z"/><path
                             d="M12 12c0 -2.76 -2.01 -5 -4.5 -5s-4.5 2.24 -4.5 5h9z"/></svg>
                           </span>
-                          </div>
-                          <div class="col">
-                            <div class="font-weight-medium">
-                              增氧泵
                             </div>
-                            <div class="text-muted">
-                              <label class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" checked="">
-                              </label>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-4">
-                    <div class="card">
-                      <div class="card-body">
-                        <div class="row align-items-center">
-                          <div class="col-auto">
-                          <span class="bg-blue text-white avatar"><svg xmlns="http://www.w3.org/2000/svg" class="icon"
-                                                                       width="24" height="24" viewBox="0 0 24 24"
-                                                                       stroke-width="2" stroke="currentColor"
-                                                                       fill="none" stroke-linecap="round"
-                                                                       stroke-linejoin="round"><path stroke="none"
-                                                                                                     d="M0 0h24v24H0z"
-                                                                                                     fill="none"/><path
-                            d="M12 12c2.76 0 5 -2.01 5 -4.5s-2.24 -4.5 -5 -4.5v9z"/><path
-                            d="M12 12c0 2.76 2.01 5 4.5 5s4.5 -2.24 4.5 -5h-9z"/><path
-                            d="M12 12c-2.76 0 -5 2.01 -5 4.5s2.24 4.5 5 4.5v-9z"/><path
-                            d="M12 12c0 -2.76 -2.01 -5 -4.5 -5s-4.5 2.24 -4.5 5h9z"/></svg>
-                          </span>
-                          </div>
-                          <div class="col">
-                            <div class="font-weight-medium">
-                              推水机
-                            </div>
-                            <div class="text-muted">
-                              <label class="form-check form-switch">
-                                <input class="form-check-input" type="checkbox" checked="">
-                              </label>
+                            <div class="col">
+                              <div class="font-weight-medium">
+                                  ${prodDevice.name}
+                              </div>
+                              <div class="row">
+                                <a href="/pond/config/1361230754313998338" class="btn btn-primary w-30">
+                                  <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
+                                       viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                                       stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                    <path
+                                      d="M10.325 4.317c.426 -1.756 2.924 -1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543 -.94 3.31 .826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756 .426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543 -.826 3.31 -2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756 -2.924 1.756 -3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543 .94 -3.31 -.826 -2.37 -2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756 -.426 -1.756 -2.924 0 -3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94 -1.543 .826 -3.31 2.37 -2.37c1 .608 2.296 .07 2.572 -1.065z"></path>
+                                    <circle cx="12" cy="12" r="3"></circle>
+                                  </svg>
+                                  开
+                                </a>
+                              </div>
+                              <div class="row">
+                                <a href="/pond/config/1361230754313998338" class="btn btn-primary w-30">
+                                  <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
+                                       viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                                       stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                    <path
+                                      d="M10.325 4.317c.426 -1.756 2.924 -1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543 -.94 3.31 .826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756 .426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543 -.826 3.31 -2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756 -2.924 1.756 -3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543 .94 -3.31 -.826 -2.37 -2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756 -.426 -1.756 -2.924 0 -3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94 -1.543 .826 -3.31 2.37 -2.37c1 .608 2.296 .07 2.572 -1.065z"></path>
+                                    <circle cx="12" cy="12" r="3"></circle>
+                                  </svg>
+                                  开
+                                </a>
+                              </div>
                             </div>
                           </div>
                         </div>
                       </div>
                     </div>
-                  </div>
+                  </c:forEach>
                 </div>
               </div>
               <div class="card">

@@ -129,6 +129,10 @@ public class PondManagerController {
 
 		IPage<TsDataVO> tsDataVO = tsDataService.findLatestByPond(0L, 1L, pondId);
 		modelAndView.addObject("tsData", tsDataVO);
+
+		// 生产设备列表
+		List<DeviceVO> prodDevices = deviceService.findByPondAndType(pondId, DeviceType.PROD.getCode());
+		modelAndView.addObject("prodDevices", prodDevices);
 		return modelAndView;
 	}
 }

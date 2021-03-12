@@ -191,9 +191,19 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
 	 */
 	@Override
 	public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
-		cause.printStackTrace();
+		log.error("netty channel error", cause);
 		ctx.close();
 	}
 
+	@Override
+	public void channelRegistered(ChannelHandlerContext ctx) throws Exception {
+		log.info("================channelRegistered===================");
+		super.channelRegistered(ctx);
+	}
 
+	@Override
+	public void channelInactive(ChannelHandlerContext ctx) throws Exception {
+		log.info("===============channelInactive=====================");
+		super.channelInactive(ctx);
+	}
 }
