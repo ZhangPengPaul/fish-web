@@ -33,6 +33,17 @@
           </div>
         </div>
       </div>
+      <div class="row">
+        <iframe
+          src="https://open.ys7.com/ezopen/h5/live?autoplay=1&audio=1&accessToken=at.c4jduewdbzbulob698t6nlj57krro25j-1ladjiu5is-1t9fcqk-palajjme7&deviceSerial=F43323849&channelNo=1"
+          width="300"
+          height="193"
+          id="ysOpenDevice"
+          scrolling="no"
+          allowfullscreen
+        >
+        </iframe>
+      </div>
       <div class="row row-deck row-cards">
         <div class="col-12">
           <div class="card">
@@ -152,17 +163,18 @@
           </div>
         </div>
         <div class="col-12">
-          <div class="card">
-            <div class="card-body">
-              <div id="myPlayer"></div>
-            </div>
-            <div class="resize-triggers">
-              <div class="expand-trigger">
-                <div style="width: 343px; height: 120px;"></div>
-              </div>
-              <div class="contract-trigger"></div>
-            </div>
-          </div>
+
+          <%--          <div class="card">--%>
+          <%--            <div class="card-body">--%>
+          <%--              --%>
+          <%--            </div>--%>
+          <%--            <div class="resize-triggers">--%>
+          <%--              <div class="expand-trigger">--%>
+          <%--                <div style="width: 343px; height: 120px;"></div>--%>
+          <%--              </div>--%>
+          <%--              <div class="contract-trigger"></div>--%>
+          <%--            </div>--%>
+          <%--          </div>--%>
         </div>
         <div class="col-12">
           <div class="card">
@@ -393,7 +405,7 @@
 <script src="<%=path%>/dist/js/tabler.min.js"></script>
 <script src="https://cdn.bootcdn.net/ajax/libs/fetch/3.5.0/fetch.min.js"></script>
 <script src="<%=path%>/dist/libs/page/bootstrap-paginator.min.js"></script>
-<script src="<%=path%>/dist/js/ezuikit.js"></script>
+<script src="<%=path%>/dist/js/ezui/ezuikit.js"></script>
 <script>
   $("document").ready(function () {
     $("#page-index").removeClass("active");
@@ -623,15 +635,26 @@
   // @formatter:on
 </script>
 <script type="application/javascript">
-  var player = new EZUIPlayer({
-    id: 'myPlayer',
-    url: 'ezopen://open.ys7.com/F43323849/1.hd.live',
-    autoplay: true,
-    accessToken: "at.1fscvppp9cmd71hu8t0xr5q90g9r0xd3-2kqgms1bmp-0abqw6m-4ih0nqfp3",
-    decoderPath: '<%=path%>/dist',
-    width: 300,
-    height: 200
-  });
+
+  <%--function handleError(e) {--%>
+  <%--  console.log('捕获到错误', e)--%>
+  <%--}--%>
+
+  <%--var decoder = new EZUIKit.EZUIPlayer({--%>
+  <%--  id: 'myPlayer',--%>
+  <%--  autoplay: true,--%>
+  <%--  url: 'ezopen://open.ys7.com/F43323849/1.hd.live',--%>
+  <%--  accessToken: 'at.c4jduewdbzbulob698t6nlj57krro25j-1ladjiu5is-1t9fcqk-palajjme7',--%>
+  <%--  decoderPath: '<%=path%>/dist/js/ezui/',--%>
+  <%--  width: 300,--%>
+  <%--  height: 200,--%>
+  <%--  handleError: handleError--%>
+  <%--  // env: {--%>
+  <%--  //   domain: window.location.protocol + '//' + window.location.host--%>
+  <%--  // }--%>
+
+  <%--});--%>
+
 </script>
 <script type="text/javascript">
   // 池塘轮廓坐标点数组

@@ -522,7 +522,7 @@
       url: 'ezopen://open.ys7.com/F43323849/1.hd.live',
       autoplay: true,
       accessToken: "at.1fscvppp9cmd71hu8t0xr5q90g9r0xd3-2kqgms1bmp-0abqw6m-4ih0nqfp3",
-      decoderPath: '<%=path%>/dist',
+      decoderPath: '<%=path%>/dist/js/ezui/',
       width: 600,
       height: 400
     });
