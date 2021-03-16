@@ -67,12 +67,12 @@
             </div>
           </div>
         </div>
-        <div class="col-6">
+        <div class="col-5">
           <div class="card" style="height: calc(100vh - 180px);">
             <div class="card-body" id="map"></div>
           </div>
         </div>
-        <div class="col-4">
+        <div class="col-5">
           <div class="card">
             <div class="card-body card-body-scrollable card-body-scrollable-shadow">
               <div class="card">
@@ -256,53 +256,54 @@
                 </div>
                 <div class="row">
                   <c:forEach items="${prodDevices}" var="prodDevice">
-                    <div class="col-4">
+                    <div class="col-auto">
                       <div class="card">
                         <div class="card-body">
                           <div class="row align-items-center">
                             <div class="col-auto">
-                          <span class="bg-blue text-white avatar"><svg xmlns="http://www.w3.org/2000/svg" class="icon"
-                                                                       width="24" height="24" viewBox="0 0 24 24"
-                                                                       stroke-width="2" stroke="currentColor"
-                                                                       fill="none" stroke-linecap="round"
-                                                                       stroke-linejoin="round"><path stroke="none"
-                                                                                                     d="M0 0h24v24H0z"
-                                                                                                     fill="none"/><path
-                            d="M12 12c2.76 0 5 -2.01 5 -4.5s-2.24 -4.5 -5 -4.5v9z"/><path
-                            d="M12 12c0 2.76 2.01 5 4.5 5s4.5 -2.24 4.5 -5h-9z"/><path
-                            d="M12 12c-2.76 0 -5 2.01 -5 4.5s2.24 4.5 5 4.5v-9z"/><path
-                            d="M12 12c0 -2.76 -2.01 -5 -4.5 -5s-4.5 2.24 -4.5 5h9z"/></svg>
-                          </span>
+                                                        <span class="bg-blue text-white avatar"><svg
+                                                          xmlns="http://www.w3.org/2000/svg" class="icon"
+                                                          width="24" height="24" viewBox="0 0 24 24"
+                                                          stroke-width="2" stroke="currentColor"
+                                                          fill="none" stroke-linecap="round"
+                                                          stroke-linejoin="round"><path stroke="none"
+                                                                                        d="M0 0h24v24H0z"
+                                                                                        fill="none"/><path
+                                                          d="M12 12c2.76 0 5 -2.01 5 -4.5s-2.24 -4.5 -5 -4.5v9z"/><path
+                                                          d="M12 12c0 2.76 2.01 5 4.5 5s4.5 -2.24 4.5 -5h-9z"/><path
+                                                          d="M12 12c-2.76 0 -5 2.01 -5 4.5s2.24 4.5 5 4.5v-9z"/><path
+                                                          d="M12 12c0 -2.76 -2.01 -5 -4.5 -5s-4.5 2.24 -4.5 5h9z"/></svg>
+                                                        </span>
                             </div>
-                            <div class="col">
+                            <div class="col-auto">
                               <div class="font-weight-medium">
                                   ${prodDevice.name}
                               </div>
                               <div class="row">
-                                <a href="/pond/config/1361230754313998338" class="btn btn-primary w-30">
-                                  <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
-                                       viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                                       stroke-linecap="round" stroke-linejoin="round">
-                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                    <path
-                                      d="M10.325 4.317c.426 -1.756 2.924 -1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543 -.94 3.31 .826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756 .426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543 -.826 3.31 -2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756 -2.924 1.756 -3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543 .94 -3.31 -.826 -2.37 -2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756 -.426 -1.756 -2.924 0 -3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94 -1.543 .826 -3.31 2.37 -2.37c1 .608 2.296 .07 2.572 -1.065z"></path>
-                                    <circle cx="12" cy="12" r="3"></circle>
-                                  </svg>
-                                  开
-                                </a>
-                              </div>
-                              <div class="row">
-                                <a href="/pond/config/1361230754313998338" class="btn btn-primary w-30">
-                                  <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
-                                       viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                                       stroke-linecap="round" stroke-linejoin="round">
-                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                    <path
-                                      d="M10.325 4.317c.426 -1.756 2.924 -1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543 -.94 3.31 .826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756 .426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543 -.826 3.31 -2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756 -2.924 1.756 -3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543 .94 -3.31 -.826 -2.37 -2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756 -.426 -1.756 -2.924 0 -3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94 -1.543 .826 -3.31 2.37 -2.37c1 .608 2.296 .07 2.572 -1.065z"></path>
-                                    <circle cx="12" cy="12" r="3"></circle>
-                                  </svg>
-                                  开
-                                </a>
+                                <div class="col-auto">
+                                  <a href="/pond/config/1361230754313998338" class="btn btn-primary w-30">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
+                                         viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                                         stroke-linecap="round" stroke-linejoin="round">
+                                      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                      <polyline points="13 3 13 10 19 10 11 21 11 14 5 14 13 3"/>
+                                    </svg>
+                                    开
+                                  </a>
+                                </div>
+                                <div class="col-auto">
+                                  <a href="/pond/config/1361230754313998338" class="btn btn-secondary w-30">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
+                                         viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                                         stroke-linecap="round" stroke-linejoin="round">
+                                      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                      <line x1="3" y1="3" x2="21" y2="21"/>
+                                      <path
+                                        d="M15.212 15.21l-4.212 5.79v-7h-6l3.79 -5.21m1.685 -2.32l2.525 -3.47v6m1 1h5l-2.104 2.893"/>
+                                    </svg>
+                                    关
+                                  </a>
+                                </div>
                               </div>
                             </div>
                           </div>
@@ -447,7 +448,7 @@
 <script src="https://webapi.amap.com/loader.js"></script>
 <!-- Tabler Core -->
 <script src="<%=path%>/dist/js/tabler.min.js"></script>
-<script src="<%=path%>/dist/js/ezuikit.js"></script>
+<script src="<%=path%>/dist/js/ezui/ezuikit.js"></script>
 <script type="application/javascript">
   AMapLoader.load({
     "key": "f824b2bfc96d319950893291586c3600",              // 申请好的Web端开发者Key，首次调用 load 时必填
@@ -521,7 +522,7 @@
       id: 'myPlayer',
       url: 'ezopen://open.ys7.com/F43323849/1.hd.live',
       autoplay: true,
-      accessToken: "at.1fscvppp9cmd71hu8t0xr5q90g9r0xd3-2kqgms1bmp-0abqw6m-4ih0nqfp3",
+      accessToken: "${ysToken.accessToken}",
       decoderPath: '<%=path%>/dist/js/ezui/',
       width: 600,
       height: 400

@@ -35,7 +35,7 @@
       </div>
       <div class="row">
         <iframe
-          src="https://open.ys7.com/ezopen/h5/live?autoplay=1&audio=1&accessToken=at.c4jduewdbzbulob698t6nlj57krro25j-1ladjiu5is-1t9fcqk-palajjme7&deviceSerial=F43323849&channelNo=1"
+          src="https://open.ys7.com/ezopen/h5/live?autoplay=1&audio=1&accessToken=${ysToken.accessToken}&deviceSerial=F43323849&channelNo=1"
           width="300"
           height="193"
           id="ysOpenDevice"
@@ -45,86 +45,86 @@
         </iframe>
       </div>
       <div class="row row-deck row-cards">
-        <div class="col-12">
-          <div class="card">
-            <div class="card-header">
-              <h4>基本信息</h4>
-            </div>
-            <div class="card-body">
-              <div class="col-12">
-                <div class="card card-sm">
-                  <div class="card-body">
-                    <div class="row align-items-center">
-                      <div class="col-auto">
-                          <span class="bg-blue text-white avatar"><svg xmlns="http://www.w3.org/2000/svg" class="icon"
-                                                                       width="24" height="24" viewBox="0 0 24 24"
-                                                                       stroke-width="2" stroke="currentColor"
-                                                                       fill="none" stroke-linecap="round"
-                                                                       stroke-linejoin="round"><path stroke="none"
-                                                                                                     d="M0 0h24v24H0z"
-                                                                                                     fill="none"></path><polyline
-                            points="6 21 21 6 18 3 3 18 6 21"></polyline><line x1="15" y1="6" x2="18" y2="9"></line><path
-                            d="M9 3a2 2 0 0 0 2 2a2 2 0 0 0 -2 2a2 2 0 0 0 -2 -2a2 2 0 0 0 2 -2"></path><path
-                            d="M19 13a2 2 0 0 0 2 2a2 2 0 0 0 -2 2a2 2 0 0 0 -2 -2a2 2 0 0 0 2 -2"></path></svg>
-                          </span>
-                      </div>
-                      <div class="col">
-                        <div class="font-weight-medium">
-                          大闸蟹
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="card card-sm">
-                  <div class="card-body">
-                    <div class="row align-items-center">
-                      <div class="col-auto">
-                          <span class="bg-blue text-white avatar"><svg xmlns="http://www.w3.org/2000/svg" class="icon"
-                                                                       width="24" height="24" viewBox="0 0 24 24"
-                                                                       stroke-width="2" stroke="currentColor"
-                                                                       fill="none" stroke-linecap="round"
-                                                                       stroke-linejoin="round"><path stroke="none"
-                                                                                                     d="M0 0h24v24H0z"
-                                                                                                     fill="none"></path><circle
-                            cx="9.5" cy="9.5" r="6.5"></circle><rect x="10" y="10" width="11" height="11" rx="2"></rect></svg>
-                          </span>
-                      </div>
-                      <div class="col">
-                        <div class="font-weight-medium">
-                          25.0亩
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="card card-sm">
-                  <div class="card-body">
-                    <div class="row align-items-center">
-                      <div class="col-auto">
-                          <span class="bg-blue text-white avatar"><svg xmlns="http://www.w3.org/2000/svg" class="icon"
-                                                                       width="24" height="24" viewBox="0 0 24 24"
-                                                                       stroke-width="2" stroke="currentColor"
-                                                                       fill="none" stroke-linecap="round"
-                                                                       stroke-linejoin="round"><path stroke="none"
-                                                                                                     d="M0 0h24v24H0z"
-                                                                                                     fill="none"></path><path
-                            d="M16.7 8a3 3 0 0 0 -2.7 -2h-4a3 3 0 0 0 0 6h4a3 3 0 0 1 0 6h-4a3 3 0 0 1 -2.7 -2"></path><path
-                            d="M12 3v3m0 12v3"></path></svg>
-                          </span>
-                      </div>
-                      <div class="col">
-                        <div class="font-weight-medium">
-                          100
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <%--        <div class="col-12">--%>
+        <%--          <div class="card">--%>
+        <%--            <div class="card-header">--%>
+        <%--              <h4>基本信息</h4>--%>
+        <%--            </div>--%>
+        <%--            <div class="card-body">--%>
+        <%--              <div class="col-12">--%>
+        <%--                <div class="card card-sm">--%>
+        <%--                  <div class="card-body">--%>
+        <%--                    <div class="row align-items-center">--%>
+        <%--                      <div class="col-auto">--%>
+        <%--                          <span class="bg-blue text-white avatar"><svg xmlns="http://www.w3.org/2000/svg" class="icon"--%>
+        <%--                                                                       width="24" height="24" viewBox="0 0 24 24"--%>
+        <%--                                                                       stroke-width="2" stroke="currentColor"--%>
+        <%--                                                                       fill="none" stroke-linecap="round"--%>
+        <%--                                                                       stroke-linejoin="round"><path stroke="none"--%>
+        <%--                                                                                                     d="M0 0h24v24H0z"--%>
+        <%--                                                                                                     fill="none"></path><polyline--%>
+        <%--                            points="6 21 21 6 18 3 3 18 6 21"></polyline><line x1="15" y1="6" x2="18" y2="9"></line><path--%>
+        <%--                            d="M9 3a2 2 0 0 0 2 2a2 2 0 0 0 -2 2a2 2 0 0 0 -2 -2a2 2 0 0 0 2 -2"></path><path--%>
+        <%--                            d="M19 13a2 2 0 0 0 2 2a2 2 0 0 0 -2 2a2 2 0 0 0 -2 -2a2 2 0 0 0 2 -2"></path></svg>--%>
+        <%--                          </span>--%>
+        <%--                      </div>--%>
+        <%--                      <div class="col">--%>
+        <%--                        <div class="font-weight-medium">--%>
+        <%--                          大闸蟹--%>
+        <%--                        </div>--%>
+        <%--                      </div>--%>
+        <%--                    </div>--%>
+        <%--                  </div>--%>
+        <%--                </div>--%>
+        <%--                <div class="card card-sm">--%>
+        <%--                  <div class="card-body">--%>
+        <%--                    <div class="row align-items-center">--%>
+        <%--                      <div class="col-auto">--%>
+        <%--                          <span class="bg-blue text-white avatar"><svg xmlns="http://www.w3.org/2000/svg" class="icon"--%>
+        <%--                                                                       width="24" height="24" viewBox="0 0 24 24"--%>
+        <%--                                                                       stroke-width="2" stroke="currentColor"--%>
+        <%--                                                                       fill="none" stroke-linecap="round"--%>
+        <%--                                                                       stroke-linejoin="round"><path stroke="none"--%>
+        <%--                                                                                                     d="M0 0h24v24H0z"--%>
+        <%--                                                                                                     fill="none"></path><circle--%>
+        <%--                            cx="9.5" cy="9.5" r="6.5"></circle><rect x="10" y="10" width="11" height="11" rx="2"></rect></svg>--%>
+        <%--                          </span>--%>
+        <%--                      </div>--%>
+        <%--                      <div class="col">--%>
+        <%--                        <div class="font-weight-medium">--%>
+        <%--                          25.0亩--%>
+        <%--                        </div>--%>
+        <%--                      </div>--%>
+        <%--                    </div>--%>
+        <%--                  </div>--%>
+        <%--                </div>--%>
+        <%--                <div class="card card-sm">--%>
+        <%--                  <div class="card-body">--%>
+        <%--                    <div class="row align-items-center">--%>
+        <%--                      <div class="col-auto">--%>
+        <%--                          <span class="bg-blue text-white avatar"><svg xmlns="http://www.w3.org/2000/svg" class="icon"--%>
+        <%--                                                                       width="24" height="24" viewBox="0 0 24 24"--%>
+        <%--                                                                       stroke-width="2" stroke="currentColor"--%>
+        <%--                                                                       fill="none" stroke-linecap="round"--%>
+        <%--                                                                       stroke-linejoin="round"><path stroke="none"--%>
+        <%--                                                                                                     d="M0 0h24v24H0z"--%>
+        <%--                                                                                                     fill="none"></path><path--%>
+        <%--                            d="M16.7 8a3 3 0 0 0 -2.7 -2h-4a3 3 0 0 0 0 6h4a3 3 0 0 1 0 6h-4a3 3 0 0 1 -2.7 -2"></path><path--%>
+        <%--                            d="M12 3v3m0 12v3"></path></svg>--%>
+        <%--                          </span>--%>
+        <%--                      </div>--%>
+        <%--                      <div class="col">--%>
+        <%--                        <div class="font-weight-medium">--%>
+        <%--                          100--%>
+        <%--                        </div>--%>
+        <%--                      </div>--%>
+        <%--                    </div>--%>
+        <%--                  </div>--%>
+        <%--                </div>--%>
+        <%--              </div>--%>
+        <%--            </div>--%>
+        <%--          </div>--%>
+        <%--        </div>--%>
         <div class="col-12">
           <div class="card">
             <div class="card-body">
@@ -132,26 +132,18 @@
                 <div class="subheader">远程开关</div>
               </div>
               <div class="d-flex align-items-baseline">
-                <div class="col">
-                  <div class="font-weight-medium">
-                    增氧泵
+                <c:forEach items="${prodDevices}" var="prodDevice">
+                  <div class="col">
+                    <div class="font-weight-medium">
+                        ${prodDevice.name}
+                    </div>
+                    <div class="text-muted">
+                      <label class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox">
+                      </label>
+                    </div>
                   </div>
-                  <div class="text-muted">
-                    <label class="form-check form-switch">
-                      <input class="form-check-input" type="checkbox" checked="">
-                    </label>
-                  </div>
-                </div>
-                <div class="col">
-                  <div class="font-weight-medium">
-                    推水机
-                  </div>
-                  <div class="text-muted">
-                    <label class="form-check form-switch">
-                      <input class="form-check-input" type="checkbox" checked="">
-                    </label>
-                  </div>
-                </div>
+                </c:forEach>
               </div>
             </div>
             <div class="resize-triggers">

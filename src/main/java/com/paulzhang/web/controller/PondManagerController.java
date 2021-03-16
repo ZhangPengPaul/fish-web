@@ -5,15 +5,9 @@ import com.paulzhang.web.common.HttpResult;
 import com.paulzhang.web.common.constants.CommonConstants;
 import com.paulzhang.web.common.constants.DeviceType;
 import com.paulzhang.web.common.constants.HttpResultCode;
-import com.paulzhang.web.domain.DeviceVO;
-import com.paulzhang.web.domain.DtuVO;
-import com.paulzhang.web.domain.PondVO;
-import com.paulzhang.web.domain.TsDataVO;
+import com.paulzhang.web.domain.*;
 import com.paulzhang.web.entity.User;
-import com.paulzhang.web.service.DeviceService;
-import com.paulzhang.web.service.DtuService;
-import com.paulzhang.web.service.PondService;
-import com.paulzhang.web.service.TsDataService;
+import com.paulzhang.web.service.*;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.logging.log4j.util.Strings;
 import org.apache.shiro.SecurityUtils;
@@ -44,6 +38,9 @@ public class PondManagerController {
 
 	@Resource
 	private TsDataService tsDataService;
+
+	@Resource
+	private YsTokenService ysTokenService;
 
 	@GetMapping("/list")
 	public ModelAndView list() {
@@ -133,6 +130,9 @@ public class PondManagerController {
 		// 生产设备列表
 		List<DeviceVO> prodDevices = deviceService.findByPondAndType(pondId, DeviceType.PROD.getCode());
 		modelAndView.addObject("prodDevices", prodDevices);
+
+		YsTokenVO ysTokenVO = ysTokenService.findToken();
+		modelAndView.addObject("ysToken", ysTokenVO);
 		return modelAndView;
 	}
 }
