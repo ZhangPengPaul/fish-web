@@ -19,4 +19,5 @@ public class DtuVO {
 	@NotBlank(message = "DTU编号不能为空")
 	private String code;
 	private String memo;
+	private Integer dtuType;
 }

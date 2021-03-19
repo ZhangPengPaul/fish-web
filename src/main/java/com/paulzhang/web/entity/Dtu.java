@@ -25,6 +25,8 @@ public class Dtu extends Model<Dtu> {
 	private String code;
 	@TableField(value = "MEMO")
 	private String memo;
+	@TableField(value = "DTU_TYPE")
+	private Integer dtuType;
 	@TableField(value = "CREATE_TIME")
 	private Date createTime;
 

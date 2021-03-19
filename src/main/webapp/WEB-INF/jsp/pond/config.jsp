@@ -304,6 +304,18 @@
           <input type="text" class="form-control" name="dtu-code" id="dtu-code" placeholder="DTU的编号">
           <div class="invalid-feedback">DTU编号不能为空</div>
         </div>
+        <div class="mb-3">
+          <div class="col-12">
+            <div>
+              <label class="form-label">DTU类型</label>
+              <select class="form-select form-control" name="dtu-type" id="dtu-type">
+                <option value="1">控制设备</option>
+                <option value="2">三项传感器</option>
+                <option value="3">两项传感器</option>
+              </select>
+            </div>
+          </div>
+        </div>
         <div class="row">
           <div class="col-lg-12">
             <div>
@@ -463,12 +475,14 @@
     var data = {
       "code": "",
       "memo": "",
-      "pondId": ""
+      "pondId": "",
+      "dtuType": ""
     };
 
     var code = $("#dtu-code").val();
     var memo = $("#dtu-memo").val();
     var pondId = "${pondDetail.pondId}";
+    var dtyType = $("#dtu-type").val();
 
 
     if (code.trim() === "") {
@@ -479,6 +493,7 @@
     data.code = code;
     data.memo = memo;
     data.pondId = pondId;
+    data.dtuType = dtyType;
 
     fetch(url, {
       method: "POST",

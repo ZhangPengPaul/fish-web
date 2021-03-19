@@ -6,7 +6,7 @@
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
   <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-  <title>驾驶舱</title>
+  <title>首页</title>
   <!-- CSS files -->
   <link href="<%=path%>/dist/libs/jqvmap/dist/jqvmap.min.css" rel="stylesheet"/>
   <link href="<%=path%>/dist/css/tabler.min.css" rel="stylesheet"/>
