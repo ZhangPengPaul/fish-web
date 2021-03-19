@@ -9,6 +9,7 @@ import com.paulzhang.web.domain.*;
 import com.paulzhang.web.entity.User;
 import com.paulzhang.web.service.*;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.logging.log4j.util.Strings;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.util.StringUtils;
@@ -19,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import java.lang.reflect.InvocationTargetException;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -94,7 +96,9 @@ public class PondManagerController {
 		modelAndView.addObject("prodDevices", prodDevices);
 
 		IPage<TsDataVO> tsDataVOS = tsDataService.findLatestByPond(0, 100, pondId);
-		modelAndView.addObject("tsDatas", tsDataVOS);
+		List<TsDataVO> records = tsDataVOS.getRecords();
+		Collections.reverse(records);
+		modelAndView.addObject("tsDatas", records);
 		return modelAndView;
 	}
 
