@@ -155,7 +155,6 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
 				case SENSOR_2:
 					// 两项传感器
 					log.info("sensor type: {}", dtuTypeEnum.getMessage());
-					// 三项传感器
 					hexString = Hex.encodeHexString(bytes);
 					log.info("hex string: {}", hexString);
 
@@ -285,10 +284,10 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
 			case CONTROL:
 				break;
 			case SENSOR_2:
-				commond = new byte[]{0x01, 0x03, 0x00, 0x00, 0x00, 0x08, (byte) 0x44, (byte) 0x0c};
+				commond = new byte[]{0x01, 0x03, 0x00, 0x00, 0x00, 0x0A, (byte) 0xc5, (byte) 0xcd};
 				break;
 			case SENSOR_3:
-				commond = new byte[]{0x03, 0x03, 0x00, 0x00, 0x00, 0x0A, (byte) 0xc5, (byte) 0xcd};
+				commond = new byte[]{0x03, 0x03, 0x00, 0x00, 0x00, 0x0A, (byte) 0xc4, (byte) 0x2F};
 				break;
 		}
 
