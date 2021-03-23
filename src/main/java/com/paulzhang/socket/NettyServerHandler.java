@@ -36,6 +36,7 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
 	}
 
 	private final ThreadLocal<String> threadLocal = new ThreadLocal<>();
+	private final ThreadLocal<byte[]> commondLocal = new ThreadLocal<>();
 
 	/**
 	 * 客户端连接会触发
@@ -43,6 +44,24 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
 	@Override
 	public void channelActive(ChannelHandlerContext ctx) throws Exception {
 		log.info("Channel active......");
+
+		Channel channel = ctx.channel();
+		channel.eventLoop().scheduleAtFixedRate(
+			new Runnable() {
+				@Override
+				public void run() {
+					byte[] commond = commondLocal.get();
+					if (commond.length > 0) {
+						channel.writeAndFlush(Unpooled.wrappedBuffer(commond))
+							.addListener(ChannelFutureListener.FIRE_EXCEPTION_ON_FAILURE)
+							.addListener((ChannelFutureListener) channelFuture -> log.info(
+								"SomCommunicationHandler "
+									+ this.getClass().getName()
+									+ "成功发送指令:"
+									+ Hex.encodeHexString(commond)));
+					}
+				}
+			}, 0, 10, TimeUnit.MINUTES);
 	}
 
 	/**
@@ -77,21 +96,25 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
 			}
 
 			Integer dtuType = dtuVO.getDtuType();
-			byte[] commond = getCommandByDtuType(dtuType);
-			if (Objects.isNull(commond)) {
-				return;
+
+			if (commondLocal.get() == null) {
+				byte[] commond = getCommandByDtuType(dtuType);
+				if (Objects.isNull(commond)) {
+					return;
+				}
+				commondLocal.set(commond);
 			}
 
 			if (dtuList.contains(strMsg)) {
 				log.info("receive message is dtu code, send command to client one time");
 
-				ctx.channel().writeAndFlush(Unpooled.wrappedBuffer(commond))
+				ctx.channel().writeAndFlush(Unpooled.wrappedBuffer(commondLocal.get()))
 					.addListener(ChannelFutureListener.FIRE_EXCEPTION_ON_FAILURE)
 					.addListener((ChannelFutureListener) channelFuture -> log.info(
 						"SomCommunicationHandler "
 							+ this.getClass().getName()
 							+ "成功发送指令:"
-							+ Hex.encodeHexString(commond)));
+							+ Hex.encodeHexString(commondLocal.get())));
 				return;
 			}
 
@@ -178,21 +201,6 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
 					break;
 			}
 
-
-			Channel channel = ctx.channel();
-			channel.eventLoop().scheduleAtFixedRate(
-				new Runnable() {
-					@Override
-					public void run() {
-						channel.writeAndFlush(Unpooled.wrappedBuffer(commond))
-							.addListener(ChannelFutureListener.FIRE_EXCEPTION_ON_FAILURE)
-							.addListener((ChannelFutureListener) channelFuture -> log.info(
-								"SomCommunicationHandler "
-									+ this.getClass().getName()
-									+ "成功发送指令:"
-									+ Hex.encodeHexString(commond)));
-					}
-				}, 0, 10, TimeUnit.MINUTES);
 		}
 
 		log.info("=============================end=======================================");
@@ -284,7 +292,7 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
 			case CONTROL:
 				break;
 			case SENSOR_2:
-				commond = new byte[]{0x01, 0x03, 0x00, 0x00, 0x00, 0x0A, (byte) 0xc5, (byte) 0xcd};
+				commond = new byte[]{0x01, 0x03, 0x00, 0x00, 0x00, 0x06, (byte) 0xc5, (byte) 0xcd};
 				break;
 			case SENSOR_3:
 				commond = new byte[]{0x03, 0x03, 0x00, 0x00, 0x00, 0x0A, (byte) 0xc4, (byte) 0x2F};
