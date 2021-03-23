@@ -19,10 +19,10 @@
             <a href="/" class="link-secondary">渔立方</a>.
             All rights reserved.
           </li>
-          <%--                    <li class="list-inline-item">--%>
-          <%--                        <a href="<%=path%>/changelog.html" class="link-secondary"--%>
-          <%--                           rel="noopener">v1.0.0-alpha.21</a>--%>
-          <%--                    </li>--%>
+          <li class="list-inline-item">
+            <a href="https://beian.miit.gov.cn" class="link-secondary"
+               rel="noopener" target="_blank">苏ICP备2021012247号</a>
+          </li>
         </ul>
       </div>
     </div>

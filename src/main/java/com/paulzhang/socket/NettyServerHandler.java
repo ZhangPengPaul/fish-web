@@ -4,7 +4,9 @@ import com.paulzhang.util.SpringUtil;
 import com.paulzhang.web.common.constants.DtuType;
 import com.paulzhang.web.domain.DtuVO;
 import com.paulzhang.web.entity.TsData;
+import com.paulzhang.web.entity.TsDataNC;
 import com.paulzhang.web.service.DtuService;
+import com.paulzhang.web.service.TsDataNCService;
 import com.paulzhang.web.service.TsDataService;
 import com.paulzhang.web.service.impl.DtuServiceImpl;
 import com.paulzhang.web.service.impl.TsDataServiceImpl;
@@ -13,13 +15,12 @@ import io.netty.channel.Channel;
 import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.logging.log4j.util.Strings;
 
-import java.nio.IntBuffer;
-import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
@@ -123,19 +124,19 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
 				return;
 			}
 
-			String hexString = "";
-			byte[] ai1Bytes = null;
-			String hexAi1 = "";
-			long ai1l = 0L;
-			float oxygen = 0F;
-			byte[] ai2Bytes = null;
-			String hexAi2 = "";
-			long ai2l = 0L;
-			float ph = 0F;
-			byte[] ai3Bytes = null;
-			String hexAi3 = "";
-			long ai3l = 0L;
-			float temp = 0F;
+			String hexString;
+			byte[] ai1Bytes;
+			String hexAi1;
+			long ai1l;
+			float oxygen;
+			byte[] ai2Bytes;
+			String hexAi2;
+			long ai2l;
+			float ph;
+			byte[] ai3Bytes;
+			String hexAi3;
+			long ai3l;
+			float temp;
 			switch (dtuTypeEnum) {
 				case CONTROL:
 					// 控制设备
@@ -185,19 +186,24 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
 					hexAi1 = Hex.encodeHexString(ai1Bytes);
 					ai1l = NettyServerHandler.parseLong(hexAi1, 16);
 					oxygen = Float.intBitsToFloat((int) ai1l);
-					log.info("溶氧：{}", oxygen);
+					log.info("读数：{}", oxygen);
 
-					ai2Bytes = Arrays.copyOfRange(bytes, 13, 17);
-					hexAi2 = Hex.encodeHexString(ai2Bytes);
-					ai2l = NettyServerHandler.parseLong(hexAi2, 16);
-					ph = Float.intBitsToFloat((int) ai2l);
-					log.info("PH：{}", ph);
+					byte[] address = Arrays.copyOfRange(bytes, 0, 1);
+					String addressStr = Hex.encodeHexString(address);
+					TsDataNC.TsDataNCBuilder tsDataNCBuilder = TsDataNC.builder();
+					if (addressStr.equals("01")) {
+						log.info("氨氮：{}", oxygen);
+						tsDataNCBuilder.nh4n(oxygen);
+					} else if (addressStr.equals("02")) {
+						log.info("COD：{}", oxygen);
+						tsDataNCBuilder.cod(oxygen);
+					}
 
-					ai3Bytes = Arrays.copyOfRange(bytes, 21, 25);
-					hexAi3 = Hex.encodeHexString(ai3Bytes);
-					ai3l = NettyServerHandler.parseLong(hexAi3, 16);
-					temp = Float.intBitsToFloat((int) ai3l);
-					log.info("温度：{}", temp);
+					TsDataNCService tsDataNCService = (TsDataNCService) SpringUtil.getBean("tsDataNCService");
+					tsDataNCBuilder.pondId(dtuVO.getPondId())
+						.timestamp(new Date());
+					TsDataNC tsDataNC = tsDataNCBuilder.build();
+					tsDataNCService.add(tsDataNC);
 					break;
 			}
 
@@ -292,7 +298,7 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
 			case CONTROL:
 				break;
 			case SENSOR_2:
-				commond = new byte[]{0x01, 0x03, 0x00, 0x00, 0x00, 0x06, (byte) 0xc5, (byte) 0xcd};
+				commond = new byte[]{0x01, 0x03, 0x00, 0x00, 0x00, 0x02, (byte) 0xc5, (byte) 0xcd};
 				break;
 			case SENSOR_3:
 				commond = new byte[]{0x03, 0x03, 0x00, 0x00, 0x00, 0x0A, (byte) 0xc4, (byte) 0x2F};

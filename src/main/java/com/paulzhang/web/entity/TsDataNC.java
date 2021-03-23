@@ -14,17 +14,15 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@TableName("ts_data")
-public class TsData extends Model<TsData> {
+@TableName("ts_data_nc")
+public class TsDataNC extends Model<TsDataNC> {
 
 	@TableId(type = IdType.ASSIGN_ID, value = "DATA_ID")
 	private Long dataId;
-	@TableField(value = "TEMP")
-	private float temp = 0.0F;
-	@TableField(value = "OXYGEN")
-	private float oxygen = 0.0F;
-	@TableField(value = "PH")
-	private float ph = 0.0F;
+	@TableField(value = "NH4N")
+	private float nh4n = 0.0F;
+	@TableField(value = "COD")
+	private float cod = 0.0F;
 	@TableField(value = "POND_ID")
 	private Long pondId;
 	@TableField(value = "TIMESTAMP")
