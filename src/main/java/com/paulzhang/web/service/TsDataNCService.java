@@ -13,7 +13,9 @@ public interface TsDataNCService {
 
 	int add(TsDataNC tsDataNC);
 
-	IPage<TsDataNCVO> findLatestByPond(long current, long size, Long pondId);
+	IPage<TsDataNCVO> findLatestNH4HByPond(long current, long size, Long pondId);
+
+	IPage<TsDataNCVO> findLatestCODByPond(long current, long size, Long pondId);
 
 	List<TsDataNCVO> findBetweenDateByPond(Date start, Date end, Long pondId);
 }

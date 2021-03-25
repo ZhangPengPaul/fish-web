@@ -2,17 +2,14 @@ package com.paulzhang.web.controller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.paulzhang.web.common.HttpResult;
-import com.paulzhang.web.common.constants.CommonConstants;
 import com.paulzhang.web.common.constants.DeviceType;
 import com.paulzhang.web.common.constants.HttpResultCode;
 import com.paulzhang.web.domain.*;
 import com.paulzhang.web.entity.User;
 import com.paulzhang.web.service.*;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.collections.CollectionUtils;
 import org.apache.logging.log4j.util.Strings;
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.util.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -43,6 +40,9 @@ public class PondManagerController {
 
 	@Resource
 	private YsTokenService ysTokenService;
+
+	@Resource
+	private TsDataNCService tsDataNCService;
 
 	@GetMapping("/list")
 	public ModelAndView list() {
@@ -131,12 +131,21 @@ public class PondManagerController {
 		IPage<TsDataVO> tsDataVO = tsDataService.findLatestByPond(0L, 1L, pondId);
 		modelAndView.addObject("tsData", tsDataVO);
 
+		IPage<TsDataNCVO> latestNH4H = tsDataNCService.findLatestNH4HByPond(0L, 1L, pondId);
+		modelAndView.addObject("tsDataN", latestNH4H);
+
+		IPage<TsDataNCVO> latestCOD = tsDataNCService.findLatestCODByPond(0L, 1L, pondId);
+		modelAndView.addObject("tsDataC", latestCOD);
+
 		// 生产设备列表
 		List<DeviceVO> prodDevices = deviceService.findByPondAndType(pondId, DeviceType.PROD.getCode());
 		modelAndView.addObject("prodDevices", prodDevices);
 
 		YsTokenVO ysTokenVO = ysTokenService.findToken();
 		modelAndView.addObject("ysToken", ysTokenVO);
+
+		List<DtuVO> dtuVOS = dtuService.findByPondId(pondId);
+		modelAndView.addObject("dtus", dtuVOS);
 		return modelAndView;
 	}
 }

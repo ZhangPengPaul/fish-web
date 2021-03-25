@@ -33,9 +33,46 @@ public class TsDataNCServiceImpl implements TsDataNCService {
 	}
 
 	@Override
-	public IPage<TsDataNCVO> findLatestByPond(long current, long size, Long pondId) {
+	public IPage<TsDataNCVO> findLatestNH4HByPond(long current, long size, Long pondId) {
 		QueryWrapper<TsDataNC> queryWrapper = new QueryWrapper<>();
 		queryWrapper.eq("POND_ID", pondId)
+			.gt("NH4N", 0)
+			.orderByDesc("TIMESTAMP");
+
+		IPage<TsDataNC> page = new Page<>();
+		page.setCurrent(current);
+		page.setSize(size);
+
+		IPage<TsDataNC> tsDataIPage = tsDataNCMapper.selectPage(page, queryWrapper);
+		IPage<TsDataNCVO> tsDataVOs = null;
+		List<TsDataNCVO> tsDataVOList;
+		if (tsDataIPage.getTotal() > 0) {
+			tsDataVOs = new Page<>();
+			List<TsDataNC> tsDataList = tsDataIPage.getRecords();
+			tsDataVOList = new ArrayList<>(tsDataList.size());
+			for (TsDataNC tsData : tsDataList) {
+				TsDataNCVO tsDataVO = new TsDataNCVO();
+				try {
+					BeanUtils.copyProperties(tsDataVO, tsData);
+					tsDataVOList.add(tsDataVO);
+				} catch (IllegalAccessException | InvocationTargetException e) {
+					log.error("tsDataNC copy error", e);
+				}
+			}
+			tsDataVOs.setSize(tsDataIPage.getSize());
+			tsDataVOs.setCurrent(tsDataIPage.getCurrent());
+			tsDataVOs.setPages(tsDataIPage.getPages());
+			tsDataVOs.setRecords(tsDataVOList);
+			tsDataVOs.setTotal(tsDataIPage.getTotal());
+		}
+		return tsDataVOs;
+	}
+
+	@Override
+	public IPage<TsDataNCVO> findLatestCODByPond(long current, long size, Long pondId) {
+		QueryWrapper<TsDataNC> queryWrapper = new QueryWrapper<>();
+		queryWrapper.eq("POND_ID", pondId)
+			.gt("COD", 0)
 			.orderByDesc("TIMESTAMP");
 
 		IPage<TsDataNC> page = new Page<>();
