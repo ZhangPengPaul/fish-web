@@ -428,7 +428,15 @@
       </div>
       <div class="modal-body">
         <div class="mb-3">
-          <div id="myPlayer"></div>
+          <iframe
+            src="https://open.ys7.com/ezopen/h5/iframe?url=ezopen://open.ys7.com/F43323849/1.live&autoplay=1&audio=1&accessToken=${ysToken.accessToken}&templete=0"
+            width="600"
+            height="400"
+            id="ysOpenDevice"
+            scrolling="no"
+            allowfullscreen
+          >
+          </iframe>
         </div>
       </div>
       <div class="modal-footer">
@@ -518,23 +526,23 @@
   function clickMarker() {
     var modal = $("#modal-camera");
     modal.modal("show")
-    player = new EZUIPlayer({
-      id: 'myPlayer',
-      url: 'ezopen://open.ys7.com/F43323849/1.hd.live',
-      autoplay: true,
-      accessToken: "${ysToken.accessToken}",
-      decoderPath: '<%=path%>/dist/js/ezui/',
-      width: 600,
-      height: 400
-    });
-  }
+    <%--  player = new EZUIPlayer({--%>
+    <%--    id: 'myPlayer',--%>
+    <%--    url: 'ezopen://open.ys7.com/F43323849/1.hd.live',--%>
+    <%--    autoplay: true,--%>
+    <%--    accessToken: "${ysToken.accessToken}",--%>
+    <%--    decoderPath: '<%=path%>/dist/js/ezui/',--%>
+    <%--    width: 600,--%>
+    <%--    height: 400--%>
+    <%--  });--%>
+    <%--}--%>
 
-  function closeCramera() {
-    var modal = $("#modal-camera");
-    modal.modal("hide");
-    player.stop();
+    function closeCramera() {
+      var modal = $("#modal-camera");
+      modal.modal("hide");
+      player.stop();
 
-  }
+    }
 </script>
 <script type="application/javascript">
   var timeId;

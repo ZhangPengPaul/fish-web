@@ -9,13 +9,13 @@ import com.paulzhang.web.service.DtuService;
 import com.paulzhang.web.service.TsDataNCService;
 import com.paulzhang.web.service.TsDataService;
 import com.paulzhang.web.service.impl.DtuServiceImpl;
+import com.paulzhang.web.service.impl.TsDataNCServiceImpl;
 import com.paulzhang.web.service.impl.TsDataServiceImpl;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
-import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.collections.CollectionUtils;
@@ -28,16 +28,18 @@ import java.util.concurrent.TimeUnit;
 @Slf4j
 public class NettyServerHandler extends ChannelInboundHandlerAdapter {
 
-	private static TsDataService tsDataService;
-	private static DtuService dtuService;
+	private static final TsDataService tsDataService;
+	private static final DtuService dtuService;
+	private static final TsDataNCService tsDataNCService;
 
 	static {
 		tsDataService = SpringUtil.getBean(TsDataServiceImpl.class);
 		dtuService = SpringUtil.getBean(DtuServiceImpl.class);
+		tsDataNCService = SpringUtil.getBean(TsDataNCServiceImpl.class);
 	}
 
 	private final ThreadLocal<String> threadLocal = new ThreadLocal<>();
-	private final ThreadLocal<byte[]> commondLocal = new ThreadLocal<>();
+	private final ThreadLocal<byte[]> commandLocal = new ThreadLocal<>();
 
 	/**
 	 * 客户端连接会触发
@@ -51,7 +53,7 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
 			new Runnable() {
 				@Override
 				public void run() {
-					byte[] commond = commondLocal.get();
+					byte[] commond = commandLocal.get();
 					if (commond.length > 0) {
 						channel.writeAndFlush(Unpooled.wrappedBuffer(commond))
 							.addListener(ChannelFutureListener.FIRE_EXCEPTION_ON_FAILURE)
@@ -98,24 +100,24 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
 
 			Integer dtuType = dtuVO.getDtuType();
 
-			if (commondLocal.get() == null) {
+			if (commandLocal.get() == null) {
 				byte[] commond = getCommandByDtuType(dtuType);
 				if (Objects.isNull(commond)) {
 					return;
 				}
-				commondLocal.set(commond);
+				commandLocal.set(commond);
 			}
 
 			if (dtuList.contains(strMsg)) {
 				log.info("receive message is dtu code, send command to client one time");
 
-				ctx.channel().writeAndFlush(Unpooled.wrappedBuffer(commondLocal.get()))
+				ctx.channel().writeAndFlush(Unpooled.wrappedBuffer(commandLocal.get()))
 					.addListener(ChannelFutureListener.FIRE_EXCEPTION_ON_FAILURE)
 					.addListener((ChannelFutureListener) channelFuture -> log.info(
 						"SomCommunicationHandler "
 							+ this.getClass().getName()
 							+ "成功发送指令:"
-							+ Hex.encodeHexString(commondLocal.get())));
+							+ Hex.encodeHexString(commandLocal.get())));
 				return;
 			}
 
@@ -165,7 +167,6 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
 					temp = Float.intBitsToFloat((int) ai3l);
 					log.info("温度：{}", temp);
 
-					TsDataService tsDataService = (TsDataService) SpringUtil.getBean("tsDataService");
 					TsData tsData = TsData.builder()
 						.temp(temp)
 						.oxygen(oxygen)
@@ -186,7 +187,6 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
 					hexAi1 = Hex.encodeHexString(ai1Bytes);
 					ai1l = NettyServerHandler.parseLong(hexAi1, 16);
 					oxygen = Float.intBitsToFloat((int) ai1l);
-					log.info("读数：{}", oxygen);
 
 					byte[] address = Arrays.copyOfRange(bytes, 0, 1);
 					String addressStr = Hex.encodeHexString(address);
@@ -199,7 +199,7 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
 						tsDataNCBuilder.cod(oxygen);
 					}
 
-					TsDataNCService tsDataNCService = (TsDataNCService) SpringUtil.getBean("tsDataNCService");
+//					TsDataNCService tsDataNCService = (TsDataNCService) SpringUtil.getBean("tsDataNCService");
 					tsDataNCBuilder.pondId(dtuVO.getPondId())
 						.timestamp(new Date());
 					TsDataNC tsDataNC = tsDataNCBuilder.build();
@@ -274,18 +274,6 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
 	public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
 		log.error("netty channel error", cause);
 		ctx.close();
-	}
-
-	@Override
-	public void channelRegistered(ChannelHandlerContext ctx) throws Exception {
-		log.info("================channelRegistered===================");
-		super.channelRegistered(ctx);
-	}
-
-	@Override
-	public void channelInactive(ChannelHandlerContext ctx) throws Exception {
-		log.info("===============channelInactive=====================");
-		super.channelInactive(ctx);
 	}
 
 	private byte[] getCommandByDtuType(Integer dtuType) {
