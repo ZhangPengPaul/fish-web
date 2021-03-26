@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.paulzhang.web.common.HttpResult;
 import com.paulzhang.web.common.constants.DeviceType;
 import com.paulzhang.web.common.constants.HttpResultCode;
+import com.paulzhang.web.common.constants.TaskStatus;
 import com.paulzhang.web.domain.*;
 import com.paulzhang.web.entity.User;
 import com.paulzhang.web.service.*;
@@ -20,7 +21,9 @@ import javax.annotation.Resource;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Controller
@@ -44,6 +47,9 @@ public class PondManagerController {
 
 	@Resource
 	private TsDataNCService tsDataNCService;
+
+	@Resource
+	private TaskService taskService;
 
 	@GetMapping("/list")
 	public ModelAndView list() {
@@ -129,34 +135,35 @@ public class PondManagerController {
 		}
 		modelAndView.addObject("isSelect", bolSelect);
 
-		IPage<TsDataVO> tsDataVO = tsDataService.findLatestByPond(0L, 1L, pondId);
+		IPage<TsDataVO> tsDataVO = tsDataService.findLatestByPond(0L, 1L, pondVO.getPondId());
 		modelAndView.addObject("tsData", tsDataVO);
 
-		IPage<TsDataNCVO> latestNH4H = tsDataNCService.findLatestNH4NByPond(0L, 1L, pondId);
-		if (Objects.nonNull(latestNH4H) && CollectionUtils.isNotEmpty(latestNH4H.getRecords())) {
-			log.info("ts data N: {}", latestNH4H.getRecords().get(0));
-			log.info("ts data N: {},{},{}", latestNH4H.getRecords().get(0).getDataId(), latestNH4H.getRecords().get(0).getCod(), latestNH4H.getRecords().get(0).getNh4n());
-			modelAndView.addObject("tsDataN", latestNH4H);
-		}
+		IPage<TsDataNCVO> latestNH4H = tsDataNCService.findLatestNH4NByPond(0L, 1L, pondVO.getPondId());
+		modelAndView.addObject("tsDataN", latestNH4H);
 
 
-		IPage<TsDataNCVO> latestCOD = tsDataNCService.findLatestCODByPond(0L, 1L, pondId);
-		if (Objects.nonNull(latestCOD) && CollectionUtils.isNotEmpty(latestCOD.getRecords())) {
-			log.info("ts data C: {}", latestCOD.getRecords().get(0));
-			log.info("ts data C: {},{},{}", latestCOD.getRecords().get(0).getDataId(), latestCOD.getRecords().get(0).getCod(), latestCOD.getRecords().get(0).getNh4n());
-			modelAndView.addObject("tsDataC", latestCOD);
-		}
+		IPage<TsDataNCVO> latestCOD = tsDataNCService.findLatestCODByPond(0L, 1L, pondVO.getPondId());
+		modelAndView.addObject("tsDataC", latestCOD);
 
 
 		// 生产设备列表
-		List<DeviceVO> prodDevices = deviceService.findByPondAndType(pondId, DeviceType.PROD.getCode());
+		List<DeviceVO> prodDevices = deviceService.findByPondAndType(pondVO.getPondId(), DeviceType.PROD.getCode());
 		modelAndView.addObject("prodDevices", prodDevices);
 
 		YsTokenVO ysTokenVO = ysTokenService.findToken();
 		modelAndView.addObject("ysToken", ysTokenVO);
 
-		List<DtuVO> dtuVOS = dtuService.findByPondId(pondId);
+		List<DtuVO> dtuVOS = dtuService.findByPondId(pondVO.getPondId());
 		modelAndView.addObject("dtus", dtuVOS);
+
+		List<TaskVO> taskVOS = taskService.findByPond(pondVO.getPondId());
+		if (CollectionUtils.isNotEmpty(taskVOS)) {
+			Map<Integer, List<TaskVO>> taskVOMap = taskVOS.stream().collect(Collectors.groupingBy(TaskVO::getStatus));
+			modelAndView.addObject("assignedTasks", taskVOMap.get(TaskStatus.ASSIGNED.getCode()));
+			modelAndView.addObject("doingTasks", taskVOMap.get(TaskStatus.DOING.getCode()));
+			modelAndView.addObject("doneTasks", taskVOMap.get(TaskStatus.DONE.getCode()));
+		}
+
 		return modelAndView;
 	}
 }

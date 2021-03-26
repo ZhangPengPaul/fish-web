@@ -15,4 +15,6 @@ public interface TaskService {
 	int deleteById(Long taskId);
 
 	int assign(Long taskId, Long userId);
+
+	List<TaskVO> findByPond(Long pondId);
 }

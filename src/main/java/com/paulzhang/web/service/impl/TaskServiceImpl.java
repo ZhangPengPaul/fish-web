@@ -1,8 +1,6 @@
 package com.paulzhang.web.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.paulzhang.web.common.constants.TaskStatus;
 import com.paulzhang.web.domain.PondVO;
 import com.paulzhang.web.domain.TaskVO;
@@ -103,6 +101,28 @@ public class TaskServiceImpl implements TaskService {
 		task.setTaskId(taskId);
 		task.setStatus(TaskStatus.ASSIGNED.getCode());
 		return taskMapper.updateById(task);
+	}
+
+	@Override
+	public List<TaskVO> findByPond(Long pondId) {
+		QueryWrapper<Task> queryWrapper = new QueryWrapper<>();
+		queryWrapper.eq("POND_ID", pondId);
+
+		List<Task> taskList = taskMapper.selectList(queryWrapper);
+		List<TaskVO> taskVOS = null;
+		if (CollectionUtils.isNotEmpty(taskList)) {
+			taskVOS = new ArrayList<>(taskList.size());
+			for (Task task : taskList) {
+				TaskVO taskVO = new TaskVO();
+				try {
+					BeanUtils.copyProperties(taskVO, task);
+				} catch (IllegalAccessException | InvocationTargetException e) {
+					log.error("task copy error", e);
+				}
+				taskVOS.add(taskVO);
+			}
+		}
+		return taskVOS;
 	}
 
 }

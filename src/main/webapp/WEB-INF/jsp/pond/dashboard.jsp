@@ -411,7 +411,7 @@
                               已发布
                             </div>
                             <div class="h1 mb-0 me-2 text-azure">
-                              10
+                              ${fn:length(assignedTasks)}
                             </div>
                           </div>
                         </div>
@@ -441,7 +441,7 @@
                               进行中
                             </div>
                             <div class="h1 mb-0 me-2 text-facebook">
-                              5
+                              ${fn:length(doingTasks)}
                             </div>
                           </div>
                         </div>
@@ -471,7 +471,7 @@
                               已完成
                             </div>
                             <div class="h1 mb-0 me-2 text-green">
-                              20
+                              ${fn:length(doneTasks)}
                             </div>
                           </div>
                         </div>
