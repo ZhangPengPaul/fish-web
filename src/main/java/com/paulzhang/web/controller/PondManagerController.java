@@ -8,6 +8,7 @@ import com.paulzhang.web.domain.*;
 import com.paulzhang.web.entity.User;
 import com.paulzhang.web.service.*;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.logging.log4j.util.Strings;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.stereotype.Controller;
@@ -131,11 +132,21 @@ public class PondManagerController {
 		IPage<TsDataVO> tsDataVO = tsDataService.findLatestByPond(0L, 1L, pondId);
 		modelAndView.addObject("tsData", tsDataVO);
 
-		IPage<TsDataNCVO> latestNH4H = tsDataNCService.findLatestNH4HByPond(0L, 1L, pondId);
-		modelAndView.addObject("tsDataN", latestNH4H);
+		IPage<TsDataNCVO> latestNH4H = tsDataNCService.findLatestNH4NByPond(0L, 1L, pondId);
+		if (Objects.nonNull(latestNH4H) && CollectionUtils.isNotEmpty(latestNH4H.getRecords())) {
+			log.info("ts data N: {}", latestNH4H.getRecords().get(0));
+			log.info("ts data N: {},{},{}", latestNH4H.getRecords().get(0).getDataId(), latestNH4H.getRecords().get(0).getCod(), latestNH4H.getRecords().get(0).getNh4n());
+			modelAndView.addObject("tsDataN", latestNH4H);
+		}
+
 
 		IPage<TsDataNCVO> latestCOD = tsDataNCService.findLatestCODByPond(0L, 1L, pondId);
-		modelAndView.addObject("tsDataC", latestCOD);
+		if (Objects.nonNull(latestCOD) && CollectionUtils.isNotEmpty(latestCOD.getRecords())) {
+			log.info("ts data C: {}", latestCOD.getRecords().get(0));
+			log.info("ts data C: {},{},{}", latestCOD.getRecords().get(0).getDataId(), latestCOD.getRecords().get(0).getCod(), latestCOD.getRecords().get(0).getNh4n());
+			modelAndView.addObject("tsDataC", latestCOD);
+		}
+
 
 		// 生产设备列表
 		List<DeviceVO> prodDevices = deviceService.findByPondAndType(pondId, DeviceType.PROD.getCode());

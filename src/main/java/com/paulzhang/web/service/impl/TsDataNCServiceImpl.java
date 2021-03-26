@@ -33,7 +33,7 @@ public class TsDataNCServiceImpl implements TsDataNCService {
 	}
 
 	@Override
-	public IPage<TsDataNCVO> findLatestNH4HByPond(long current, long size, Long pondId) {
+	public IPage<TsDataNCVO> findLatestNH4NByPond(long current, long size, Long pondId) {
 		QueryWrapper<TsDataNC> queryWrapper = new QueryWrapper<>();
 		queryWrapper.eq("POND_ID", pondId)
 			.gt("NH4N", 0)

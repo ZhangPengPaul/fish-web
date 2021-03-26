@@ -15,7 +15,7 @@ import java.util.Date;
 public class TsDataNCVO {
 
 	private Long dataId;
-	private float nh4h;
+	private float nh4n;
 	private float cod;
 	private Long pondId;
 	private Date timestamp;

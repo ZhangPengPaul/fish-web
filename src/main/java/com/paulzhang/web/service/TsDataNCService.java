@@ -13,7 +13,7 @@ public interface TsDataNCService {
 
 	int add(TsDataNC tsDataNC);
 
-	IPage<TsDataNCVO> findLatestNH4HByPond(long current, long size, Long pondId);
+	IPage<TsDataNCVO> findLatestNH4NByPond(long current, long size, Long pondId);
 
 	IPage<TsDataNCVO> findLatestCODByPond(long current, long size, Long pondId);
 

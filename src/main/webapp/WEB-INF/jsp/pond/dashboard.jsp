@@ -378,34 +378,6 @@
                             </div>
                           </div>
                         </div>
-                        <div class="col-4">
-                          <div class="card">
-                            <div class="card-body">
-                              <div class="row align-items-center">
-                                <div class="col-auto">
-                          <span class="bg-green text-white avatar"><svg xmlns="http://www.w3.org/2000/svg" class="icon"
-                                                                        width="24" height="24" viewBox="0 0 24 24"
-                                                                        stroke-width="2" stroke="currentColor"
-                                                                        fill="none" stroke-linecap="round"
-                                                                        stroke-linejoin="round"><path stroke="none"
-                                                                                                      d="M0 0h24v24H0z"
-                                                                                                      fill="none"/><path
-                            d="M7 20v-16h5.5a4 4 0 0 1 0 9h-5.5"/></svg>
-                          </span>
-                                </div>
-                                  <%--                                <div class="col">--%>
-                                  <%--                                  <div class="font-weight-medium">--%>
-                                  <%--                                    PH--%>
-                                  <%--                                  </div>--%>
-                                  <%--                                  <div class="h1 mb-0 me-2 text-green">--%>
-                                  <%--                                    <fmt:formatNumber type="number" value="${tsData.records[0].ph}"--%>
-                                  <%--                                                      maxFractionDigits="1"/>--%>
-                                  <%--                                  </div>--%>
-                                  <%--                                </div>--%>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
                       </div>
                     </c:otherwise>
                   </c:choose>
