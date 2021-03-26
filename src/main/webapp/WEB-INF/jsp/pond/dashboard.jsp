@@ -342,7 +342,7 @@
                                     氨氮
                                   </div>
                                   <div class="h1 mb-0 me-2 text-green">
-                                    <fmt:formatNumber type="number" value="${tsDataN.records[0].nh4h}"
+                                    <fmt:formatNumber type="number" value="${tsDataN.records[0].nh4n}"
                                                       maxFractionDigits="1"/>
                                   </div>
                                 </div>
