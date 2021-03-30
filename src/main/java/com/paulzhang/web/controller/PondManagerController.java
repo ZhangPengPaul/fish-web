@@ -103,9 +103,17 @@ public class PondManagerController {
 		modelAndView.addObject("prodDevices", prodDevices);
 
 		IPage<TsDataVO> tsDataVOS = tsDataService.findLatestByPond(0, 100, pondId);
-		List<TsDataVO> records = tsDataVOS.getRecords();
-		Collections.reverse(records);
-		modelAndView.addObject("tsDatas", records);
+		if (Objects.nonNull(tsDataVOS)) {
+			List<TsDataVO> records = tsDataVOS.getRecords();
+			Collections.reverse(records);
+			modelAndView.addObject("tsDatas", records);
+		}
+
+		IPage<TsDataNCVO> latestNH4H = tsDataNCService.findLatestNH4NByPond(0L, 1L, pondVO.getPondId());
+		modelAndView.addObject("tsDataN", latestNH4H);
+
+		IPage<TsDataNCVO> latestCOD = tsDataNCService.findLatestCODByPond(0L, 1L, pondVO.getPondId());
+		modelAndView.addObject("tsDataC", latestCOD);
 		return modelAndView;
 	}
 
@@ -140,7 +148,6 @@ public class PondManagerController {
 
 		IPage<TsDataNCVO> latestNH4H = tsDataNCService.findLatestNH4NByPond(0L, 1L, pondVO.getPondId());
 		modelAndView.addObject("tsDataN", latestNH4H);
-
 
 		IPage<TsDataNCVO> latestCOD = tsDataNCService.findLatestCODByPond(0L, 1L, pondVO.getPondId());
 		modelAndView.addObject("tsDataC", latestCOD);

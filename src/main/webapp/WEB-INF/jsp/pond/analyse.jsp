@@ -157,66 +157,112 @@
               <h3 class="card-title">水质监测</h3>
             </div>
             <div class="card-body">
-              <div class="row row-cards">
-                <div class="col-3">
-                  <div class="card">
-                    <div class="card-body p-2 text-center">
-                      <div class="h1 m-0">${tsDatas[99].temp}</div>
-                      <div class="text-muted mb-3">温度</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-9">
-                  <div class="card">
-                    <div class="card-body">
-                      <div class="d-flex">
-                        <h3 class="card-title">温度</h3>
+              <c:if test="${tsDatas != null && fn:length(tsDatas) > 0}">
+                <div class="row row-cards">
+                  <div class="col-3">
+                    <div class="card">
+                      <div class="card-body p-2 text-center">
+                        <div class="h1 m-0">${tsDatas[99].temp}</div>
+                        <div class="text-muted mb-3">温度</div>
                       </div>
-                      <div id="chart-temp"></div>
                     </div>
                   </div>
-                </div>
-              </div>
-              <div class="row row-cards">
-                <div class="col-3">
-                  <div class="card">
-                    <div class="card-body p-2 text-center">
-                      <div class="h1 m-0">${tsDatas[99].oxygen}</div>
-                      <div class="text-muted mb-3">溶氧</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-9">
-                  <div class="card">
-                    <div class="card-body">
-                      <div class="d-flex">
-                        <h3 class="card-title">溶氧</h3>
+                  <div class="col-9">
+                    <div class="card">
+                      <div class="card-body">
+                        <div class="d-flex">
+                          <h3 class="card-title">温度</h3>
+                        </div>
+                        <div id="chart-temp"></div>
                       </div>
-                      <div id="chart-ry"></div>
                     </div>
                   </div>
                 </div>
-              </div>
-              <div class="row row-cards">
-                <div class="col-3">
-                  <div class="card">
-                    <div class="card-body p-2 text-center">
-                      <div class="h1 m-0">${tsDatas[99].ph}</div>
-                      <div class="text-muted mb-3">PH</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-9">
-                  <div class="card">
-                    <div class="card-body">
-                      <div class="d-flex">
-                        <h3 class="card-title">PH</h3>
+                <div class="row row-cards">
+                  <div class="col-3">
+                    <div class="card">
+                      <div class="card-body p-2 text-center">
+                        <div class="h1 m-0">${tsDatas[99].oxygen}</div>
+                        <div class="text-muted mb-3">溶氧</div>
                       </div>
-                      <div id="chart-ph"></div>
+                    </div>
+                  </div>
+                  <div class="col-9">
+                    <div class="card">
+                      <div class="card-body">
+                        <div class="d-flex">
+                          <h3 class="card-title">溶氧</h3>
+                        </div>
+                        <div id="chart-ry"></div>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
+                <div class="row row-cards">
+                  <div class="col-3">
+                    <div class="card">
+                      <div class="card-body p-2 text-center">
+                        <div class="h1 m-0">${tsDatas[99].ph}</div>
+                        <div class="text-muted mb-3">PH</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-9">
+                    <div class="card">
+                      <div class="card-body">
+                        <div class="d-flex">
+                          <h3 class="card-title">PH</h3>
+                        </div>
+                        <div id="chart-ph"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </c:if>
+              <c:if test="${tsDataN != null && fn:length(tsDataN.records) > 0}">
+                <div class="row row-cards">
+                  <div class="col-3">
+                    <div class="card">
+                      <div class="card-body p-2 text-center">
+                        <div class="h1 m-0">${tsDataN.records[99].nh4n}</div>
+                        <div class="text-muted mb-3">氨氮</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-9">
+                    <div class="card">
+                      <div class="card-body">
+                        <div class="d-flex">
+                          <h3 class="card-title">氨氮</h3>
+                        </div>
+                        <div id="chart-nh4n"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </c:if>
+              <c:if test="${tsDataC != null && fn:length(tsDataC.records) > 0}">
+                <div class="row row-cards">
+                  <div class="col-3">
+                    <div class="card">
+                      <div class="card-body p-2 text-center">
+                        <div class="h1 m-0">${tsDataC.records[99].cod}</div>
+                        <div class="text-muted mb-3">COD</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-9">
+                    <div class="card">
+                      <div class="card-body">
+                        <div class="d-flex">
+                          <h3 class="card-title">COD</h3>
+                        </div>
+                        <div id="chart-cod"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </c:if>
             </div>
           </div>
         </div>
@@ -273,6 +319,7 @@
   });
 </script>
 <script>
+  <c:if test="${tsDatas != null && fn:length(tsDatas) > 0}">
   // @formatter:off
   document.addEventListener("DOMContentLoaded", function () {
     var tempData = [];
@@ -482,6 +529,150 @@
     })).render();
   });
   // @formatter:on
+  </c:if>
+  <c:if test="${tsDataN != null && fn:length(tsDataN.records) > 0}">
+  document.addEventListener("DOMContentLoaded", function () {
+    var nh4nData = [];
+    var nh4nLabels = [];
+    <c:forEach items="${tsDataN.records}" var="data">
+    nh4nData.push(${data.nh4n});
+    nh4nLabels.push('<fmt:formatDate value="${data.timestamp}" pattern="yyyy-MM-dd HH:mm"/>');
+    </c:forEach>
+    window.ApexCharts && (new ApexCharts(document.getElementById('chart-nh4n'), {
+      chart: {
+        type: "line",
+        fontFamily: 'inherit',
+        height: 300,
+        parentHeightOffset: 0,
+        toolbar: {
+          show: false,
+        },
+        animations: {
+          enabled: false
+        },
+      },
+      fill: {
+        opacity: 1,
+      },
+      stroke: {
+        width: 2,
+        lineCap: "round",
+        curve: "smooth",
+      },
+      series: [{
+        name: "氨氮",
+        data: nh4nData
+      }],
+      grid: {
+        padding: {
+          top: -20,
+          right: 0,
+          left: -4,
+          bottom: -4
+        },
+        strokeDashArray: 4,
+        xaxis: {
+          lines: {
+            show: true
+          }
+        },
+      },
+      yaxis: {
+        labels: {
+          padding: 4
+        },
+      },
+      labels: nh4nLabels,
+      colors: ["#98baea"],
+      legend: {
+        show: true,
+        position: 'bottom',
+        height: 32,
+        offsetY: 8,
+        markers: {
+          width: 8,
+          height: 8,
+          radius: 100,
+        },
+        itemMargin: {
+          horizontal: 8,
+        },
+      },
+    })).render();
+  });
+  </c:if>
+
+  <c:if test="${tsDataC != null && fn:length(tsDataC.records) > 0}">
+  document.addEventListener("DOMContentLoaded", function () {
+    var codData = [];
+    var codLabels = [];
+    <c:forEach items="${tsDataC.records}" var="data">
+    codData.push(${data.cod});
+    codLabels.push('<fmt:formatDate value="${data.timestamp}" pattern="yyyy-MM-dd HH:mm"/>');
+    </c:forEach>
+    window.ApexCharts && (new ApexCharts(document.getElementById('chart-cod'), {
+      chart: {
+        type: "line",
+        fontFamily: 'inherit',
+        height: 300,
+        parentHeightOffset: 0,
+        toolbar: {
+          show: false,
+        },
+        animations: {
+          enabled: false
+        },
+      },
+      fill: {
+        opacity: 1,
+      },
+      stroke: {
+        width: 2,
+        lineCap: "round",
+        curve: "smooth",
+      },
+      series: [{
+        name: "COD",
+        data: codData
+      }],
+      grid: {
+        padding: {
+          top: -20,
+          right: 0,
+          left: -4,
+          bottom: -4
+        },
+        strokeDashArray: 4,
+        xaxis: {
+          lines: {
+            show: true
+          }
+        },
+      },
+      yaxis: {
+        labels: {
+          padding: 4
+        },
+      },
+      labels: codLabels,
+      colors: ["#98baea"],
+      legend: {
+        show: true,
+        position: 'bottom',
+        height: 32,
+        offsetY: 8,
+        markers: {
+          width: 8,
+          height: 8,
+          radius: 100,
+        },
+        itemMargin: {
+          horizontal: 8,
+        },
+      },
+    })).render();
+  });
+  </c:if>
 </script>
 </body>
 </html>
