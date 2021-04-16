@@ -214,7 +214,9 @@
                                     </div>
                                     <div class="row">
                                       <div class="col-auto">
-                                        <a href="/pond/config/1361230754313998338" class="btn btn-primary w-30">
+                                        <a href="javascript:void(0);"
+                                           onclick="deviceControl('ON','${prodDevice.deviceId}')"
+                                           class="btn btn-primary w-30">
                                           <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
                                                viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
                                                stroke-linecap="round" stroke-linejoin="round">
@@ -225,7 +227,9 @@
                                         </a>
                                       </div>
                                       <div class="col-auto">
-                                        <a href="/pond/config/1361230754313998338" class="btn btn-secondary w-30">
+                                        <a href="javascript:void(0);"
+                                           onclick="deviceControl('OFF','${prodDevice.deviceId}')"
+                                           class="btn btn-secondary w-30">
                                           <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
                                                viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
                                                stroke-linecap="round" stroke-linejoin="round">
@@ -364,103 +368,6 @@
                   </c:choose>
                 </div>
               </c:forEach>
-              <%--              <div class="card">--%>
-              <%--                <div class="card-header">--%>
-              <%--                  <h4>任务统计</h4>--%>
-              <%--                </div>--%>
-              <%--                <div class="row">--%>
-              <%--                  <div class="col-4">--%>
-              <%--                    <div class="card">--%>
-              <%--                      <div class="card-body">--%>
-              <%--                        <div class="row align-items-center">--%>
-              <%--                          <div class="col-auto">--%>
-              <%--                          <span class="bg-blue text-white avatar"><svg xmlns="http://www.w3.org/2000/svg" class="icon"--%>
-              <%--                                                                       width="24" height="24" viewBox="0 0 24 24"--%>
-              <%--                                                                       stroke-width="2" stroke="currentColor"--%>
-              <%--                                                                       fill="none" stroke-linecap="round"--%>
-              <%--                                                                       stroke-linejoin="round"><path stroke="none"--%>
-              <%--                                                                                                     d="M0 0h24v24H0z"--%>
-              <%--                                                                                                     fill="none"/><path--%>
-              <%--                            d="M3.5 5.5l1.5 1.5l2.5 -2.5"/><path d="M3.5 11.5l1.5 1.5l2.5 -2.5"/><path--%>
-              <%--                            d="M3.5 17.5l1.5 1.5l2.5 -2.5"/><line x1="11" y1="6" x2="20" y2="6"/><line x1="11" y1="12"--%>
-              <%--                                                                                                       x2="20" y2="12"/><line--%>
-              <%--                            x1="11" y1="18" x2="20" y2="18"/></svg>--%>
-              <%--                          </span>--%>
-              <%--                          </div>--%>
-              <%--                          <div class="col">--%>
-              <%--                            <div class="font-weight-medium">--%>
-              <%--                              已发布--%>
-              <%--                            </div>--%>
-              <%--                            <div class="h1 mb-0 me-2 text-azure">--%>
-              <%--                              ${fn:length(assignedTasks)}--%>
-              <%--                            </div>--%>
-              <%--                          </div>--%>
-              <%--                        </div>--%>
-              <%--                      </div>--%>
-              <%--                    </div>--%>
-              <%--                  </div>--%>
-              <%--                  <div class="col-4">--%>
-              <%--                    <div class="card">--%>
-              <%--                      <div class="card-body">--%>
-              <%--                        <div class="row align-items-center">--%>
-              <%--                          <div class="col-auto">--%>
-              <%--                          <span class="bg-blue text-white avatar"><svg xmlns="http://www.w3.org/2000/svg" class="icon"--%>
-              <%--                                                                       width="24" height="24" viewBox="0 0 24 24"--%>
-              <%--                                                                       stroke-width="2" stroke="currentColor"--%>
-              <%--                                                                       fill="none" stroke-linecap="round"--%>
-              <%--                                                                       stroke-linejoin="round"><path stroke="none"--%>
-              <%--                                                                                                     d="M0 0h24v24H0z"--%>
-              <%--                                                                                                     fill="none"/><path--%>
-              <%--                            d="M3.5 5.5l1.5 1.5l2.5 -2.5"/><path d="M3.5 11.5l1.5 1.5l2.5 -2.5"/><path--%>
-              <%--                            d="M3.5 17.5l1.5 1.5l2.5 -2.5"/><line x1="11" y1="6" x2="20" y2="6"/><line x1="11" y1="12"--%>
-              <%--                                                                                                       x2="20" y2="12"/><line--%>
-              <%--                            x1="11" y1="18" x2="20" y2="18"/></svg>--%>
-              <%--                          </span>--%>
-              <%--                          </div>--%>
-              <%--                          <div class="col">--%>
-              <%--                            <div class="font-weight-medium">--%>
-              <%--                              进行中--%>
-              <%--                            </div>--%>
-              <%--                            <div class="h1 mb-0 me-2 text-facebook">--%>
-              <%--                              ${fn:length(doingTasks)}--%>
-              <%--                            </div>--%>
-              <%--                          </div>--%>
-              <%--                        </div>--%>
-              <%--                      </div>--%>
-              <%--                    </div>--%>
-              <%--                  </div>--%>
-              <%--                  <div class="col-4">--%>
-              <%--                    <div class="card">--%>
-              <%--                      <div class="card-body">--%>
-              <%--                        <div class="row align-items-center">--%>
-              <%--                          <div class="col-auto">--%>
-              <%--                          <span class="bg-blue text-white avatar"><svg xmlns="http://www.w3.org/2000/svg" class="icon"--%>
-              <%--                                                                       width="24" height="24" viewBox="0 0 24 24"--%>
-              <%--                                                                       stroke-width="2" stroke="currentColor"--%>
-              <%--                                                                       fill="none" stroke-linecap="round"--%>
-              <%--                                                                       stroke-linejoin="round"><path stroke="none"--%>
-              <%--                                                                                                     d="M0 0h24v24H0z"--%>
-              <%--                                                                                                     fill="none"/><path--%>
-              <%--                            d="M3.5 5.5l1.5 1.5l2.5 -2.5"/><path d="M3.5 11.5l1.5 1.5l2.5 -2.5"/><path--%>
-              <%--                            d="M3.5 17.5l1.5 1.5l2.5 -2.5"/><line x1="11" y1="6" x2="20" y2="6"/><line x1="11" y1="12"--%>
-              <%--                                                                                                       x2="20" y2="12"/><line--%>
-              <%--                            x1="11" y1="18" x2="20" y2="18"/></svg>--%>
-              <%--                          </span>--%>
-              <%--                          </div>--%>
-              <%--                          <div class="col">--%>
-              <%--                            <div class="font-weight-medium">--%>
-              <%--                              已完成--%>
-              <%--                            </div>--%>
-              <%--                            <div class="h1 mb-0 me-2 text-green">--%>
-              <%--                              ${fn:length(doneTasks)}--%>
-              <%--                            </div>--%>
-              <%--                          </div>--%>
-              <%--                        </div>--%>
-              <%--                      </div>--%>
-              <%--                    </div>--%>
-              <%--                  </div>--%>
-              <%--                </div>--%>
-              <%--              </div>--%>
             </div>
           </div>
         </div>
@@ -469,35 +376,6 @@
     <%@include file="../common/footer.jsp" %>
   </div>
 </div>
-<%--<div class="modal modal-blur fade" id="modal-camera" tabindex="-1" role="dialog" aria-hidden="true">--%>
-<%--  <div class="modal-dialog modal-lg" role="document">--%>
-<%--    <div class="modal-content">--%>
-<%--      <div class="modal-header">--%>
-<%--        <h5 class="modal-title">监控</h5>--%>
-<%--        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"--%>
-<%--                onclick="closeCramera()"></button>--%>
-<%--      </div>--%>
-<%--      <div class="modal-body">--%>
-<%--        <div class="mb-3">--%>
-<%--          <iframe--%>
-<%--            src="https://open.ys7.com/ezopen/h5/iframe?url=ezopen://open.ys7.com/F43323849/1.live&autoplay=1&audio=1&accessToken=${ysToken.accessToken}&templete=0"--%>
-<%--            width="600"--%>
-<%--            height="400"--%>
-<%--            id="ysOpenDevice"--%>
-<%--            scrolling="no"--%>
-<%--            allowfullscreen--%>
-<%--          >--%>
-<%--          </iframe>--%>
-<%--        </div>--%>
-<%--      </div>--%>
-<%--      <div class="modal-footer">--%>
-<%--        <a href="#" class="btn btn-link link-secondary" data-bs-dismiss="modal" onclick="closeCramera()">--%>
-<%--          关闭--%>
-<%--        </a>--%>
-<%--      </div>--%>
-<%--    </div>--%>
-<%--  </div>--%>
-<%--</div>--%>
 <!-- Libs JS -->
 <script src="<%=path%>/dist/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 <script src="<%=path%>/dist/libs/jquery/dist/jquery.slim.min.js"></script>
@@ -566,38 +444,10 @@
     map.remove(marker);
     map.add(marker);
 
-    marker.on('click', clickMarker);
-
   }).catch((e) => {
     console.error(e);  //加载错误提示
   });
 
-  var player;
-
-  function clickMarker() {
-    var modal = $("#modal-camera");
-    modal.modal("show")
-    var player = document.getElementById('ysOpenDevice').contentWindow;
-    player.postMessage("play", "https://open.ys7.com/ezopen/h5/iframe");
-    <%--  player = new EZUIPlayer({--%>
-    <%--    id: 'myPlayer',--%>
-    <%--    url: 'ezopen://open.ys7.com/F43323849/1.hd.live',--%>
-    <%--    autoplay: true,--%>
-    <%--    accessToken: "${ysToken.accessToken}",--%>
-    <%--    decoderPath: '<%=path%>/dist/js/ezui/',--%>
-    <%--    width: 600,--%>
-    <%--    height: 400--%>
-    <%--  });--%>
-    <%--}--%>
-  }
-
-  function closeCramera() {
-    var modal = $("#modal-camera");
-    modal.modal("hide");
-    var player = document.getElementById('ysOpenDevice').contentWindow;
-    player.postMessage("stop", "https://open.ys7.com/ezopen/h5/iframe");
-
-  }
 </script>
 <script type="application/javascript">
   var timeId;
@@ -623,6 +473,26 @@
     } else {
       window.clearTimeout(timeId);
     }
+  }
+
+  function deviceControl(action, deviceId) {
+    var url = "<%=path%>/remote-device/control?action=" + action + "&deviceId=" + deviceId;
+
+    fetch(url, {
+      method: "GET",
+      headers: new Headers({
+        "Content-Type": "application/json"
+      })
+    }).then(res => res.json())
+      .catch(error => console.error("Error:", error))
+      .then(response => {
+        console.log("Success:", response);
+        if (response.code !== 200) {
+          $("#error-alert").removeClass("visually-hidden");
+        } else {
+          alert("控制成功")
+        }
+      });
   }
 </script>
 </body>

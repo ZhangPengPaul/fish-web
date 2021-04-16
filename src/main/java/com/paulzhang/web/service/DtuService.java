@@ -16,4 +16,6 @@ public interface DtuService {
 	int deleteByPondId(Long dtuId, Long pondId);
 
 	List<DtuVO> findAll();
+
+	DtuVO findById(Long dtuId);
 }

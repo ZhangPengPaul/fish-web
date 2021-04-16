@@ -1,6 +1,8 @@
 package com.paulzhang.socket;
 
+import com.github.benmanes.caffeine.cache.Cache;
 import com.paulzhang.util.SpringUtil;
+import com.paulzhang.web.common.constants.CommonConstants;
 import com.paulzhang.web.common.constants.DtuType;
 import com.paulzhang.web.domain.DtuVO;
 import com.paulzhang.web.entity.TsData;
@@ -19,6 +21,7 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.util.Strings;
 
 import java.nio.charset.StandardCharsets;
@@ -31,11 +34,13 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
 	private static final TsDataService tsDataService;
 	private static final DtuService dtuService;
 	private static final TsDataNCService tsDataNCService;
+	private static final Cache<String, Object> caffeineCache;
 
 	static {
 		tsDataService = SpringUtil.getBean(TsDataServiceImpl.class);
 		dtuService = SpringUtil.getBean(DtuServiceImpl.class);
 		tsDataNCService = SpringUtil.getBean(TsDataNCServiceImpl.class);
+		caffeineCache = SpringUtil.getBean(Cache.class);
 	}
 
 	private final ThreadLocal<String> threadLocal = new ThreadLocal<>();
@@ -48,6 +53,7 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
 	public void channelActive(ChannelHandlerContext ctx) throws Exception {
 		log.info("Channel active......");
 		Channel channel = ctx.channel();
+		ChannelPool.addChannel(channel);
 		channel.eventLoop().scheduleAtFixedRate(
 			new Runnable() {
 				@Override
@@ -66,6 +72,13 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
 			}, 0, 10, TimeUnit.MINUTES);
 	}
 
+	@Override
+	public void channelInactive(ChannelHandlerContext ctx) throws Exception {
+		Channel channel = ctx.channel();
+		log.info("[{}]Disconnect from client, channel closed!", channel.id());
+		ChannelPool.removeChannel(channel);
+	}
+
 	/**
 	 * 客户端发消息会触发
 	 */
@@ -80,6 +93,7 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
 			if (bytes.length == 6) {
 				dtuCode = new String(bytes, StandardCharsets.UTF_8);
 				threadLocal.set(dtuCode);
+				caffeineCache.put(CommonConstants.CacheChannelKeys.CHANNEL + dtuCode, ctx.channel().id().asShortText());
 			}
 		}
 		log.info("receive dtu code:{}", dtuCode);
@@ -211,6 +225,35 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
 		log.info("=============================end=======================================");
 	}
 
+	public static void sendMessage(byte[] msg, String channelId) {
+		if (Objects.isNull(msg)) {
+			log.warn("netty channelId [{}] illegality.", channelId);
+			return;
+		}
+
+		Channel channel = ChannelPool.getChannel(channelId);
+		if (Objects.isNull(channel)) {
+			log.error("netty channel [{}] illegality.", channelId);
+			return;
+		}
+
+		channel.writeAndFlush(Unpooled.wrappedBuffer(msg))
+			.addListener(ChannelFutureListener.FIRE_EXCEPTION_ON_FAILURE)
+			.addListener((ChannelFutureListener) channelFuture -> log.info(
+				"成功发送指令:" + Hex.encodeHexString(msg)));
+	}
+
+	/**
+	 * 发生异常触发
+	 */
+	@Override
+	public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
+		Channel channel = ctx.channel();
+		if (channel.isActive()) {
+			ctx.close();
+		}
+	}
+
 	public static long parseLong(String s, int radix) throws NumberFormatException {
 		if (s == null) {
 			throw new NumberFormatException("null");
@@ -265,15 +308,6 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
 		return negative ? result : -result;
 	}
 
-
-	/**
-	 * 发生异常触发
-	 */
-	@Override
-	public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
-		log.error("netty channel error", cause);
-		ctx.close();
-	}
 
 	private byte[] getCommandByDtuType(Integer dtuType) {
 		DtuType dtuTypeEnum = DtuType.getTypeByValue(dtuType);

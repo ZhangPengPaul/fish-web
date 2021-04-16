@@ -22,6 +22,7 @@
 		<commons-beanutils.version>1.9.3</commons-beanutils.version>
 		<shiro-spring.version>1.7.0</shiro-spring.version>
 		<commons-lang3.version>3.12.0</commons-lang3.version>
+		<commons-codec.version>1.7</commons-codec.version>
 	</properties>
 
 	<dependencies>
@@ -104,9 +105,13 @@
 		<dependency>
 			<groupId>commons-codec</groupId>
 			<artifactId>commons-codec</artifactId>
-			<version>1.7</version>
+			<version>${commons-codec.version}</version>
 		</dependency>
 
+		<dependency>
+			<groupId>com.github.ben-manes.caffeine</groupId>
+			<artifactId>caffeine</artifactId>
+		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

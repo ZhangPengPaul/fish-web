@@ -3,14 +3,17 @@ package com.paulzhang.web.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.paulzhang.web.domain.DeviceVO;
 import com.paulzhang.web.domain.DtuVO;
+import com.paulzhang.web.entity.Device;
 import com.paulzhang.web.entity.Dtu;
 import com.paulzhang.web.entity.Pond;
+import com.paulzhang.web.mapper.DeviceMapper;
 import com.paulzhang.web.mapper.DtuMapper;
 import com.paulzhang.web.service.DeviceService;
 import com.paulzhang.web.service.DtuService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.collections.CollectionUtils;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -22,12 +25,13 @@ import java.util.Objects;
 
 @Slf4j
 @Service
+@Lazy
 public class DtuServiceImpl implements DtuService {
 	@Resource
 	private DtuMapper dtuMapper;
 
 	@Resource
-	private DeviceService deviceService;
+	private DeviceMapper deviceMapper;
 
 	@Override
 	public int add(DtuVO dtuVO) throws InvocationTargetException, IllegalAccessException {
@@ -87,11 +91,13 @@ public class DtuServiceImpl implements DtuService {
 	@Override
 	public int deleteByPondId(Long dtuId, Long pondId) {
 		int count = 0;
-		List<DeviceVO> deviceVOS = deviceService.findByDtuId(dtuId);
-		if (CollectionUtils.isEmpty(deviceVOS)) {
-			QueryWrapper<Dtu> queryWrapper = new QueryWrapper<>();
-			queryWrapper.eq("DTU_ID", dtuId).eq("POND_ID", pondId);
-			count = dtuMapper.delete(queryWrapper);
+		QueryWrapper<Device> deviceQueryWrapper = new QueryWrapper<>();
+		deviceQueryWrapper.eq("DTU_ID", dtuId);
+		List<Device> devices = deviceMapper.selectList(deviceQueryWrapper);
+		if (CollectionUtils.isEmpty(devices)) {
+			QueryWrapper<Dtu> dtuQueryWrapper = new QueryWrapper<>();
+			dtuQueryWrapper.eq("DTU_ID", dtuId).eq("POND_ID", pondId);
+			count = dtuMapper.delete(dtuQueryWrapper);
 		}
 
 		return count;
@@ -114,5 +120,20 @@ public class DtuServiceImpl implements DtuService {
 			}
 		}
 		return dtuVOS;
+	}
+
+	@Override
+	public DtuVO findById(Long dtuId) {
+		Dtu dtu = dtuMapper.selectById(dtuId);
+		DtuVO dtuVO = null;
+		if (Objects.nonNull(dtu)) {
+			dtuVO = new DtuVO();
+			try {
+				BeanUtils.copyProperties(dtuVO, dtu);
+			} catch (IllegalAccessException | InvocationTargetException e) {
+				log.error("dtu copy error", e);
+			}
+		}
+		return dtuVO;
 	}
 }
