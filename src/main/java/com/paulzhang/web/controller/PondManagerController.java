@@ -126,51 +126,52 @@ public class PondManagerController {
 		List<PondVO> pondVOPage = pondService.findAllByProjectId(projectId);
 		ModelAndView modelAndView = new ModelAndView("pond/dashboard");
 		modelAndView.addObject("pondPage", pondVOPage);
-		PondVO pondVO = pondVOPage.get(0);
-		if (Objects.nonNull(pondId)) {
-			pondVO = pondService.findById(pondId);
+		if (Objects.nonNull(pondVOPage)) {
+			PondVO pondVO = pondVOPage.get(0);
+			if (Objects.nonNull(pondId)) {
+				pondVO = pondService.findById(pondId);
+			}
+			modelAndView.addObject("pondDetail", pondVO);
+			int intIndex = Integer.parseInt(index);
+			intIndex++;
+			if (intIndex >= pondVOPage.size()) {
+				intIndex = 0;
+			}
+			modelAndView.addObject("index", intIndex);
+			boolean bolSelect = false;
+			if (Strings.isNotBlank(isSelect)) {
+				bolSelect = Boolean.parseBoolean(isSelect);
+			}
+			modelAndView.addObject("isSelect", bolSelect);
+
+			IPage<TsDataVO> tsDataVO = tsDataService.findLatestByPond(0L, 1L, pondVO.getPondId());
+			modelAndView.addObject("tsData", tsDataVO);
+
+			IPage<TsDataNCVO> latestNH4H = tsDataNCService.findLatestNH4NByPond(0L, 1L, pondVO.getPondId());
+			modelAndView.addObject("tsDataN", latestNH4H);
+
+			IPage<TsDataNCVO> latestCOD = tsDataNCService.findLatestCODByPond(0L, 1L, pondVO.getPondId());
+			modelAndView.addObject("tsDataC", latestCOD);
+
+
+			// 生产设备列表
+			List<DeviceVO> prodDevices = deviceService.findByPondAndType(pondVO.getPondId(), DeviceType.PROD.getCode());
+			modelAndView.addObject("prodDevices", prodDevices);
+
+			YsTokenVO ysTokenVO = ysTokenService.findToken();
+			modelAndView.addObject("ysToken", ysTokenVO);
+
+			List<DtuVO> dtuVOS = dtuService.findByPondId(pondVO.getPondId());
+			modelAndView.addObject("dtus", dtuVOS);
+
+			List<TaskVO> taskVOS = taskService.findByPond(pondVO.getPondId());
+			if (CollectionUtils.isNotEmpty(taskVOS)) {
+				Map<Integer, List<TaskVO>> taskVOMap = taskVOS.stream().collect(Collectors.groupingBy(TaskVO::getStatus));
+				modelAndView.addObject("assignedTasks", taskVOMap.get(TaskStatus.ASSIGNED.getCode()));
+				modelAndView.addObject("doingTasks", taskVOMap.get(TaskStatus.DOING.getCode()));
+				modelAndView.addObject("doneTasks", taskVOMap.get(TaskStatus.DONE.getCode()));
+			}
 		}
-		modelAndView.addObject("pondDetail", pondVO);
-		int intIndex = Integer.parseInt(index);
-		intIndex++;
-		if (intIndex >= pondVOPage.size()) {
-			intIndex = 0;
-		}
-		modelAndView.addObject("index", intIndex);
-		boolean bolSelect = false;
-		if (Strings.isNotBlank(isSelect)) {
-			bolSelect = Boolean.parseBoolean(isSelect);
-		}
-		modelAndView.addObject("isSelect", bolSelect);
-
-		IPage<TsDataVO> tsDataVO = tsDataService.findLatestByPond(0L, 1L, pondVO.getPondId());
-		modelAndView.addObject("tsData", tsDataVO);
-
-		IPage<TsDataNCVO> latestNH4H = tsDataNCService.findLatestNH4NByPond(0L, 1L, pondVO.getPondId());
-		modelAndView.addObject("tsDataN", latestNH4H);
-
-		IPage<TsDataNCVO> latestCOD = tsDataNCService.findLatestCODByPond(0L, 1L, pondVO.getPondId());
-		modelAndView.addObject("tsDataC", latestCOD);
-
-
-		// 生产设备列表
-		List<DeviceVO> prodDevices = deviceService.findByPondAndType(pondVO.getPondId(), DeviceType.PROD.getCode());
-		modelAndView.addObject("prodDevices", prodDevices);
-
-		YsTokenVO ysTokenVO = ysTokenService.findToken();
-		modelAndView.addObject("ysToken", ysTokenVO);
-
-		List<DtuVO> dtuVOS = dtuService.findByPondId(pondVO.getPondId());
-		modelAndView.addObject("dtus", dtuVOS);
-
-		List<TaskVO> taskVOS = taskService.findByPond(pondVO.getPondId());
-		if (CollectionUtils.isNotEmpty(taskVOS)) {
-			Map<Integer, List<TaskVO>> taskVOMap = taskVOS.stream().collect(Collectors.groupingBy(TaskVO::getStatus));
-			modelAndView.addObject("assignedTasks", taskVOMap.get(TaskStatus.ASSIGNED.getCode()));
-			modelAndView.addObject("doingTasks", taskVOMap.get(TaskStatus.DOING.getCode()));
-			modelAndView.addObject("doneTasks", taskVOMap.get(TaskStatus.DONE.getCode()));
-		}
-
 		return modelAndView;
 	}
 }
