@@ -123,7 +123,15 @@ public class PondManagerController {
 								  @RequestParam(value = "isSelect", required = false, defaultValue = "false") String isSelect) {
 		User user = (User) SecurityUtils.getSubject().getPrincipal();
 		Long projectId = user.getProjectId();
+
+		// todo temp project id
+		if (projectId.equals(1384027378088828930L)) {
+			projectId = 1361229838336724993L;
+		}
+
+
 		List<PondVO> pondVOPage = pondService.findAllByProjectId(projectId);
+
 		ModelAndView modelAndView = new ModelAndView("pond/dashboard");
 		modelAndView.addObject("pondPage", pondVOPage);
 		if (Objects.nonNull(pondVOPage)) {
@@ -163,6 +171,47 @@ public class PondManagerController {
 
 			List<DtuVO> dtuVOS = dtuService.findByPondId(pondVO.getPondId());
 			modelAndView.addObject("dtus", dtuVOS);
+
+			// todo temp
+
+			if (pondVO.getPondId() == 1433376476664778753L) {
+				// 1
+				dtuVOS.clear();
+				DtuVO dtuVO1 = dtuService.findById(1361230754313998338L);
+				DtuVO dtuVO2 = dtuService.findById(1361231034657083394L);
+				DtuVO dtuVO3 = dtuService.findById(1361231288768991233L);
+				dtuVOS.add(dtuVO1);
+				dtuVOS.add(dtuVO2);
+				dtuVOS.add(dtuVO3);
+			} else if (pondVO.getPondId() == 1433376683557212161L) {
+				// 2
+				dtuVOS.clear();
+				DtuVO dtuVO1 = dtuService.findById(1361231511742386177L);
+				DtuVO dtuVO2 = dtuService.findById(1361231724834000897L);
+				DtuVO dtuVO3 = dtuService.findById(1361231898964725761L);
+				dtuVOS.add(dtuVO1);
+				dtuVOS.add(dtuVO2);
+				dtuVOS.add(dtuVO3);
+			} else if (pondVO.getPondId() == 1433376877573132289L) {
+				// 3
+				dtuVOS.clear();
+				DtuVO dtuVO1 = dtuService.findById(1361232134751719426L);
+				DtuVO dtuVO2 = dtuService.findById(1361232308089720834L);
+				DtuVO dtuVO3 = dtuService.findById(1361232497038921729L);
+				dtuVOS.add(dtuVO1);
+				dtuVOS.add(dtuVO2);
+				dtuVOS.add(dtuVO3);
+			} else if (pondVO.getPondId() == 1433377723086098433L) {
+				// 4
+				dtuVOS.clear();
+				DtuVO dtuVO1 = dtuService.findById(1361232705000902658L);
+				DtuVO dtuVO2 = dtuService.findById(1361232855706439681L);
+				DtuVO dtuVO3 = dtuService.findById(1361232999931777025L);
+				dtuVOS.add(dtuVO1);
+				dtuVOS.add(dtuVO2);
+				dtuVOS.add(dtuVO3);
+			}
+			// todo temp
 
 			List<TaskVO> taskVOS = taskService.findByPond(pondVO.getPondId());
 			if (CollectionUtils.isNotEmpty(taskVOS)) {
