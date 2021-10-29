@@ -64,12 +64,95 @@
             </div>
           </div>
         </div>
-        <div class="col-3">
+        <div class="col-2">
+          <%--          <div class="card" style="height: calc(100vh - 180px);">--%>
+          <%--            <div class="card-body card-body-scrollable card-body-scrollable-shadow">--%>
+          <%--              <div class="card">--%>
+          <%--                <div class="card-header">--%>
+          <%--                  <h4>今日任务</h4>--%>
+          <%--                </div>--%>
+          <%--                <div class="row row-deck row-cards">--%>
+          <%--                  <div class="col">--%>
+          <%--                    <div class="card">--%>
+          <%--                      <div class="card-body">--%>
+          <%--                        <div class="col">--%>
+          <%--                          <div class="d-flex align-items-center">--%>
+          <%--                            <div class="h4 font-weight-bold text-green">日常施肥</div>--%>
+          <%--                            <div class="ms-auto lh-1">--%>
+          <%--                              <div class="text-muted">2021-03-31</div>--%>
+          <%--                            </div>--%>
+          <%--                          </div>--%>
+          <%--                          <div class="h5 mb-3">全塘 100%</div>--%>
+          <%--                          <span class="badge bg-green-lt font-weight-bold">VC+硅藻 300KG</span>--%>
+          <%--                        </div>--%>
+          <%--                      </div>--%>
+          <%--                    </div>--%>
+          <%--                  </div>--%>
+          <%--                </div>--%>
+          <%--                <div class="row row-deck row-cards">--%>
+          <%--                  <div class="col">--%>
+          <%--                    <div class="card">--%>
+          <%--                      <div class="card-body">--%>
+          <%--                        <div class="d-flex align-items-center">--%>
+          <%--                          <div class="h4 font-weight-bold text-yellow">日常投喂</div>--%>
+          <%--                          <div class="ms-auto lh-1">--%>
+          <%--                            <div class="text-muted">2021-03-31</div>--%>
+          <%--                          </div>--%>
+          <%--                        </div>--%>
+          <%--                        <div class="h5 mb-3">日常投喂量 10%</div>--%>
+          <%--                        <span class="badge bg-yellow-lt font-weight-bold">饲料 60KG</span>--%>
+          <%--                      </div>--%>
+          <%--                    </div>--%>
+          <%--                  </div>--%>
+          <%--                </div>--%>
+          <%--                <div class="row row-deck row-cards">--%>
+          <%--                  <div class="col">--%>
+          <%--                    <div class="card">--%>
+          <%--                      <div class="card-body">--%>
+          <%--                        <div class="d-flex align-items-center">--%>
+          <%--                          <div class="h4 font-weight-bold text-azure">消毒</div>--%>
+          <%--                          <div class="ms-auto lh-1">--%>
+          <%--                            <div class="text-muted">2021-03-31</div>--%>
+          <%--                          </div>--%>
+          <%--                        </div>--%>
+          <%--                        <div class="h5 mb-3">全塘 100%</div>--%>
+          <%--                        <span class="badge bg-azure-lt font-weight-bold">蟹安康15%浓度，200KG</span>--%>
+          <%--                      </div>--%>
+          <%--                    </div>--%>
+          <%--                  </div>--%>
+          <%--                </div>--%>
+          <%--                <div class="row row-deck row-cards">--%>
+          <%--                  <div class="col">--%>
+          <%--                    <div class="card">--%>
+          <%--                      <div class="card-body">--%>
+          <%--                        <div class="d-flex align-items-center">--%>
+          <%--                          <div class="h4 font-weight-bold text-cyan">增氧</div>--%>
+          <%--                          <div class="ms-auto lh-1">--%>
+          <%--                            <div class="text-muted">2021-03-31</div>--%>
+          <%--                          </div>--%>
+          <%--                        </div>--%>
+          <%--                        <div class="h5 mb-3">全塘 100%</div>--%>
+          <%--                        <span class="badge bg-cyan-lt font-weight-bold">持续供氧</span>--%>
+          <%--                      </div>--%>
+          <%--                    </div>--%>
+          <%--                  </div>--%>
+          <%--                </div>--%>
+          <%--              </div>--%>
+          <%--              <div class="card">--%>
+          <%--                <div class="card-header">--%>
+          <%--                  <h4>养殖模型</h4>--%>
+          <%--                </div>--%>
+          <%--                <div class="row">--%>
+
+          <%--                </div>--%>
+          <%--              </div>--%>
+          <%--            </div>--%>
+          <%--          </div>--%>
           <div class="card" style="height: calc(100vh - 180px);">
             <div class="card-body card-body-scrollable card-body-scrollable-shadow">
               <div class="card">
                 <div class="card-header">
-                  <h4>今日任务</h4>
+                  <h4>池塘信息</h4>
                 </div>
                 <div class="row row-deck row-cards">
                   <div class="col">
@@ -77,13 +160,9 @@
                       <div class="card-body">
                         <div class="col">
                           <div class="d-flex align-items-center">
-                            <div class="h4 font-weight-bold text-green">日常施肥</div>
-                            <div class="ms-auto lh-1">
-                              <div class="text-muted">2021-03-31</div>
-                            </div>
+                            <div class="h4 font-weight-bold text-green">面积</div>
                           </div>
-                          <div class="h5 mb-3">全塘 100%</div>
-                          <span class="badge bg-green-lt font-weight-bold">VC+硅藻 300KG</span>
+                          <div class="h5 mb-3">${pondDetail.area}亩</div>
                         </div>
                       </div>
                     </div>
@@ -94,13 +173,9 @@
                     <div class="card">
                       <div class="card-body">
                         <div class="d-flex align-items-center">
-                          <div class="h4 font-weight-bold text-yellow">日常投喂</div>
-                          <div class="ms-auto lh-1">
-                            <div class="text-muted">2021-03-31</div>
-                          </div>
+                          <div class="h4 font-weight-bold text-yellow">养殖品种</div>
                         </div>
-                        <div class="h5 mb-3">日常投喂量 10%</div>
-                        <span class="badge bg-yellow-lt font-weight-bold">饲料 60KG</span>
+                        <div class="h5 mb-3">螃蟹</div>
                       </div>
                     </div>
                   </div>
@@ -110,46 +185,18 @@
                     <div class="card">
                       <div class="card-body">
                         <div class="d-flex align-items-center">
-                          <div class="h4 font-weight-bold text-azure">消毒</div>
-                          <div class="ms-auto lh-1">
-                            <div class="text-muted">2021-03-31</div>
-                          </div>
+                          <div class="h4 font-weight-bold text-azure">苗种数量</div>
                         </div>
-                        <div class="h5 mb-3">全塘 100%</div>
-                        <span class="badge bg-azure-lt font-weight-bold">蟹安康15%浓度，200KG</span>
+                        <div class="h5 mb-3">${pondDetail.area * 800}只</div>
                       </div>
                     </div>
                   </div>
-                </div>
-                <div class="row row-deck row-cards">
-                  <div class="col">
-                    <div class="card">
-                      <div class="card-body">
-                        <div class="d-flex align-items-center">
-                          <div class="h4 font-weight-bold text-cyan">增氧</div>
-                          <div class="ms-auto lh-1">
-                            <div class="text-muted">2021-03-31</div>
-                          </div>
-                        </div>
-                        <div class="h5 mb-3">全塘 100%</div>
-                        <span class="badge bg-cyan-lt font-weight-bold">持续供氧</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="card">
-                <div class="card-header">
-                  <h4>养殖模型</h4>
-                </div>
-                <div class="row">
-
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div class="col-4">
+        <div class="col-5">
           <div class="card" style="height: calc(100vh - 180px);">
             <div class="card-body" id="map"></div>
           </div>
@@ -250,7 +297,7 @@
                         </c:forEach>
                       </div>
                     </c:when>
-                    <c:when test="${dtu.dtuType == 2}">
+                    <c:when test="${dtu.dtuType == 2 || dtu.dtuType == 4}">
                       <div class="row">
                         <div class="col-4">
                           <div class="card">
@@ -413,7 +460,7 @@
 
 
     var map = new AMap.Map('map', {
-      zoom: 17
+      zoom: 18
     });
     map.addControl(new AMap.Scale());
     var satelliteLayer = new AMap.TileLayer.Satellite();

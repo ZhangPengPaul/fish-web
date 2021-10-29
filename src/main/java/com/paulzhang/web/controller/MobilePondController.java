@@ -43,7 +43,17 @@ public class MobilePondController {
 	public ModelAndView list() {
 		User user = (User) SecurityUtils.getSubject().getPrincipal();
 		Long projectId = user.getProjectId();
+
+		if (projectId.equals(1384027378088828930L)) {
+			projectId = 1361229838336724993L;
+		}
+
 		List<PondVO> pondVOPage = pondService.findAllByProjectId(projectId);
+
+		if (projectId.equals(1384027378088828930L)) {
+			pondVOPage = pondVOPage.subList(0, 3);
+		}
+
 		ModelAndView modelAndView = new ModelAndView("pond/mobile/list");
 		modelAndView.addObject("pondPage", pondVOPage);
 
@@ -52,6 +62,7 @@ public class MobilePondController {
 			IPage<TsDataVO> tsDataVO = tsDataService.findLatestByPond(0, 1, pondVO.getPondId());
 			map.put(pondVO.getPondId(), tsDataVO);
 		}
+
 		modelAndView.addObject("tsDataMap", map);
 		return modelAndView;
 	}

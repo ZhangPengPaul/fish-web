@@ -312,6 +312,7 @@
                 <option value="1">控制设备</option>
                 <option value="2">三项传感器</option>
                 <option value="3">两项传感器</option>
+                <option value="4">新</option>
               </select>
             </div>
           </div>
