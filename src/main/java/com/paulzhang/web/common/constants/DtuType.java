@@ -12,8 +12,8 @@ public enum DtuType {
 
 	CONTROL(1, "控制设备"),
 	SENSOR_3(2, "三项传感器"),
-	SENSOR_2(3, "两项传感器");
-
+	SENSOR_2(3, "两项传感器"),
+	SENSOR_W_T(4,"新品牌");
 	private final Integer code;
 	private final String message;
 

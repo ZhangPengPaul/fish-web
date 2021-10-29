@@ -19,10 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import java.lang.reflect.InvocationTargetException;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -124,12 +121,10 @@ public class PondManagerController {
 		User user = (User) SecurityUtils.getSubject().getPrincipal();
 		Long projectId = user.getProjectId();
 
-		// todo temp project id
-		if (projectId.equals(1384027378088828930L)) {
-			projectId = 1361229838336724993L;
-		}
-
-
+//		// todo temp project id
+//		if (projectId.equals(1384027378088828930L)) {
+//			projectId = 1361229838336724993L;
+//		}
 		List<PondVO> pondVOPage = pondService.findAllByProjectId(projectId);
 
 		ModelAndView modelAndView = new ModelAndView("pond/dashboard");
@@ -139,6 +134,10 @@ public class PondManagerController {
 			if (Objects.nonNull(pondId)) {
 				pondVO = pondService.findById(pondId);
 			}
+
+			// todo temp
+
+
 			modelAndView.addObject("pondDetail", pondVO);
 			int intIndex = Integer.parseInt(index);
 			intIndex++;
@@ -152,13 +151,25 @@ public class PondManagerController {
 			}
 			modelAndView.addObject("isSelect", bolSelect);
 
+			// todo temp
 			IPage<TsDataVO> tsDataVO = tsDataService.findLatestByPond(0L, 1L, pondVO.getPondId());
-			modelAndView.addObject("tsData", tsDataVO);
-
 			IPage<TsDataNCVO> latestNH4H = tsDataNCService.findLatestNH4NByPond(0L, 1L, pondVO.getPondId());
-			modelAndView.addObject("tsDataN", latestNH4H);
-
 			IPage<TsDataNCVO> latestCOD = tsDataNCService.findLatestCODByPond(0L, 1L, pondVO.getPondId());
+			if (pondVO.getPondId() == 1433376476664778753L) {
+				// 1
+				tsDataVO = tsDataService.findLatestByPond(0L, 1L, 1361230754313998338L);
+			} else if (pondVO.getPondId() == 1433376683557212161L) {
+				// 2
+				tsDataVO = tsDataService.findLatestByPond(0L, 1L, 1361231034657083394L);
+			} else if (pondVO.getPondId() == 1433376877573132289L) {
+				// 3
+				tsDataVO = tsDataService.findLatestByPond(0L, 1L, 1361231288768991233L);
+			} else if (pondVO.getPondId() == 1433377723086098433L) {
+				// 4
+				tsDataVO = tsDataService.findLatestByPond(0L, 1L, 1361231288768991233L);
+			}
+			modelAndView.addObject("tsData", tsDataVO);
+			modelAndView.addObject("tsDataN", latestNH4H);
 			modelAndView.addObject("tsDataC", latestCOD);
 
 
@@ -170,48 +181,48 @@ public class PondManagerController {
 			modelAndView.addObject("ysToken", ysTokenVO);
 
 			List<DtuVO> dtuVOS = dtuService.findByPondId(pondVO.getPondId());
-			modelAndView.addObject("dtus", dtuVOS);
-
 			// todo temp
 
 			if (pondVO.getPondId() == 1433376476664778753L) {
 				// 1
-				dtuVOS.clear();
-				DtuVO dtuVO1 = dtuService.findById(1361230754313998338L);
-				DtuVO dtuVO2 = dtuService.findById(1361231034657083394L);
-				DtuVO dtuVO3 = dtuService.findById(1361231288768991233L);
+				dtuVOS = new ArrayList<>();
+				DtuVO dtuVO1 = dtuService.findById(1376415850762248193L);
+//				DtuVO dtuVO2 = dtuService.findById(1367380902871056386L);
+//				DtuVO dtuVO3 = dtuService.findById(1376783192704823297L);
 				dtuVOS.add(dtuVO1);
-				dtuVOS.add(dtuVO2);
-				dtuVOS.add(dtuVO3);
+//				dtuVOS.add(dtuVO2);
+//				dtuVOS.add(dtuVO3);
 			} else if (pondVO.getPondId() == 1433376683557212161L) {
 				// 2
-				dtuVOS.clear();
-				DtuVO dtuVO1 = dtuService.findById(1361231511742386177L);
-				DtuVO dtuVO2 = dtuService.findById(1361231724834000897L);
-				DtuVO dtuVO3 = dtuService.findById(1361231898964725761L);
+				dtuVOS = new ArrayList<>();
+				DtuVO dtuVO1 = dtuService.findById(1376783394522148865L);
+//				DtuVO dtuVO2 = dtuService.findById(1376783698412056578L);
+//				DtuVO dtuVO3 = dtuService.findById(1376783850724012034L);
 				dtuVOS.add(dtuVO1);
-				dtuVOS.add(dtuVO2);
-				dtuVOS.add(dtuVO3);
+//				dtuVOS.add(dtuVO2);
+//				dtuVOS.add(dtuVO3);
 			} else if (pondVO.getPondId() == 1433376877573132289L) {
 				// 3
-				dtuVOS.clear();
-				DtuVO dtuVO1 = dtuService.findById(1361232134751719426L);
-				DtuVO dtuVO2 = dtuService.findById(1361232308089720834L);
-				DtuVO dtuVO3 = dtuService.findById(1361232497038921729L);
+				dtuVOS = new ArrayList<>();
+				DtuVO dtuVO1 = dtuService.findById(1376784035848007682L);
+//				DtuVO dtuVO2 = dtuService.findById(1376784598631329794L);
+//				DtuVO dtuVO3 = dtuService.findById(1376784791028248577L);
 				dtuVOS.add(dtuVO1);
-				dtuVOS.add(dtuVO2);
-				dtuVOS.add(dtuVO3);
+//				dtuVOS.add(dtuVO2);
+//				dtuVOS.add(dtuVO3);
 			} else if (pondVO.getPondId() == 1433377723086098433L) {
 				// 4
-				dtuVOS.clear();
-				DtuVO dtuVO1 = dtuService.findById(1361232705000902658L);
-				DtuVO dtuVO2 = dtuService.findById(1361232855706439681L);
-				DtuVO dtuVO3 = dtuService.findById(1361232999931777025L);
+				dtuVOS = new ArrayList<>();
+				DtuVO dtuVO1 = dtuService.findById(1376784972511588354L);
+//				DtuVO dtuVO2 = dtuService.findById(1376785330927448065L);
+//				DtuVO dtuVO3 = dtuService.findById(1376838611380879362L);
 				dtuVOS.add(dtuVO1);
-				dtuVOS.add(dtuVO2);
-				dtuVOS.add(dtuVO3);
+//				dtuVOS.add(dtuVO2);
+//				dtuVOS.add(dtuVO3);
 			}
 			// todo temp
+
+			modelAndView.addObject("dtus", dtuVOS);
 
 			List<TaskVO> taskVOS = taskService.findByPond(pondVO.getPondId());
 			if (CollectionUtils.isNotEmpty(taskVOS)) {

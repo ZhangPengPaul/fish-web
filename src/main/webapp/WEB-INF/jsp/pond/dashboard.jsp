@@ -187,7 +187,7 @@
                         <div class="d-flex align-items-center">
                           <div class="h4 font-weight-bold text-azure">苗种数量</div>
                         </div>
-                        <div class="h5 mb-3">16000只</div>
+                        <div class="h5 mb-3">${pondDetail.area * 800}只</div>
                       </div>
                     </div>
                   </div>
@@ -297,7 +297,7 @@
                         </c:forEach>
                       </div>
                     </c:when>
-                    <c:when test="${dtu.dtuType == 2}">
+                    <c:when test="${dtu.dtuType == 2 || dtu.dtuType == 4}">
                       <div class="row">
                         <div class="col-4">
                           <div class="card">

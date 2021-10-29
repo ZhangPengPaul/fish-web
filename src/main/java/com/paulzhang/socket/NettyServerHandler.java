@@ -1,6 +1,7 @@
 package com.paulzhang.socket;
 
 import com.github.benmanes.caffeine.cache.Cache;
+import com.google.common.util.concurrent.RateLimiter;
 import com.paulzhang.util.SpringUtil;
 import com.paulzhang.web.common.constants.CommonConstants;
 import com.paulzhang.web.common.constants.DtuType;
@@ -21,7 +22,6 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.util.Strings;
 
 import java.nio.charset.StandardCharsets;
@@ -43,8 +43,10 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
 		caffeineCache = SpringUtil.getBean(Cache.class);
 	}
 
-	private final ThreadLocal<String> threadLocal = new ThreadLocal<>();
-	private final ThreadLocal<byte[]> commandLocal = new ThreadLocal<>();
+	private final Map<String, String> dtuMap = new HashMap<>();
+	private final Map<String, byte[]> commandMap = new HashMap<>();
+	private final Map<String, String> kvMap = new HashMap<>();
+	private RateLimiter rateLimiter = RateLimiter.create(0.1, 1, TimeUnit.MINUTES);
 
 	/**
 	 * 客户端连接会触发
@@ -58,7 +60,7 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
 			new Runnable() {
 				@Override
 				public void run() {
-					byte[] commond = commandLocal.get();
+					byte[] commond = commandMap.get("command");
 					if (commond.length > 0) {
 						channel.writeAndFlush(Unpooled.wrappedBuffer(commond))
 							.addListener(ChannelFutureListener.FIRE_EXCEPTION_ON_FAILURE)
@@ -85,14 +87,14 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
 	@Override
 	public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
 		log.info("==============================receive msg======================================");
-		String dtuCode = threadLocal.get();
+		String dtuCode = dtuMap.get("dtu");
 		log.info("thread local dtu code:{}", dtuCode);
 		byte[] bytes = (byte[]) msg;
 		log.info("msg length: {}", bytes.length);
 		if (Strings.isBlank(dtuCode)) {
 			if (bytes.length == 6) {
 				dtuCode = new String(bytes, StandardCharsets.UTF_8);
-				threadLocal.set(dtuCode);
+				dtuMap.put("dtu", dtuCode);
 				caffeineCache.put(CommonConstants.CacheChannelKeys.CHANNEL + dtuCode, ctx.channel().id().asShortText());
 			}
 		}
@@ -113,24 +115,25 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
 
 			Integer dtuType = dtuVO.getDtuType();
 
-			if (commandLocal.get() == null) {
+			if (commandMap.get("command") == null) {
 				byte[] commond = getCommandByDtuType(dtuType);
 				if (Objects.isNull(commond)) {
 					return;
 				}
-				commandLocal.set(commond);
+				commandMap.put("command", commond);
 			}
 
-			if (dtuList.contains(strMsg)) {
+			// temp crab26
+			if (dtuList.contains(strMsg) && !"crab26".equals(strMsg)) {
 				log.info("receive message is dtu code, send command to client one time");
 
-				ctx.channel().writeAndFlush(Unpooled.wrappedBuffer(commandLocal.get()))
+				ctx.channel().writeAndFlush(Unpooled.wrappedBuffer(commandMap.get("command")))
 					.addListener(ChannelFutureListener.FIRE_EXCEPTION_ON_FAILURE)
 					.addListener((ChannelFutureListener) channelFuture -> log.info(
 						"SomCommunicationHandler "
 							+ this.getClass().getName()
 							+ "成功发送指令:"
-							+ Hex.encodeHexString(commandLocal.get())));
+							+ Hex.encodeHexString(commandMap.get("command"))));
 				return;
 			}
 
@@ -139,90 +142,123 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
 				return;
 			}
 
-			String hexString;
-			byte[] ai1Bytes;
-			String hexAi1;
-			long ai1l;
-			float oxygen;
-			byte[] ai2Bytes;
-			String hexAi2;
-			long ai2l;
-			float ph;
-			byte[] ai3Bytes;
-			String hexAi3;
-			long ai3l;
-			float temp;
-			switch (dtuTypeEnum) {
-				case CONTROL:
-					// 控制设备
-					break;
-				case SENSOR_3:
-					log.info("sensor type: {}", dtuTypeEnum.getMessage());
-					// 三项传感器
-					hexString = Hex.encodeHexString(bytes);
-					log.info("hex string: {}", hexString);
-
-					ai1Bytes = Arrays.copyOfRange(bytes, 5, 9);
-					hexAi1 = Hex.encodeHexString(ai1Bytes);
-					ai1l = NettyServerHandler.parseLong(hexAi1, 16);
-					oxygen = Float.intBitsToFloat((int) ai1l);
-					log.info("溶氧：{}", oxygen);
-
-					ai2Bytes = Arrays.copyOfRange(bytes, 13, 17);
-					hexAi2 = Hex.encodeHexString(ai2Bytes);
-					ai2l = NettyServerHandler.parseLong(hexAi2, 16);
-					ph = Float.intBitsToFloat((int) ai2l);
-					log.info("PH：{}", ph);
-
-					ai3Bytes = Arrays.copyOfRange(bytes, 21, 25);
-					hexAi3 = Hex.encodeHexString(ai3Bytes);
-					ai3l = NettyServerHandler.parseLong(hexAi3, 16);
-					temp = Float.intBitsToFloat((int) ai3l);
-					log.info("温度：{}", temp);
-
-					TsData tsData = TsData.builder()
-						.temp(temp)
-						.oxygen(oxygen)
-						.ph(ph)
-						.pondId(dtuVO.getPondId())
-						.timestamp(new Date())
-						.build();
-
-					tsDataService.add(tsData);
-					break;
-				case SENSOR_2:
-					// 两项传感器
-					log.info("sensor type: {}", dtuTypeEnum.getMessage());
-					hexString = Hex.encodeHexString(bytes);
-					log.info("hex string: {}", hexString);
-
-					ai1Bytes = Arrays.copyOfRange(bytes, 5, 9);
-					hexAi1 = Hex.encodeHexString(ai1Bytes);
-					ai1l = NettyServerHandler.parseLong(hexAi1, 16);
-					oxygen = Float.intBitsToFloat((int) ai1l);
-
-					byte[] address = Arrays.copyOfRange(bytes, 0, 1);
-					String addressStr = Hex.encodeHexString(address);
-					TsDataNC.TsDataNCBuilder tsDataNCBuilder = TsDataNC.builder();
-					if (addressStr.equals("01")) {
-						log.info("氨氮：{}", oxygen);
-						tsDataNCBuilder.nh4n(oxygen);
-					} else if (addressStr.equals("02")) {
-						log.info("COD：{}", oxygen);
-						tsDataNCBuilder.cod(oxygen);
+			log.info("dtuTypeEnum: {}", dtuTypeEnum);
+			log.info("strMsg: {}", strMsg);
+			if (dtuTypeEnum.equals(DtuType.SENSOR_W_T) && !strMsg.equals("crab26")) {
+				log.info("crab26: {}", strMsg);
+				String[] kvs = strMsg.split("=");
+				String key = kvs[0];
+				String value = kvs[1];
+				kvMap.put(key, value);
+				if (kvMap.size() == 2) {
+					boolean acquire = rateLimiter.tryAcquire(500, TimeUnit.MILLISECONDS);
+					if (acquire) {
+						// insert into data
+						log.info("insert into db: {}", kvMap);
+						TsData tsData = TsData.builder()
+							.temp(Float.parseFloat(kvMap.get("Water temperature").replace("C", "")))
+							.oxygen(Float.parseFloat(kvMap.get("Do value").replace("mg/L", "")))
+//						.ph(ph)
+							.pondId(dtuVO.getPondId())
+							.timestamp(new Date())
+							.build();
+						tsDataService.add(tsData);
+						kvMap.clear();
+					} else {
+						log.warn("====== access limited =========");
 					}
-
-//					TsDataNCService tsDataNCService = (TsDataNCService) SpringUtil.getBean("tsDataNCService");
-					tsDataNCBuilder.pondId(dtuVO.getPondId())
-						.timestamp(new Date());
-					TsDataNC tsDataNC = tsDataNCBuilder.build();
-					tsDataNCService.add(tsDataNC);
-					break;
+				}
+			} else {
+				ehCommond(bytes, dtuVO, dtuTypeEnum);
 			}
+
 
 		}
 
 		log.info("=============================end=======================================");
+	}
+
+	private void ehCommond(byte[] bytes, DtuVO dtuVO, DtuType dtuTypeEnum) {
+		String hexString;
+		byte[] ai1Bytes;
+		String hexAi1;
+		long ai1l;
+		float oxygen;
+		byte[] ai2Bytes;
+		String hexAi2;
+		long ai2l;
+		float ph;
+		byte[] ai3Bytes;
+		String hexAi3;
+		long ai3l;
+		float temp;
+		switch (dtuTypeEnum) {
+			case CONTROL:
+				// 控制设备
+				break;
+			case SENSOR_3:
+				log.info("sensor type: {}", dtuTypeEnum.getMessage());
+				// 三项传感器
+				hexString = Hex.encodeHexString(bytes);
+				log.info("hex string: {}", hexString);
+
+				ai1Bytes = Arrays.copyOfRange(bytes, 5, 9);
+				hexAi1 = Hex.encodeHexString(ai1Bytes);
+				ai1l = NettyServerHandler.parseLong(hexAi1, 16);
+				oxygen = Float.intBitsToFloat((int) ai1l);
+				log.info("溶氧：{}", oxygen);
+
+				ai2Bytes = Arrays.copyOfRange(bytes, 13, 17);
+				hexAi2 = Hex.encodeHexString(ai2Bytes);
+				ai2l = NettyServerHandler.parseLong(hexAi2, 16);
+				ph = Float.intBitsToFloat((int) ai2l);
+				log.info("PH：{}", ph);
+
+				ai3Bytes = Arrays.copyOfRange(bytes, 21, 25);
+				hexAi3 = Hex.encodeHexString(ai3Bytes);
+				ai3l = NettyServerHandler.parseLong(hexAi3, 16);
+				temp = Float.intBitsToFloat((int) ai3l);
+				log.info("温度：{}", temp);
+
+				TsData tsData = TsData.builder()
+					.temp(temp)
+					.oxygen(oxygen)
+					.ph(ph)
+					.pondId(dtuVO.getPondId())
+					.timestamp(new Date())
+					.build();
+
+				tsDataService.add(tsData);
+				break;
+			case SENSOR_2:
+				// 两项传感器
+				log.info("sensor type: {}", dtuTypeEnum.getMessage());
+				hexString = Hex.encodeHexString(bytes);
+				log.info("hex string: {}", hexString);
+
+				ai1Bytes = Arrays.copyOfRange(bytes, 5, 9);
+				hexAi1 = Hex.encodeHexString(ai1Bytes);
+				ai1l = NettyServerHandler.parseLong(hexAi1, 16);
+				oxygen = Float.intBitsToFloat((int) ai1l);
+
+				byte[] address = Arrays.copyOfRange(bytes, 0, 1);
+				String addressStr = Hex.encodeHexString(address);
+				TsDataNC.TsDataNCBuilder tsDataNCBuilder = TsDataNC.builder();
+				if (addressStr.equals("01")) {
+					log.info("氨氮：{}", oxygen);
+					tsDataNCBuilder.nh4n(oxygen);
+				} else if (addressStr.equals("02")) {
+					log.info("COD：{}", oxygen);
+					tsDataNCBuilder.cod(oxygen);
+				}
+
+//					TsDataNCService tsDataNCService = (TsDataNCService) SpringUtil.getBean("tsDataNCService");
+				tsDataNCBuilder.pondId(dtuVO.getPondId())
+					.timestamp(new Date());
+				TsDataNC tsDataNC = tsDataNCBuilder.build();
+				tsDataNCService.add(tsDataNC);
+				break;
+		}
 	}
 
 	public static void sendMessage(byte[] msg, String channelId) {
@@ -324,6 +360,8 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
 			case SENSOR_3:
 				commond = new byte[]{0x03, 0x03, 0x00, 0x00, 0x00, 0x0A, (byte) 0xc4, (byte) 0x2F};
 				break;
+			case SENSOR_W_T:
+				commond = new byte[]{};
 		}
 
 		return commond;
