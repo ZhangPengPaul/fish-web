@@ -6,7 +6,7 @@ public class NumberFormatException extends IllegalArgumentException {
 		super(s);
 	}
 
-	static NumberFormatException forInputString(String s) {
+	public static NumberFormatException forInputString(String s) {
 		return new NumberFormatException("For input string: \"" + s + "\"");
 	}
 }

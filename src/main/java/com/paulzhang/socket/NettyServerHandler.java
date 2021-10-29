@@ -46,7 +46,7 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
 	private final Map<String, String> dtuMap = new HashMap<>();
 	private final Map<String, byte[]> commandMap = new HashMap<>();
 	private final Map<String, String> kvMap = new HashMap<>();
-	private RateLimiter rateLimiter = RateLimiter.create(0.1, 1, TimeUnit.MINUTES);
+	private RateLimiter rateLimiter = RateLimiter.create(1D / 600D, 1, TimeUnit.MINUTES);
 
 	/**
 	 * 客户端连接会触发
@@ -60,15 +60,15 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
 			new Runnable() {
 				@Override
 				public void run() {
-					byte[] commond = commandMap.get("command");
-					if (commond.length > 0) {
-						channel.writeAndFlush(Unpooled.wrappedBuffer(commond))
+					byte[] command = commandMap.get("command");
+					if (command.length > 0) {
+						channel.writeAndFlush(Unpooled.wrappedBuffer(command))
 							.addListener(ChannelFutureListener.FIRE_EXCEPTION_ON_FAILURE)
 							.addListener((ChannelFutureListener) channelFuture -> log.info(
 								"SomCommunicationHandler "
 									+ this.getClass().getName()
 									+ "成功发送指令:"
-									+ Hex.encodeHexString(commond)));
+									+ Hex.encodeHexString(command)));
 					}
 				}
 			}, 0, 10, TimeUnit.MINUTES);
@@ -123,8 +123,7 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
 				commandMap.put("command", commond);
 			}
 
-			// temp crab26
-			if (dtuList.contains(strMsg) && !"crab26".equals(strMsg)) {
+			if (dtuList.contains(strMsg)) {
 				log.info("receive message is dtu code, send command to client one time");
 
 				ctx.channel().writeAndFlush(Unpooled.wrappedBuffer(commandMap.get("command")))
@@ -132,7 +131,7 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
 					.addListener((ChannelFutureListener) channelFuture -> log.info(
 						"SomCommunicationHandler "
 							+ this.getClass().getName()
-							+ "成功发送指令:"
+							+ "首次成功发送指令:"
 							+ Hex.encodeHexString(commandMap.get("command"))));
 				return;
 			}
@@ -144,7 +143,7 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
 
 			log.info("dtuTypeEnum: {}", dtuTypeEnum);
 			log.info("strMsg: {}", strMsg);
-			if (dtuTypeEnum.equals(DtuType.SENSOR_W_T) && !strMsg.equals("crab26")) {
+			if (dtuTypeEnum.equals(DtuType.SENSOR_W_T) && strMsg.contains("=")) {
 				log.info("crab26: {}", strMsg);
 				String[] kvs = strMsg.split("=");
 				String key = kvs[0];
@@ -168,17 +167,15 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
 						log.warn("====== access limited =========");
 					}
 				}
-			} else {
-				ehCommond(bytes, dtuVO, dtuTypeEnum);
 			}
 
-
+			// send modbus command
+			modbusCommand(bytes, dtuVO, dtuTypeEnum);
 		}
-
 		log.info("=============================end=======================================");
 	}
 
-	private void ehCommond(byte[] bytes, DtuVO dtuVO, DtuType dtuTypeEnum) {
+	private void modbusCommand(byte[] bytes, DtuVO dtuVO, DtuType dtuTypeEnum) {
 		String hexString;
 		byte[] ai1Bytes;
 		String hexAi1;
@@ -258,6 +255,14 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
 				TsDataNC tsDataNC = tsDataNCBuilder.build();
 				tsDataNCService.add(tsDataNC);
 				break;
+			case SENSOR_W_T:
+				log.info("sensor type: {}", dtuTypeEnum.getMessage());
+				String strMsg = new String(bytes, StandardCharsets.UTF_8);
+				if (!strMsg.contains("=")) {
+					hexString = Hex.encodeHexString(bytes);
+					log.info("hex string: {}", hexString);
+				}
+
 		}
 	}
 
@@ -361,7 +366,7 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
 				commond = new byte[]{0x03, 0x03, 0x00, 0x00, 0x00, 0x0A, (byte) 0xc4, (byte) 0x2F};
 				break;
 			case SENSOR_W_T:
-				commond = new byte[]{};
+				commond = new byte[]{0x01, 0x03, 0x00, 0x00, 0x00, 0x02, (byte) 0xC4, 0x0B};
 		}
 
 		return commond;
