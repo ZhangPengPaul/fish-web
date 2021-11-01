@@ -249,7 +249,6 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
 					tsDataNCBuilder.cod(oxygen);
 				}
 
-//					TsDataNCService tsDataNCService = (TsDataNCService) SpringUtil.getBean("tsDataNCService");
 				tsDataNCBuilder.pondId(dtuVO.getPondId())
 					.timestamp(new Date());
 				TsDataNC tsDataNC = tsDataNCBuilder.build();
@@ -261,8 +260,10 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
 				if (!strMsg.contains("=")) {
 					hexString = Hex.encodeHexString(bytes);
 					log.info("hex string: {}", hexString);
-					long l = parseLong(hexString, 16);
-					ph = l / 10F;
+					ai2Bytes = Arrays.copyOfRange(bytes, 5, 7);
+					hexAi2 = Hex.encodeHexString(ai2Bytes);
+					ai2l = NettyServerHandler.parseLong(hexAi2, 16);
+					ph = ai2l / 10F;
 					kvMap.put("ph", String.valueOf(ph));
 				}
 

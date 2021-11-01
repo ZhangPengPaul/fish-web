@@ -4,10 +4,14 @@ import com.paulzhang.socket.NettyServerHandler;
 import com.paulzhang.socket.NumberFormatException;
 import org.apache.commons.codec.binary.Hex;
 
+import java.util.Arrays;
+
 public class Test {
 
 	public static void main(String[] args) {
-		byte[] bs = {(byte) 0x00, 0x66};
+
+		byte[] bb = {0x01, 0x03, 0x04, 0x03, 0x20, 0x00, 0x65, 0x3b, (byte) 0x96};
+		byte[] bs = Arrays.copyOfRange(bb, 5, 7);//{(byte) 0x00, 0x65};
 		String s = Hex.encodeHexString(bs);
 		System.out.println(s);
 
