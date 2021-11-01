@@ -138,9 +138,34 @@
                         ${prodDevice.name}
                     </div>
                     <div class="text-muted">
-                      <label class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox">
-                      </label>
+                      <div class="col-auto">
+                        <a href="javascript:void(0);"
+                           onclick="deviceControl('ON','${prodDevice.deviceId}')"
+                           class="btn btn-primary w-30">
+                          <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
+                               viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                               stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                            <polyline points="13 3 13 10 19 10 11 21 11 14 5 14 13 3"/>
+                          </svg>
+                          开
+                        </a>
+                      </div>
+                      <div class="col-auto">
+                        <a href="javascript:void(0);"
+                           onclick="deviceControl('OFF','${prodDevice.deviceId}')"
+                           class="btn btn-secondary w-30">
+                          <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
+                               viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                               stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                            <line x1="3" y1="3" x2="21" y2="21"/>
+                            <path
+                              d="M15.212 15.21l-4.212 5.79v-7h-6l3.79 -5.21m1.685 -2.32l2.525 -3.47v6m1 1h5l-2.104 2.893"/>
+                          </svg>
+                          关
+                        </a>
+                      </div>
                     </div>
                   </div>
                 </c:forEach>
@@ -788,6 +813,26 @@
           window.location.href = "<%=path%>/pond/list";
         }
 
+      });
+  }
+
+  function deviceControl(action, deviceId) {
+    var url = "<%=path%>/remote-device/control?action=" + action + "&deviceId=" + deviceId;
+
+    fetch(url, {
+      method: "GET",
+      headers: new Headers({
+        "Content-Type": "application/json"
+      })
+    }).then(res => res.json())
+      .catch(error => console.error("Error:", error))
+      .then(response => {
+        console.log("Success:", response);
+        if (response.code !== 200) {
+          $("#error-alert").removeClass("visually-hidden");
+        } else {
+          alert("控制成功")
+        }
       });
   }
 </script>

@@ -143,6 +143,8 @@ public class DeviceServiceImpl implements DeviceService {
 				command[3] = 0x01;
 				command[4] = (byte) 0xFF;
 				command[5] = 0x00;
+				command[6] = (byte) 0xC5;
+				command[7] = 0x5A;
 				break;
 			case OFF:
 				command[1] = 0x05;
@@ -150,17 +152,19 @@ public class DeviceServiceImpl implements DeviceService {
 				command[3] = 0x01;
 				command[4] = (byte) 0x00;
 				command[5] = 0x00;
+				command[6] = (byte) 0x84;
+				command[7] = (byte) 0xAA;
 				break;
 			default:
 				break;
 		}
 
-		String crcString = ByteUtils.getCRC3(command);
-		byte[] crcByte = Hex.decodeHex(crcString.toCharArray());
-		byte[] crcHeight = Arrays.copyOfRange(crcByte, 0, 1);
-		byte[] crcLow = Arrays.copyOfRange(crcByte, 1, 2);
-		command[6] = crcHeight[0];
-		command[7] = crcLow[0];
+//		String crcString = ByteUtils.getCRC3(command);
+//		byte[] crcByte = Hex.decodeHex(crcString.toCharArray());
+//		byte[] crcHeight = Arrays.copyOfRange(crcByte, 0, 1);
+//		byte[] crcLow = Arrays.copyOfRange(crcByte, 1, 2);
+//		command[6] = crcHeight[0];
+//		command[7] = crcLow[0];
 
 		DtuVO dtuVO = dtuService.findById(deviceVO.getDtuId());
 		String channelId = (String) caffeineCache.getIfPresent(CommonConstants.CacheChannelKeys.CHANNEL + dtuVO.getCode());
