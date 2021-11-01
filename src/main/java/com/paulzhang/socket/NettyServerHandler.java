@@ -149,7 +149,7 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
 				String key = kvs[0];
 				String value = kvs[1];
 				kvMap.put(key, value);
-				if (kvMap.size() == 2) {
+				if (kvMap.size() == 3) {
 					boolean acquire = rateLimiter.tryAcquire(500, TimeUnit.MILLISECONDS);
 					if (acquire) {
 						// insert into data
@@ -157,7 +157,7 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
 						TsData tsData = TsData.builder()
 							.temp(Float.parseFloat(kvMap.get("Water temperature").replace("C", "")))
 							.oxygen(Float.parseFloat(kvMap.get("Do value").replace("mg/L", "")))
-//						.ph(ph)
+							.ph(Float.parseFloat(kvMap.get("ph")))
 							.pondId(dtuVO.getPondId())
 							.timestamp(new Date())
 							.build();
@@ -261,6 +261,9 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
 				if (!strMsg.contains("=")) {
 					hexString = Hex.encodeHexString(bytes);
 					log.info("hex string: {}", hexString);
+					long l = parseLong(hexString, 16);
+					ph = l / 10F;
+					kvMap.put("ph", String.valueOf(ph));
 				}
 
 		}
